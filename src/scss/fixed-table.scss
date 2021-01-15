@@ -1,0 +1,40 @@
+.fixed-table {
+  position: absolute;
+  padding-top: 2.2rem;
+  overflow-x: auto;
+  top: .75rem;
+  bottom: 0rem;
+  left: 1rem;
+  right: 0rem;
+}
+.fixed-table > div {
+  max-height: 100%;
+  overflow-y: auto;
+  width: fit-content;
+  min-width: 100%;
+  padding-right: 1rem;
+}
+.fixed-table .table {
+  border-bottom: none;
+}
+.fixed-table th {
+  border: none !important;
+  padding: 0;
+  height: 0;
+}
+.fixed-table th > div:first-child {
+  height: 0;
+  padding: 0 .3rem;
+  overflow: hidden;
+}
+.fixed-table th > div:nth-child(2) {
+  height: 2.2rem;
+  padding: 0 .3rem;
+  position: absolute;
+  top: 0;
+  background: $gray-800;
+  border-bottom: 1 $dark solid;
+}
+.fixed-table tbody tr:first-child td {
+  border-top: none;
+}

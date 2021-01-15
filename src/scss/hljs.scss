@@ -1,0 +1,18 @@
+.hljs {
+  padding: 0;
+  color: $text-muted;
+  background: transparent !important;
+  user-select: text;
+}
+
+.hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo {
+  color: $primary2;
+}
+
+.hljs-number, .hljs-literal {
+  color: $success2;
+}
+
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string {
+  color: $warning2;
+}

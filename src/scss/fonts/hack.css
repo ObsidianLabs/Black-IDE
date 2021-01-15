@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Hack';
+  src:
+    /* url(hack-regular.ttf) format('truetype'), */
+    url(hack-regular.woff2) format('woff2'),
+    url(hack-regular.woff) format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src:
+    /* url(hack-bold.ttf) format('truetype'), */
+    url(hack-bold.woff2) format('woff2'),
+    url(hack-bold.woff) format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src:
+    /* url(hack-italic.ttf) format('truetype'), */
+    url(hack-italic.woff2) format('woff2'),
+    url(hack-italic.woff) format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src:
+    /* url(hack-bolditalic.ttf) format('truetype'), */
+    url(hack-bolditalic.woff2) format('woff2'),
+    url(hack-bolditalic.woff) format('woff');
+  font-weight: 700;
+  font-style: italic;
+}

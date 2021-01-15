@@ -1,0 +1,32 @@
+button, .btn, .nav-link {
+  cursor: default !important;
+}
+
+.btn-default {
+  @include button-variant($gray-800, transparent, $secondary, transparent, $dark, transparent);
+}
+
+.btn-transparent {
+  @include button-variant(transparent, transparent, $gray-800, $gray-800, $dark, $dark);
+}
+
+.btn-secondary {
+  @if $border-width {
+    @include button-variant($secondary, $border, $gray-600, $border, $dark, $border);
+  } @else {
+    @include button-variant($secondary, transparent, $gray-600, transparent, $dark, transparent);
+  }
+}
+
+.btn.btn-flat, .btn-block.btn-flat .btn {
+  border-radius: 0 !important;
+  &.btn-nav {
+    padding: 0.25rem;
+    width: 2.2rem;
+    height: 2.4rem;
+  }
+}
+
+:focus {
+  outline: none !important;
+}
