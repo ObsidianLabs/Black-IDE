@@ -1,0 +1,169 @@
+name: Build Main
+
+on:
+  release:
+    types: [published]
+ 
+  workflow_dispatch:
+
+env:
+  owner: ObsidianLabs
+  own_components: eth-components
+  share_components: electron-components
+  project_build: eth
+  project_project: eth
+  project_name: Ethereum Studio
+  project_build_script: yarn && yarn dist
+  os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
+
+jobs:
+  # Generate matrix for the following steps
+  generate-matrix:
+    runs-on: ubuntu-18.04
+
+    steps:      
+      - name: Generate os matrix
+        id: set-os-matrix
+        run: echo ::set-output name=os::${{ env.os_matrix }}
+
+      - name: Generate component matrix
+        id: set-component-matrix
+        run: echo ::set-output name=component::[\"${{ env.own_components }}\", \"${{ env.share_components }}\"]
+
+    outputs:
+      os: ${{ steps.set-os-matrix.outputs.os }} 
+      component: ${{ steps.set-component-matrix.outputs.component }}
+
+  # Extract version
+  versions:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Get ${{ env.project_name }} version
+        id: version
+        shell: bash
+        run: echo ::set-output name=VERSION::${GITHUB_REF##*[\/v]}
+
+    outputs:
+      version: ${{ steps.version.outputs.VERSION }}
+      v_version: v${{ steps.version.outputs.VERSION }}
+      component_version: v${{ steps.version.outputs.VERSION }}-${{ env.project_build }}
+      new_release: ${{ steps.version.outputs.VERSION != 'master' &&  steps.version.outputs.VERSION != 'develop' }}
+
+  # Update package.json version to match release version
+  bump:
+    needs: versions
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Bump version
+        if: ${{ needs.versions.outputs.new_release == 'true' }}
+        run: |
+          yarn config set version-git-tag false
+          yarn version --new-version ${{ needs.versions.outputs.version }}
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git diff-index --quiet HEAD || git commit -am '${{ needs.versions.outputs.v_version }}'
+
+      - name: Push changes
+        if: ${{ needs.versions.outputs.new_release == 'true' }}
+        run: |
+          git checkout develop
+          git merge master
+          git push origin master:master
+          git push origin develop:develop
+
+  # Build and release
+  release:
+    needs: [ generate-matrix, versions, bump ]
+
+    strategy:
+      matrix:
+        os: ${{ fromJson(needs.generate-matrix.outputs.os) }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Checkout ${{ env.share_components }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.share_components }}
+          ref: master
+          path: ./${{ env.share_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.own_components }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.own_components }}
+          ref: master
+          path: ./${{ env.own_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.project_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          path: ./studio
+
+      - name: Install ${{ env.share_components }} submodule
+        working-directory: ./${{ env.share_components }}
+        run: git submodule update --init
+
+      - name: Install ${{ env.share_components }} dependencies
+        working-directory: ./${{ env.share_components }}
+        run: yarn
+
+      - name: Build ${{ env.share_components }}
+        working-directory: ./${{ env.share_components }}
+        run: yarn build
+
+      - name: Install ${{ env.own_components }} submodule
+        working-directory: ./${{ env.own_components }}
+        run: git submodule update --init
+
+      - name: Install ${{ env.own_components }} dependencies
+        working-directory: ./${{ env.own_components }}
+        run: yarn
+
+      - name: Build ${{ env.own_components }}
+        working-directory: ./${{ env.own_components }}
+        run: yarn build
+
+      - name: Build ${{ env.project_name }}
+        uses: ObsidianLabs/studio-build-action@master
+        with:
+          build: ${{ env.project_build }}
+          project: ${{ env.project_project }}
+          project_name: ${{ env.project_name }}
+          build_script: ${{ env.project_build_script }}
+          working-directory: ./studio
+          fontawesome_token: ${{ secrets.fontawesome_token }}
+          mac_certs: ${{ secrets.certs }}
+          mac_certs_password: ${{ secrets.certs_password }}
+          windows_certs: ${{ secrets.certs }}
+          windows_certs_password: ${{ secrets.certs_password }}
+          github_token: ${{ github.token }}
+
+      - name: Upload assets
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'studio/dist/*.(dmg|zip|exe|AppImage|yml)'
+          repo-token: ${{ github.token }}
