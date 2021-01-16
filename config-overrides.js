@@ -68,7 +68,7 @@ const overrides = [
     CHAIN_EXECUTABLE_NAME_IN_LABEL: '"Geth"',
     TOKEN_SYMBOL: '"ETH"',
     COMPILER_NAME: '"Truffle"',
-    COMPILER_NAME_IN_LABEL: '"truffle"',
+    COMPILER_NAME_IN_LABEL: '"Truffle"',
     COMPILER_EXECUTABLE_NAME: '"truffle"',
     COMPILER_VERSION_KEY: '"truffle"',
     DOCKER_IMAGE_NODE: '"ethereum/client-go"',
