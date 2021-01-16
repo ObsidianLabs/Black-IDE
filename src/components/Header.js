@@ -3,59 +3,14 @@ import React, { PureComponent } from 'react'
 import { connect } from '@obsidians/redux'
 
 import platform from '@obsidians/platform'
+import { networks as remoteNetworks } from '@obsidians/sdk'
 import headerActions, { Header, NavGuard } from '@obsidians/header'
 import { networkManager } from '@obsidians/network'
 import { actions } from '@obsidians/workspace'
 
 import { List } from 'immutable'
 
-const networkList = [
-  {
-    id: 'ropsten',
-    group: 'testnet',
-    name: 'Ropsten',
-    fullName: 'Ropsten Testnet',
-    icon: 'fas fa-vial',
-    notification: 'Switched to <b>Ropsten Testnet</b>.',
-    url: '/',
-  },
-  {
-    id: 'rinkeby',
-    group: 'testnet',
-    name: 'Rinkeby',
-    fullName: 'Rinkeby Testnet',
-    icon: 'fas fa-vial',
-    notification: 'Switched to <b>Rinkeby Testnet</b>.',
-    url: '/',
-  },
-  // {
-  //   id: 'gorli',
-  //   group: 'testnet',
-  //   name: 'Gorli',
-  //   fullName: 'Gorli Testnet',
-  //   icon: 'fas fa-vial',
-  //   notification: 'Switched to <b>Gorli Testnet</b>.',
-  //   url: '/',
-  // },
-  {
-    id: 'kovan',
-    group: 'testnet',
-    name: 'Kovan',
-    fullName: 'Kovan Testnet',
-    icon: 'fas fa-vial',
-    notification: 'Switched to <b>Kovan Testnet</b>.',
-    url: '/',
-  },
-  {
-    id: 'homestead',
-    group: 'mainnet',
-    name: 'Homestead',
-    fullName: 'Homestead Mainnet',
-    icon: 'fas fa-globe',
-    notification: 'Switched to <b>Homestead Mainnet</b>.',
-    url: '/',
-  }
-]
+const networkList = [...remoteNetworks]
 if (platform.isDesktop) {
   networkList.unshift({
     id: 'dev',
