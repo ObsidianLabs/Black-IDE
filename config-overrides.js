@@ -73,7 +73,8 @@ const overrides = [
     COMPILER_VERSION_KEY: '"truffle"',
     DOCKER_IMAGE_NODE: '"ethereum/client-go"',
     DOCKER_IMAGE_TRUFFLE: '"obsidians/truffle"',
-    INFURA_PROJECT_ID: '"cc547d769203404cb928ec965af26894"'
+    INFURA_PROJECT_ID: '"cc547d769203404cb928ec965af26894"',
+    ENABLE_AUTH: JSON.stringify(!!process.env.ENABLE_AUTH),
   }),
   addWasmLoader(),
 ]

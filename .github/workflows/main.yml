@@ -15,6 +15,7 @@ env:
   project_name: Ethereum Studio
   project_build_script: yarn && yarn dist
   os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
+  enable_auth: false
 
 jobs:
   # Generate matrix for the following steps
@@ -155,6 +156,7 @@ jobs:
           project_name: ${{ env.project_name }}
           build_script: ${{ env.project_build_script }}
           working-directory: ./studio
+          enable_auth: ${{ env.enable_auth }}
           fontawesome_token: ${{ secrets.fontawesome_token }}
           mac_certs: ${{ secrets.certs }}
           mac_certs_password: ${{ secrets.certs_password }}
