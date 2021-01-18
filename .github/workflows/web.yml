@@ -15,6 +15,7 @@ env:
   project_project: eth
   project_name: Ethereum Studio
   project_build_script: yarn && PUBLIC_URL=/ CDN=true yarn build:react
+  enable_auth: true
 
 jobs:
   # Build and release
@@ -81,6 +82,7 @@ jobs:
           project_name: ${{ env.project_name }}
           build_script: ${{ env.project_build_script }}
           working-directory: ./studio
+          enable_auth: ${{ env.enable_auth }}
           fontawesome_token: ${{ secrets.fontawesome_token }}
           mac_certs: ${{ secrets.certs }}
           mac_certs_password: ${{ secrets.certs_password }}
