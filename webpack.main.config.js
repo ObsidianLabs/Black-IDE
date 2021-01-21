@@ -74,7 +74,7 @@ module.exports = merge.smart(baseConfig, {
       'process.env.BUILD': JSON.stringify(process.env.BUILD),
       'process.env.PROJECT': JSON.stringify(process.env.PROJECT || process.env.BUILD),
       'process.env.DOCKER_IMAGE_NODE': '"ethereum/client-go"',
-      'process.env.DOCKER_IMAGE_TRUFFLE': '"obsidians/truffle"',
+      'process.env.DOCKER_IMAGE_COMPILER': '"obsidians/truffle"',
     })
   ]
 })
