@@ -1,6 +1,8 @@
 import '@obsidians/platform'
 import $loadjs from 'loadjs'
 
+$loadjs('https://solc-bin.ethereum.org/bin/list.js')
+
 if (!process.env.CDN) {
   import('./react')
 } else {
