@@ -16,6 +16,9 @@ env:
   project_name: Ethereum Studio
   project_build_script: yarn && PUBLIC_URL=/ CDN=true yarn build:react
   enable_auth: true
+  cos_bucket: ethereum-ide-1303090311
+  cos_region: ap-singapore
+  dns_path: http://eth.obsidians.io/
 
 jobs:
   # Build and release
@@ -90,14 +93,26 @@ jobs:
           windows_certs_password: ${{ secrets.certs_password }}
           github_token: ${{ github.token }}
 
-      # - name: Create placeholder for COS
-      #   run: echo cos > ./.placeholder
+      - name: Create a placeholder for COS
+        run: echo cos > ./.placeholder
 
-      # - name: Upload to COS
-      #   uses: zkqiang/tencent-cos-action@v0.1.0
-      #   with:
-      #     args: upload ./.placeholder / && delete -r -f / && upload -r ./studio/build/ /
-      #     secret_id: ${{ secrets.tencent_cloud_secretid }}
-      #     secret_key: ${{ secrets.tencent_cloud_secretkey }}
-      #     bucket: ${{ secrets.cos_bucket }}
-      #     region: ${{ secrets.cos_region }}
+      - name: Upload ${{ env.project_name }} to COS
+        uses: zkqiang/tencent-cos-action@v0.1.0
+        with:
+          args: upload ./.placeholder / && delete -r -f / && upload -r ./studio/build/ /
+          secret_id: ${{ secrets.tencent_cloud_secretid }}
+          secret_key: ${{ secrets.tencent_cloud_secretkey }}
+          bucket: ${{ env.cos_bucket }}
+          region: ${{ env.cos_region }}
+      
+      - name: Flush ${{ env.project_name }} CDN
+        uses: TencentCloud/cli-action@v1
+        with:
+          secret_id: ${{ secrets.tencent_cloud_secretId }}
+          secret_key: ${{ secrets.tencent_cloud_secretKey }}
+          # Tencent Cloud product region
+          region: ${{ env.cos_region }}
+          # Tencent Cloud CLI commands. Mult commands seperate by `&&`
+          commands: "cdn PurgePathCache --cli-unfold-argument --Paths ${{ env.dns_path }} --FlushType flush"
+          # Data format of command output. Available values are `json`, `table`, `text`. Default is `json`
+          output_format: "json"
