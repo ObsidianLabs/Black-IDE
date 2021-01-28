@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: master
+          ref: develop
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -43,7 +43,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: master
+          ref: develop
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
