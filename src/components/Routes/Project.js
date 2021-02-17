@@ -12,7 +12,7 @@ class ProjectWithProps extends PureComponent {
   }
 
   render () {
-    const { projects, match } = this.props
+    const { projects, uiState, match } = this.props
     const { username, project } = match.params
 
     let type, projectRoot, selected
@@ -34,9 +34,10 @@ class ProjectWithProps extends PureComponent {
         theme='obsidians'
         projectRoot={projectRoot}
         type={type}
+        signer={uiState.get('signer')}
       />
     )
   }
 }
 
-export default connect(['projects'])(ProjectWithProps)
+export default connect(['uiState', 'projects'])(ProjectWithProps)
