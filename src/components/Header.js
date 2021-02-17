@@ -39,7 +39,7 @@ class HeaderWithRedux extends PureComponent {
 
   render () {
     console.debug('[render] HeaderWithRedux')
-    const { profile, projects, contracts, accounts, network } = this.props
+    const { uiState, profile, projects, contracts, accounts, network } = this.props
 
     const selectedProject = projects.get('selected')?.toJS() || {}
 
@@ -47,6 +47,7 @@ class HeaderWithRedux extends PureComponent {
     const groupedNetworks = this.groupedNetworks(networkGroups)
     const selectedNetwork = networkList.find(n => n.id === network) || {}
 
+    const browserAccounts = uiState.get('browserAccounts') || []
     const starred = (accounts.getIn([network, 'accounts'])?.toJS() || []).map(item => item.toLowerCase())
     const selectedContract = contracts.getIn([network, 'selected']) || ''
     const selectedAccount = accounts.getIn([network, 'selected']) || ''
@@ -59,6 +60,7 @@ class HeaderWithRedux extends PureComponent {
         selectedContract={selectedContract}
         selectedAccount={selectedAccount}
         starred={starred}
+        browserAccounts={browserAccounts}
         network={selectedNetwork}
         networkList={groupedNetworks}
       />
@@ -67,6 +69,7 @@ class HeaderWithRedux extends PureComponent {
 }
 
 export default connect([
+  'uiState',
   'profile',
   'projects',
   'contracts',
