@@ -100,6 +100,7 @@ class ExplorerWithProps extends Component {
         ref={this.page}
         key={network}
         network={network}
+        signer={uiState.get('signer')}
         address={this.getSelected()}
         tabs={this.getTabs()}
         starred={this.getStarred()}
