@@ -31,8 +31,9 @@ $navbar-padding-y: 0;
 $nav-tabs-border-radius: 0;
 $nav-link-padding-x: 1rem;
 $nav-link-padding-y: 0.4rem;
+$navbar-dark-color: $white;
+$navbar-dark-active-color: none;
 $nav-tabs-link-active-bg: $primary;
-$nav-tabs-link-active-color: $white;
 
 $card-bg: $background;
 $card-border-width: 0;
@@ -96,6 +97,10 @@ $custom-select-indicator-color: $text-muted;
 $close-color: $light;
 $close-text-shadow: 0 1px 0 $dark;
 
+$navbar-dark-color: $light;
+$navbar-dark-active-color: color-yiq($primary);
+$navbar-dark-hover-color: color-yiq($primary);
+
 $dropdown-min-width: 9.5rem;
 $dropdown-padding-y: .3rem;
 $dropdown-spacer: .25rem;
@@ -107,7 +112,7 @@ $dropdown-border-color: $black;
 $dropdown-divider-bg: $black;
 $dropdown-link-hover-color: rgba($white, .9);
 $dropdown-link-hover-bg: $secondary;
-$dropdown-link-active-color: $white;
+$dropdown-link-active-color: color-yiq($primary);
 $dropdown-link-active-bg: $primary;
 $dropdown-header-color: $text-muted;
 
