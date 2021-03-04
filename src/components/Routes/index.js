@@ -34,13 +34,13 @@ export default function (props) {
           />
           <CacheRoute
             exact
-            path='/contract/:name?'
+            path='/contract/:value?'
             component={Contract}
             className='p-relative w-100 h-100'
           />
           <CacheRoute
             exact
-            path='/account/:name?'
+            path='/account/:value?'
             component={Explorer}
             className='p-relative w-100 h-100'
           />
