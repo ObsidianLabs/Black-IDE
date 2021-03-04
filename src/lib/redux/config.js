@@ -41,10 +41,12 @@ export const contracts = {
     dev: {
       selected: '',
       tabs: [],
+      starred: [],
     },
     testnet: {
       selected: '',
       tabs: [],
+      starred: [],
     },
   }),
   persist: true,
@@ -58,6 +60,9 @@ export const contracts = {
     },
     SELECT_CONTRACT: {
       reducer: (state, { payload }) => state.setIn([payload.network, 'selected'], payload.contract)
+    },
+    SET_STARRED_CONTRACTS: {
+      reducer: (state, { payload }) => state.setIn([payload.network, 'starred'], List(payload.starred))
     },
   }
 }

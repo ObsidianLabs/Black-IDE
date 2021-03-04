@@ -49,6 +49,7 @@ class HeaderWithRedux extends PureComponent {
 
     const browserAccounts = uiState.get('browserAccounts') || []
     const starred = accounts.getIn([network, 'accounts'])?.toJS() || []
+    const starredContracts = contracts.getIn([network, 'starred'])?.toJS() || []
     const selectedContract = contracts.getIn([network, 'selected']) || ''
     const selectedAccount = accounts.getIn([network, 'selected']) || ''
 
@@ -60,6 +61,7 @@ class HeaderWithRedux extends PureComponent {
         selectedContract={selectedContract}
         selectedAccount={selectedAccount}
         starred={starred}
+        starredContracts={starredContracts}
         browserAccounts={browserAccounts}
         network={selectedNetwork}
         networkList={groupedNetworks}
