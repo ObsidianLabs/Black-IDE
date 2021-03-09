@@ -39,5 +39,4 @@ if (platform.isDesktop) {
   })
 }
 
-
 export default handlers
