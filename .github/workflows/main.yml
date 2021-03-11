@@ -3,7 +3,7 @@ name: Build Main
 on:
   release:
     types: [published]
- 
+
   workflow_dispatch:
 
 env:
@@ -22,7 +22,7 @@ jobs:
   generate-matrix:
     runs-on: ubuntu-18.04
 
-    steps:      
+    steps:
       - name: Generate os matrix
         id: set-os-matrix
         run: echo ::set-output name=os::${{ env.os_matrix }}
@@ -32,7 +32,7 @@ jobs:
         run: echo ::set-output name=component::[\"${{ env.own_components }}\", \"${{ env.share_components }}\"]
 
     outputs:
-      os: ${{ steps.set-os-matrix.outputs.os }} 
+      os: ${{ steps.set-os-matrix.outputs.os }}
       component: ${{ steps.set-component-matrix.outputs.component }}
 
   # Extract version
@@ -100,7 +100,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
 
       - name: Checkout ${{ env.share_components }}
         uses: actions/checkout@v2
