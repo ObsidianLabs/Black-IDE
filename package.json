@@ -1,7 +1,7 @@
 {
   "name": "ethereum-studio",
   "description": "Graphic IDE for Ethereum smart contract development",
-  "version": "0.2.0-rc.2",
+  "version": "0.3.0-rc.1",
   "author": {
     "name": "Phil Li",
     "email": "phil.li@obsidians.io",
@@ -12,7 +12,7 @@
   "homepage": "./",
   "main": "build/main/index.js",
   "engines": {
-    "node": "12"
+    "node": "14"
   },
   "scripts": {
     "install": "electron-rebuild",
@@ -36,16 +36,15 @@
   "dependencies": {
     "crypto-browserify": "^3.12.0",
     "ethers": "^5.0.30",
-    "fs-extra": "^8.1.0",
-    "keytar": "5.6.0",
-    "monaco-ace-tokenizer": "^0.2.0",
-    "node-pty": "0.9.0",
-    "node-sass": "^4.14.1",
-    "prettier": "^2.0.5",
-    "prettier-plugin-solidity": "^1.0.0-alpha.54",
-    "socket.io-client": "^3.0.5",
+    "fs-extra": "^9.1.0",
+    "keytar": "^7.4.0",
+    "monaco-ace-tokenizer": "^0.2.1",
+    "node-pty": "0.10.0",
+    "prettier": "^2.2.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.5",
+    "socket.io-client": "^2.4.0",
     "strip-ansi": "^6.0.0",
-    "trash": "^6.0.0"
+    "trash": "^7.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -57,44 +56,48 @@
     "@types/node": "12.6.3",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
-    "aws-sdk": "^2.774.0",
-    "babel-loader": "^8.0.6",
+    "aws-sdk": "^2.830.0",
     "babel-plugin-import": "^1.12.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.6.0",
     "concurrently": "^4.1.2",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^5.2.0",
-    "customize-cra": "^0.7.0",
+    "customize-cra": "^1.0.0",
     "default-shell": "^1.0.1",
     "dotenv": "^8.0.0",
-    "electron": "8.3.4",
-    "electron-builder": "^21.2.0",
-    "electron-is-dev": "^1.1.0",
-    "electron-rebuild": "^1.11.0",
-    "electron-updater": "^4.1.2",
+    "electron": "11.3.0",
+    "electron-builder": "^22.10.5",
+    "electron-is-dev": "^2.0.0",
+    "electron-rebuild": "^2.3.5",
+    "electron-updater": "^4.3.8",
     "immutable": "^4.0.0-rc.12",
     "jsbi": "^3.1.1",
     "loadjs": "^4.2.0",
     "lodash": "^4.17.14",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "monaco-editor": "^0.20.0",
     "monaco-editor-webpack-plugin": "^1.9.0",
     "native-ext-loader": "^2.3.0",
-    "node-fetch": "^2.6.0",
-    "react": "^16.12.0",
-    "react-app-rewired": "^2.1.3",
-    "react-dom": "^16.12.0",
-    "react-json-view": "^1.19.1",
-    "react-router": "^5.1.2",
-    "react-router-cache-route": "^1.4.6",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "node-fetch": "^2.6.1",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.1",
+    "react-app-rewired": "^2.1.8",
+    "react-dom": "^17.0.1",
+    "react-json-view": "^1.21.3",
+    "react-router": "^5.2.0",
+    "react-router-cache-route": "^1.11.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "sass-loader": "^10.1.1",
     "shell-path": "^2.1.0",
     "source-map-loader": "^0.2.4",
     "typescript": "3.7.2",
     "wait-on": "^3.3.0",
     "webpack-cli": "^3.3.9",
     "webpack-merge": "^4.2.2"
+  },
+  "resolutions": {
+    "sass-loader": "^10.1.0"
   },
   "workspaces": [
     "../electron-components/packages/*",
@@ -131,7 +134,11 @@
     },
     "mac": {
       "appId": "com.obsidians.ethereumstudio",
-      "category": "developer-tools"
+      "category": "developer-tools",
+      "target": {
+        "target": "dmg",
+        "arch": ["arm64", "x64"]
+      }
     },
     "dmg": {
       "contents": [
