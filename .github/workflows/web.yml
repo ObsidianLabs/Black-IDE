@@ -29,7 +29,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
 
       - name: Checkout ${{ env.share_components }}
         uses: actions/checkout@v2
@@ -104,7 +104,7 @@ jobs:
           secret_key: ${{ secrets.tencent_cloud_secretkey }}
           bucket: ${{ env.cos_bucket }}
           region: ${{ env.cos_region }}
-      
+
       - name: Flush ${{ env.project_name }} CDN
         uses: TencentCloud/cli-action@v1
         with:
