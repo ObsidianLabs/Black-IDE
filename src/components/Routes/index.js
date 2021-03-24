@@ -4,7 +4,6 @@ import CacheRoute, { CacheSwitch } from 'react-router-cache-route'
 
 import Auth from '@obsidians/auth'
 import { Input, LoadingScreen, CenterScreen } from '@obsidians/ui-components'
-import { t } from '@obsidians/i18n'
 
 import BottomBar from './BottomBar'
 
@@ -26,7 +25,7 @@ export default function (props) {
   return (
     <React.Fragment>
       {props.children}
-      <Suspense fallback={<LoadingScreen text={t('loading')}/>}>
+      <Suspense fallback={<LoadingScreen />}>
         <CacheSwitch>
           <Route
             exact
