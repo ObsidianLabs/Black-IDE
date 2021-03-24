@@ -7,6 +7,7 @@ import Welcome, { checkDependencies } from '@obsidians/welcome'
 import { GlobalModals, autoUpdater } from '@obsidians/global'
 import { LoadingScreen } from '@obsidians/ui-components'
 import redux, { Provider } from '@obsidians/redux'
+import { t } from '@obsidians/i18n'
 
 import { config, updateStore } from '@/redux'
 import '@/menu'
@@ -38,12 +39,12 @@ export default class ReduxApp extends Component {
 
   render () {
     if (!this.state.loaded) {
-      return <LoadingScreen />
+      return <LoadingScreen text={t('loading')}/>
     }
 
     if (!this.state.dependencies) {
       return (
-        <Suspense fallback={<LoadingScreen />}>
+        <Suspense fallback={<LoadingScreen text={t('loading')}/>}>
           <Welcome
             isReady={checkDependencies}
             onGetStarted={this.skip}
