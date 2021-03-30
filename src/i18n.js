@@ -4,11 +4,9 @@ import { resources as ethResources } from '@obsidians/eth-i18n'
 
 const resources = merge(shareResources, ethResources)
 
-console.log(resources)
-
 initI18n(resources, {
   lng: process.env.LANG || 'en',
-  debug: process.env.NODE_ENV === 'development',
+  // debug: process.env.NODE_ENV === 'development',
 })
 
 // TODO: store language setting in localStorage, and init with this value
