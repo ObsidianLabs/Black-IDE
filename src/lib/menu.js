@@ -22,11 +22,15 @@ if (platform.isDesktop) {
     'redo',
     'undo',
     'delete',
-    'selectAll',
   ]
 
   actions.forEach(action => {
     handlers.project[action] = projectActions[action].bind(projectActions)
+    handlers.project.selectAll = () => {
+      if (typeof window.document.activeElement?.select === 'function') {
+        window.document.activeElement.select()
+      }
+    }
   })
 
   ipcRenderer.on('menu-click', (event, action) => {
