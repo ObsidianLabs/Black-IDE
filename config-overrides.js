@@ -41,8 +41,6 @@ function addWasmLoader (options) {
 const overrides = [
   addWebpackAlias({
     crypto: 'crypto-browserify',
-    'prettier/standalone': 'prettier/standalone',
-    prettier: 'prettier/standalone',
     '@': path.resolve(__dirname, 'src/lib'),
     '@obsidians/welcome': `@obsidians/${process.env.BUILD}-welcome`,
     '@obsidians/header': `@obsidians/${process.env.BUILD}-header`,

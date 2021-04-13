@@ -40,8 +40,6 @@
     "keytar": "^7.4.0",
     "monaco-ace-tokenizer": "^0.2.1",
     "node-pty": "0.10.0",
-    "prettier": "^2.2.1",
-    "prettier-plugin-solidity": "^1.0.0-beta.5",
     "socket.io-client": "^2.4.0",
     "strip-ansi": "^6.0.0",
     "trash": "^7.0.0"
@@ -137,7 +135,10 @@
       "category": "developer-tools",
       "target": {
         "target": "dmg",
-        "arch": ["arm64", "x64"]
+        "arch": [
+          "arm64",
+          "x64"
+        ]
       }
     },
     "dmg": {
