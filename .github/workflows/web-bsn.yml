@@ -1,4 +1,4 @@
-name: Build Web
+name: Build BSN Web
 
 on:
   push:
