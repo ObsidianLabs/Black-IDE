@@ -14,10 +14,7 @@ export default function App () {
       <Suspense fallback={<LoadingScreen />}>
         <Switch>
           <Route path='/callback' render={props => {
-            Auth.handleCallback({
-              ...props,
-              provider: process.env.DEPLOY
-            })
+            Auth.handleCallback(props)
             return <LoadingScreen />
           }}/>
           <Route component={ReduxApp} />
