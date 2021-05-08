@@ -50,7 +50,7 @@ jobs:
       - name: Checkout ${{ env.project_name }}
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: bsn
           path: ./studio
 
       - name: Replace .env
