@@ -33,7 +33,7 @@ class HeaderWithRedux extends PureComponent {
     if (process.env.DEPLOY === 'bsn') {
       this.getNetworks()
       clearInterval(this.state.interval)
-      const interval = setInterval(() => this.getNetworks(), 5 * 6 * 1000)
+      const interval = setInterval(() => this.getNetworks(), 30 * 1000)
       this.setState({ interval })
     } else {
       this.setState({ networkList: List(networks) }, this.setNetwork)
