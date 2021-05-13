@@ -1,5 +1,6 @@
 const os = require('os')
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 const {
   override,
   addWebpackExternals,
@@ -24,6 +25,20 @@ function overrideProcessEnv (value) {
   }
 }
 
+function turnOffMangle () {
+  return config => {
+    config.optimization.minimizer = config.optimization.minimizer.map(
+      minimizer => {
+        if (minimizer instanceof TerserPlugin) {
+          minimizer.options.terserOptions.mangle = false
+        }
+        return minimizer
+      }
+    )
+    return config
+  }
+}
+
 function addWasmLoader (options) {
   return config => {
     config.resolve.extensions.push('.wasm')
@@ -41,6 +56,7 @@ function addWasmLoader (options) {
 const overrides = [
   addWebpackAlias({
     crypto: 'crypto-browserify',
+    '@solidity-parser/parser': '@solidity-parser/parser/dist/index.cjs.js',
     '@': path.resolve(__dirname, 'src/lib'),
     '@obsidians/welcome': `@obsidians/${process.env.BUILD}-welcome`,
     '@obsidians/header': `@obsidians/${process.env.BUILD}-header`,
@@ -79,6 +95,7 @@ const overrides = [
     LANG: '"zh"',
     // ENABLE_AUTH: true,
   }),
+  turnOffMangle(),
   addWasmLoader(),
 ]
 
