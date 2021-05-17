@@ -1,10 +1,15 @@
 const { app, BrowserWindow } = require('electron')
+const os = require('os')
 const path = require('path')
 const isDev = require('electron-is-dev')
 const shellPath = require('shell-path')
 
 const { ipc } = require('@obsidians/ipc')
 const { TerminalChannelManager } = require('@obsidians/terminal')
+
+if (os.type() === 'Linux') {
+  app.disableHardwareAcceleration()
+}
 
 const init = require('./init')
 const createMenu = require('./createMenu')
