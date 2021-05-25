@@ -4,7 +4,7 @@ import { connect } from '@obsidians/redux'
 import { IpcChannel } from '@obsidians/ipc'
 
 import { networks } from '@obsidians/sdk'
-import headerActions, { Header, NavGuard, AuthModal } from '@obsidians/header'
+import headerActions, { Header, NavGuard } from '@obsidians/header'
 import { networkManager } from '@obsidians/network'
 import { actions } from '@obsidians/workspace'
 
@@ -114,7 +114,6 @@ class HeaderWithRedux extends PureComponent {
         browserAccounts={browserAccounts}
         network={selectedNetwork}
         networkList={groupedNetworks}
-        AuthModal={AuthModal}
       />
     )
   }
