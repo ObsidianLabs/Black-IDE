@@ -3,7 +3,7 @@ name: Build BSN Web
 on:
   push:
     branches:
-      - master
+      - bsn
 
   workflow_dispatch:
 
