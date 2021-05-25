@@ -6,7 +6,9 @@ import { IpcChannel } from '@obsidians/ipc'
 import { networks } from '@obsidians/sdk'
 import headerActions, { Header, NavGuard, AuthModal } from '@obsidians/header'
 import { networkManager } from '@obsidians/network'
+import { BaseProjectManager } from '@obsidians/workspace'
 import { actions } from '@obsidians/workspace'
+import { createProject } from '../lib/bsn'
 
 import { List } from 'immutable'
 
@@ -55,18 +57,21 @@ class HeaderWithRedux extends PureComponent {
             icon: 'fas fa-globe',
             notification: `Switched to <b>${project.network.name}</b>.`,
             url,
-            chainId: project.id
+            chainId: project.id,
+            raw: project
           }
         }))
-      }, this.setNetwork)
+      }, () => {
+        this.setNetwork(false)
+      })
     } catch (error) {
       this.setState({ networkList: List() })
     }
   }
 
-  setNetwork () {
+  setNetwork (redirect = true) {
     if (!networkManager.network) {
-      networkManager.setNetwork(this.state.networkList.get(0))
+      networkManager.setNetwork(this.state.networkList.get(0), false, redirect)
     }
   }
 
@@ -84,6 +89,17 @@ class HeaderWithRedux extends PureComponent {
       }
     })
     return networkList
+  }
+
+  setCreateProject = () => {
+    const cp = async function (params) {
+      return await createProject.call(this, {
+        networkManager,
+        bsnChannel: new IpcChannel('bsn'),
+        projectChannel: BaseProjectManager.channel
+      }, params)
+    }
+    return process.env.DEPLOY === 'bsn' && cp
   }
 
   render () {
@@ -115,6 +131,7 @@ class HeaderWithRedux extends PureComponent {
         network={selectedNetwork}
         networkList={groupedNetworks}
         AuthModal={AuthModal}
+        createProject={this.setCreateProject()}
       />
     )
   }

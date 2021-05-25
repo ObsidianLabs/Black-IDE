@@ -4,6 +4,7 @@ import { BrowserRouter, HashRouter, Switch, Route } from 'react-router-dom'
 import platform from '@obsidians/platform'
 import { LoadingScreen } from '@obsidians/ui-components'
 import Auth from '@obsidians/auth'
+import { handleBsnCallback } from './lib/bsn'
 
 const Router = platform.isDesktop ? HashRouter : BrowserRouter
 const ReduxApp = lazy(() => import('./ReduxApp' /* webpackChunkName: "components" */))
@@ -15,7 +16,8 @@ export default function App () {
         <Switch>
           <Route path='/callback' render={props => {
             if (process.env.DEPLOY === 'bsn') {
-              Auth.handleCallback({ ...props, provider: 'bsn' })
+              handleBsnCallback.call(Auth, props)
+              // Auth.handleCallback({ ...props, provider: 'bsn' })
             } else {
               Auth.handleCallback(props)
             }
