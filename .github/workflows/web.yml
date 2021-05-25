@@ -91,6 +91,7 @@ jobs:
           mac_certs_password: ${{ secrets.certs_password }}
           windows_certs: ${{ secrets.certs }}
           windows_certs_password: ${{ secrets.certs_password }}
+          react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
           github_token: ${{ github.token }}
 
       - name: Create a placeholder for COS
