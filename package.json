@@ -136,7 +136,7 @@
       "appId": "com.obsidians.ethereumstudio",
       "category": "developer-tools",
       "target": {
-        "target": "dmg",
+        "target": "default",
         "arch": [
           "arm64",
           "x64"
