@@ -24,13 +24,13 @@ async function handleBsnCallback ({ location, history }) {
   this.credentials = { token, awsCredential }
 
   try {
-    // const {
-    //   urlCode,
-    //   projectId,
-    //   orgCode,
-    //   appTypeId,
-    //   appTypeFrameName,
-    // } = JSON.parse(atob(decodeURIComponent(state)))
+    const {
+      urlCode,
+      projectId,
+      orgCode,
+      appTypeId,
+      appTypeFrameName,
+    } = JSON.parse(atob(decodeURIComponent(state)))
     // bsnParams = {
     //   urlCode,
     //   projectId,
@@ -38,7 +38,7 @@ async function handleBsnCallback ({ location, history }) {
     //   appTypeId,
     //   appTypeFrameName,
     // }
-    history.replace(`${username}`)
+    history.replace(`${username}?networkId=${appTypeId}`)
   } catch (error) {
     history.replace('/')
   }

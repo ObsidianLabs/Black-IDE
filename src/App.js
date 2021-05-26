@@ -17,7 +17,6 @@ export default function App () {
           <Route path='/callback' render={props => {
             if (process.env.DEPLOY === 'bsn') {
               handleBsnCallback.call(Auth, props)
-              // Auth.handleCallback({ ...props, provider: 'bsn' })
             } else {
               Auth.handleCallback(props)
             }
