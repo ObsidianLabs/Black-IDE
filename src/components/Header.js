@@ -49,7 +49,7 @@ class HeaderWithRedux extends PureComponent {
       networkManager.networks = projects.map(project => {
         const url = project.endpoints?.find(endpoint => endpoint.startsWith('http'))
         return {
-          id: `${project.name}${project.network.id}`,
+          id: `bsn_${project.name}${project.network.id}`,
           group: 'BSN',
           name: `${project.name}`,
           fullName: `${project.network.name} - ${project.name}`,
