@@ -38,7 +38,7 @@ async function handleBsnCallback ({ location, history }) {
     //   appTypeId,
     //   appTypeFrameName,
     // }
-    history.replace(`${username}?networkId=${appTypeId}`)
+    history.replace(`${username}?networkId=${appTypeId}&projectId=${projectId}`)
   } catch (error) {
     history.replace('/')
   }

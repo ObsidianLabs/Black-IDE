@@ -10,7 +10,7 @@ class UserHomepage extends BaseUserHomepage {
 
   async updateNetwork () {
     const urlParams = new URLSearchParams(this.props.location.search);
-    const networkId = `bsn_${urlParams.get('networkId')}`
+    const networkId = `bsn_${urlParams.get('projectId')}`
     this.setNetwork(networkId)
   }
 
