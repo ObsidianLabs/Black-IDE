@@ -1,0 +1,119 @@
+name: Build BSN Web Test
+
+on:
+
+  workflow_dispatch:
+
+env:
+  owner: ObsidianLabs
+  own_components: eth-components
+  share_components: electron-components
+  project_build: eth
+  project_project: eth
+  project_name: Ethereum Studio
+  project_build_script: yarn && PUBLIC_URL=/ CDN=true yarn build:react
+  enable_auth: true
+  cos_bucket: bsn-eth-1303090311
+  cos_region: ap-singapore
+  dns_path: https://ethide.bsnbase.io/
+
+jobs:
+  # Build and release
+  release:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Checkout ${{ env.share_components }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.share_components }}
+          ref: bsn
+          path: ./${{ env.share_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.own_components }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.own_components }}
+          ref: bsn
+          path: ./${{ env.own_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.project_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: bsn
+          path: ./studio
+
+      - name: Replace .env
+        working-directory: ./studio
+        run: cp .env.bsn.test .env
+
+      - name: Install ${{ env.share_components }} submodule
+        working-directory: ./${{ env.share_components }}
+        run: git submodule update --init
+
+      - name: Install ${{ env.share_components }} dependencies
+        working-directory: ./${{ env.share_components }}
+        run: yarn
+
+      - name: Build ${{ env.share_components }}
+        working-directory: ./${{ env.share_components }}
+        run: yarn build
+
+      - name: Install ${{ env.own_components }} submodule
+        working-directory: ./${{ env.own_components }}
+        run: git submodule update --init
+
+      - name: Install ${{ env.own_components }} dependencies
+        working-directory: ./${{ env.own_components }}
+        run: yarn
+
+      - name: Build ${{ env.own_components }}
+        working-directory: ./${{ env.own_components }}
+        run: yarn build
+
+      - name: Build ${{ env.project_name }}
+        uses: ObsidianLabs/studio-build-action@master
+        with:
+          build: ${{ env.project_build }}
+          project: ${{ env.project_project }}
+          project_name: ${{ env.project_name }}
+          build_script: ${{ env.project_build_script }}
+          working-directory: ./studio
+          enable_auth: ${{ env.enable_auth }}
+          fontawesome_token: ${{ secrets.fontawesome_token }}
+          mac_certs: ${{ secrets.certs }}
+          mac_certs_password: ${{ secrets.certs_password }}
+          windows_certs: ${{ secrets.certs }}
+          windows_certs_password: ${{ secrets.certs_password }}
+          github_token: ${{ github.token }}
+
+      - name: Create a placeholder for COS
+        run: echo cos > ./.placeholder
+
+      - name: Upload ${{ env.project_name }} to COS
+        uses: zkqiang/tencent-cos-action@v0.1.0
+        with:
+          args: upload ./.placeholder / && delete -r -f / && upload -r ./studio/build/ /
+          secret_id: ${{ secrets.tencent_cloud_secretid }}
+          secret_key: ${{ secrets.tencent_cloud_secretkey }}
+          bucket: ${{ env.cos_bucket }}
+          region: ${{ env.cos_region }}
+
+      - name: Flush ${{ env.project_name }} CDN
+        uses: TencentCloud/cli-action@v1
+        with:
+          secret_id: ${{ secrets.tencent_cloud_secretId }}
+          secret_key: ${{ secrets.tencent_cloud_secretKey }}
+          # Tencent Cloud product region
+          region: ${{ env.cos_region }}
+          # Tencent Cloud CLI commands. Mult commands seperate by `&&`
+          commands: "cdn PurgePathCache --cli-unfold-argument --Paths ${{ env.dns_path }} --FlushType flush"
+          # Data format of command output. Available values are `json`, `table`, `text`. Default is `json`
+          output_format: "json"
