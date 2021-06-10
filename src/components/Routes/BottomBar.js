@@ -11,7 +11,7 @@ function BottomBarWithProps ({ network, queue, uiState }) {
   } else if (localNetwork && localNetwork.lifecycle === 'started') {
     txs = queue.getIn([localNetwork.params.id, 'txs'])
   }
-  return <BottomBar txs={txs} />
+  return <BottomBar mnemonic txs={txs} />
 }
 
 export default connect(['queue', 'network', 'uiState'])(BottomBarWithProps)
