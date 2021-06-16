@@ -1,10 +1,6 @@
 name: Build BSN Web
 
 on:
-  push:
-    branches:
-      - bsn
-
   workflow_dispatch:
 
 env:
