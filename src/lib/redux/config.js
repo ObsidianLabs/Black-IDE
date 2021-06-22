@@ -31,7 +31,7 @@ export const uiState = {
   persist: false,
   actions: {
     UPDATE_UI_STATE: {
-      reducer: (state, { payload }) => state.mergeDeep(payload)
+      reducer: (state, { payload }) => state.merge(payload)
     },
   }
 }
