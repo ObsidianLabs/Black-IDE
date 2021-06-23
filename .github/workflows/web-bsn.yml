@@ -18,7 +18,7 @@ env:
   enable_auth: true
   cos_bucket: bsn-eth-1303090311
   cos_region: ap-singapore
-  dns_path: http://bsn-eth.ide.black/
+  dns_path: https://bsn-eth.ide.black/
 
 jobs:
   # Build and release

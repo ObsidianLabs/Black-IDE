@@ -18,7 +18,7 @@ env:
   enable_auth: true
   cos_bucket: ethereum-ide-1303090311
   cos_region: ap-singapore
-  dns_path: http://eth.obsidians.io/
+  dns_path: https://eth.obsidians.io/
 
 jobs:
   # Build and release
