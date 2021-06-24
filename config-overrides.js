@@ -94,6 +94,7 @@ const overrides = [
     DOCKER_IMAGE_NODE: '"ethereum/client-go"',
     DOCKER_IMAGE_COMPILER: '"obsidians/truffle"',
     INFURA_PROJECT_ID: '"cc547d769203404cb928ec965af26894"',
+    TOKENVIEW_API_TOKEN: '"EKOSwQf1EICfbxcVyNvt"',
     BROWSER_EXTENSION_NAME: '"MetaMask"',
     LANG: JSON.stringify(process.env.LANGUAGE || 'en'),
     // ENABLE_AUTH: true,
