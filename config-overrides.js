@@ -97,7 +97,7 @@ const overrides = [
     TOKENVIEW_API_TOKEN: '"EKOSwQf1EICfbxcVyNvt"',
     BROWSER_EXTENSION_NAME: '"MetaMask"',
     LANG: JSON.stringify(process.env.LANGUAGE || 'en'),
-    // ENABLE_AUTH: true,
+    ENABLE_AUTH: true,
   }),
   turnOffMangle(),
   addWasmLoader(),

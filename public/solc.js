@@ -13,7 +13,6 @@ function compileProject ({ solcUrl, input }) {
   if (typeof solc === 'undefined') {
     importScripts(solcUrl)
     solc = wrapper(Module)
-    console.log('solc ready', solc)
   }
   const output = solc.compile(input, { import: importFile })
   return JSON.parse(output)
