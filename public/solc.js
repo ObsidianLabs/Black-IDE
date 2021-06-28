@@ -1,5 +1,5 @@
 process = { env: {} }
-importScripts('/solc-wrapper.js')
+importScripts('./solc-wrapper.js')
 
 onmessage = function (e) {
   const { id, method, data } = e.data
