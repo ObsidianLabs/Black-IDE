@@ -86,7 +86,7 @@ const overrides = [
     CHAIN_SHORT_NAME: '"ETH"',
     CHAIN_EXECUTABLE_NAME: '"Geth"',
     CHAIN_EXECUTABLE_NAME_IN_LABEL: '"Geth"',
-    TOKEN_SYMBOL: '"ETH"',
+    TOKEN_SYMBOL: 'function () { return "ETH" }',
     COMPILER_NAME: '"Truffle"',
     COMPILER_NAME_IN_LABEL: '"Truffle"',
     COMPILER_EXECUTABLE_NAME: '"truffle"',
