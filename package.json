@@ -43,7 +43,7 @@
     "prettier": "^2.2.1",
     "prettier-plugin-solidity": "1.0.0-beta.10",
     "socket.io-client": "^2.4.0",
-    "solhint": "^3.3.6",
+    "solhint": "ObsidianLabs/solhint#obsidians",
     "strip-ansi": "^6.0.0",
     "trash": "^7.0.0"
   },
