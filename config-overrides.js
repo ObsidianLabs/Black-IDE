@@ -68,6 +68,7 @@ const overrides = [
     '@obsidians/sdk': `@obsidians/${process.env.PROJECT}-sdk`,
     '@obsidians/network': `@obsidians/${process.env.BUILD}-network`,
     '@obsidians/node': `@obsidians/${process.env.BUILD}-node`,
+    '@obsidians/premium-editor': path.resolve(__dirname, 'empty.js'),
   }),
   overrideProcessEnv({
     CDN: JSON.stringify(!!process.env.CDN),
