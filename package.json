@@ -104,7 +104,8 @@
   },
   "workspaces": [
     "../electron-components/packages/*",
-    "../eth-components/packages/*"
+    "../eth-components/packages/*",
+    "../bsc-components/packages/*"
   ],
   "browserslist": {
     "production": [

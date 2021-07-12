@@ -3,12 +3,20 @@ import React, { PureComponent } from 'react'
 import { connect } from '@obsidians/redux'
 import { IpcChannel } from '@obsidians/ipc'
 
-import { networks } from '@obsidians/sdk'
 import headerActions, { Header, NavGuard } from '@obsidians/header'
 import { networkManager } from '@obsidians/network'
 import { actions } from '@obsidians/workspace'
+import keypairManager from '@obsidians/keypair'
 
 import { List } from 'immutable'
+
+import EthSdk, { kp } from '@obsidians/eth-sdk'
+import BscSdk from '@obsidians/bsc-sdk'
+
+keypairManager.kp = kp
+networkManager.addSdk(EthSdk, EthSdk.networks)
+networkManager.addSdk(BscSdk, BscSdk.networks)
+networkManager.addSdk(EthSdk, EthSdk.customNetworks)
 
 class HeaderWithRedux extends PureComponent {
   state = {
@@ -23,12 +31,6 @@ class HeaderWithRedux extends PureComponent {
     this.navGuard = new NavGuard(this.props.history)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.network && prevProps.network !== this.props.network) {
-      this.refresh()
-    }
-  }
-
   async refresh() {
     if (process.env.DEPLOY === 'bsn') {
       this.getNetworks()
@@ -36,7 +38,7 @@ class HeaderWithRedux extends PureComponent {
       const interval = setInterval(() => this.getNetworks(), 5 * 6 * 1000)
       this.setState({ interval })
     } else {
-      this.setState({ networkList: List(networks) }, this.setNetwork)
+      this.setState({ networkList: List(networkManager.networks) }, this.setNetwork)
     }
   }
 
