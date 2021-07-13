@@ -11,11 +11,11 @@ import keypairManager from '@obsidians/keypair'
 import { List } from 'immutable'
 
 import EthSdk, { kp } from '@obsidians/eth-sdk'
-import BscSdk from '@obsidians/bsc-sdk'
+// import BscSdk from '@obsidians/bsc-sdk'
 
 keypairManager.kp = kp
 networkManager.addSdk(EthSdk, EthSdk.networks)
-networkManager.addSdk(BscSdk, BscSdk.networks)
+// networkManager.addSdk(BscSdk, BscSdk.networks)
 networkManager.addSdk(EthSdk, EthSdk.customNetworks)
 
 class HeaderWithRedux extends PureComponent {
