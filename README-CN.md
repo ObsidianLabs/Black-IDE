@@ -8,7 +8,6 @@ Ethereum Studio 是一个帮助开发者快速开发 [Ethereum](https://Ethereum
   <img src="./screenshots/studio.png" width="720px">
 </p>
 
-
 ## 使用 Ethereum Studio
 
 ### Ethereum Studio 桌面版
@@ -55,13 +54,11 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
   <img src="./screenshots/create_keypairs.png" width="720px">
 </p>
 
-
 如需导入密钥，点击密钥管理器左下角的 *Import* 按钮，输入密钥对名称，并在私钥/助记词输入框中输入希望导入的私钥或助记词，Ethereum Studio 将根据输入格式自动检测。如果输入的是有效的私钥或助记词，输入框下方将显示对应的地址，确认无误后点击 *Import* 按钮即可完成导入。
 
 <p align="center">
   <img src="./screenshots/import_keypairs.png" width="720px">
 </p>
-
 
 在继续之前，请先在密钥管理器中创建一些密钥对，以便我们完成接下来的操作步骤。
 
@@ -109,7 +106,7 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
   <img src="./screenshots/testkeypair_explorer.png" width="720px">
 </p>
 
-当连接主网或者测试网查询信息时，区块浏览器可以显示地址下所有 [EthereumScan](https://Ethereumscan.io/) 已收录的[测试网 CRC-20 代币](https://testnet.Ethereumscan.io/tokens/crc20)或[主网 CRC-20 代币](https://www.Ethereumscan.io/tokens/crc20)信息（CRC-20 标准与 ERC-20 标准是等价的，本教程将不区分 ERC-20 和 CRC-20）。
+当连接主网查询信息时，区块浏览器可以显示地址下的 ERC-20 代币信息（基于[Trust Wallet](https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/tokenlist.json)）。
 
 <p align="center">
   <img src="./screenshots/crc-20_token_explorer.png" width="720px">
@@ -117,14 +114,14 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
 
 Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便用户使用，可以单击按钮调用相应工具：
 
-- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 CFX 或其拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会在[历史交易记录](#历史交易记录)中以便之后再次查看。
+- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或其拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会在[历史交易记录](#历史交易记录)中以便之后再次查看。
 
 <p align="center">
   <img src="./screenshots/transfer.png" width="720px">
 </p>
 
 - 点击 *Convert* 按钮以进行地址格式转换。
-- 当连接测试网时，点击 *Faucet* 按钮可申请测试代币。每次使用 Faucet 功能时，Ethereum Studio 会自动申请 1,000 CFX 以及 1,000 cUSDT 两种测试代币。不过，测试网上所申请的这两种代币均为测试代币，是没有实际价值的。
+- 当连接测试网时，点击 *Faucet* 按钮，Ethereum Studio 会打开申请测试代币的网站，以供开发测试使用。测试网上所申请的代币均为测试代币，是没有实际价值的。
 
 ### 智能合约项目
 
@@ -133,11 +130,7 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
 点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，输入项目名称并选择合适的模版，Ethereum Studio 目前提供了多种模版：
 
 - `Coin`：Ethereum 实例提供的 Coin 智能合约。
-
-- `Sponsored Coin`：Ethereum 实例提供的 Sponsored Coin 智能合约。
-
-- `[Open Zeppelin]`：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约。
-
+- `[Open Zeppelin] Basics`：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约。
 - `[Truffle] Metacoin`：使用 Ethereum Truffle 创建的合约。 目前 Ethereum Studio 暂不支持部署 Metacoin 合约。
 
 <p align="center">
@@ -229,7 +222,6 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
   <img src="./screenshots/transfer.png" width="720px">
 </p>
 
-
 接下来，我们来验证一下上笔交易的结果。在合约读取窗口中选择 *balanceOf* 数据栏，在 Parameters 下 account 下拉菜单中选择 my-keypair-2 地址，最后点击上方的数据名称旁的 *Execute* 按钮（三角形状）。结果会显示在下方 Result 栏目中，这个结果与我们上笔交易中向 my-keypair-2 转账的 amount 数量一致，这验证了我们之前交易的结果。
 
 <p align="center">
@@ -259,6 +251,7 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
 #### 历史交易记录
 
 Ethereum Studio 会记录每笔发布到链上的交易。如需查看最近的交易记录，点击底部栏的 *Transactions* 按钮即可唤出最近交易记录的列表。可以点击单笔交易以打开交易确认弹窗，并查看交易详情、参数 （Parameters） 、交易数据 （Tx）、交易收据 （Receipt）和 ABI 等详细信息。
+
 <p align="center">
   <img src="./screenshots/transactions.png" width="720px">
 </p>
