@@ -103,10 +103,11 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
 点击 *Explorer* 标签右侧的三角箭头，在下拉菜单中选择希望访问的密钥地址，即可查看对应地址的账户信息了。另外，也可以在区块浏览器的地址栏中输入待查看的密钥地址来查看信息。目前 Ethereum Studio 暂不支持查看本地开发节点的历史交易记录。将网络切换到测试网或主网，区块浏览器中便可以查看历史交易记录了。
 
 <p align="center">
-  <img src="./screenshots/testkeypair_explorer.png" width="720px">
+  <img src="./screenshots/explorer.png" width="720px">
 </p>
 
-当连接主网查询信息时，区块浏览器可以显示地址下的 ERC-20 代币信息（基于[Trust Wallet](https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/tokenlist.json)）。
+
+当连接主网查询信息时，区块浏览器可以显示地址下已被 [Trust Wallet](https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/tokenlist.json) 收录的的 ERC-20 代币信息。
 
 <p align="center">
   <img src="./screenshots/crc-20_token_explorer.png" width="720px">
@@ -114,7 +115,7 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
 
 Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便用户使用，可以单击按钮调用相应工具：
 
-- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或其拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会在[历史交易记录](#历史交易记录)中以便之后再次查看。
+- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或任意地址中拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会在[历史交易记录](#历史交易记录)中以便之后再次查看。
 
 <p align="center">
   <img src="./screenshots/transfer.png" width="720px">
@@ -127,9 +128,10 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
 
 #### 项目列表
 
-点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，输入项目名称并选择合适的模版，Ethereum Studio 目前提供了多种模版：
+点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，首先选择新建项目的储存位置，本地或者云端。然后输入项目储存位置，名称并选择合适的模版。Ethereum Studio 目前提供了多种模版：
 
 - `Coin`：Ethereum 实例提供的 Coin 智能合约。
+- `ERC20 Token`：Ethereum 实例提供的简易 ERC-20 代币合约。
 - `[Open Zeppelin] Basics`：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约。
 - `[Truffle] Metacoin`：使用 Ethereum Truffle 创建的合约。 目前 Ethereum Studio 暂不支持部署 Metacoin 合约。
 
@@ -137,7 +139,7 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
   <img src="./screenshots/create_project.png" width="720px">
 </p>
 
-这里我们使用 Open Zeppelin 的 Basics 模版创建一个名为 `my-project` 的项目，并使用这个项目完成后续操作。
+这里我们使用 Open Zeppelin 的 Basics 模版在本地创建一个名为 `my-project` 的项目，并使用这个项目完成后续操作。
 
 #### 项目编辑器
 
@@ -150,14 +152,16 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
 点击工具栏中右侧的 *Project Settings*（齿轮形状）图标，打开项目设置标签页。在这里可以查看和修改项目的基本配置，编译器配置以及 Linter 配置等信息。
 
 <p align="center">
-  <img src="./screenshots/proj_settings.png" width="720px">
+  <img src="./screenshots/project_setting.png" width="720px">
 </p>
+
 
 Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程中自动检查代码并提示项目代码中的警告和错误。 项目编辑器会在有警告的代码行前标注黄色的惊叹号，在错误的代码行前标注红色的叉作为提示。
 
 <p align="center">
-  <img src="./screenshots/warning_error.png" width="720px">
+  <img src="./screenshots/linter.png" width="720px">
 </p>
+
 
 #### 编译智能合约
 
@@ -184,7 +188,8 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
   <img src="./screenshots/deploy_parameters.png" width="720px">
 </p>
 
-现在右键点击 `GLDToken.json` ，选择 *Compile* 以调出部署弹窗。在弹窗中填写构造函数参数，并选择签名密钥地址后，点击 *Estimate & Deploy* 按钮，Ethereum Studio 会自动估算所需的交易费用并填入对应栏目中。如需重新估算，请点击左侧绿色 *Re-estimate* 按钮。有时候预估的交易费用可能是不够的，如果部署的时候出现交易费用不足的错误，可以手动提高交易费用后重试。点击蓝色 *Deploy* 按钮，Ethereum Studio 将发送合约部署交易。
+
+现在右键点击 `GLDToken.json` ，选择 *Deploy* 以调出部署弹窗。在弹窗中填写构造函数参数，并选择签名密钥地址后，点击 *Estimate & Deploy* 按钮，Ethereum Studio 会自动估算所需的交易费用并填入对应栏目中。如需重新估算，请点击左侧绿色 *Re-estimate* 按钮。有时候预估的交易费用可能是不够的，如果部署的时候出现交易费用不足的错误，可以手动提高交易费用后重试。点击蓝紫色 *Deploy* 按钮，Ethereum Studio 将发送合约部署交易。
 
 部署交易需要一些时间被区块链网络处理。大约十几秒后，Ethereum Studio 会弹出交易详情弹窗显示部署结果，包括部署参数（Parameters）、交易数据（Tx）、交易收据（Receipt）、ABI 等详细信息，可点击弹窗中的标签进行切换。若在本弹窗关闭之后仍想查看本次部署结果和交易详情信息，请参考[历史交易记录](#历史交易记录)。
 
@@ -198,13 +203,14 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 
 合约浏览器页面主要分为三个部分：
 
-- 左边栏用于调用合约的写入方法：点击蓝色下拉框，选择希望调用该合约的写入方法；
-- 中间栏用于进行合约的数据读取：点击蓝色下拉框，选择希望查询该合约的读取方法；
-- 右边栏用于进行合约的事件查询，点击蓝色下拉框，选择希望查询该合约的事件。
+- 左边栏用于调用合约的写入方法：点击蓝紫色下拉框，选择希望调用该合约的写入方法；
+- 中间栏用于进行合约的数据读取：点击蓝紫色下拉框，选择希望查询该合约的读取方法；
+- 右边栏用于进行合约的事件查询，点击蓝紫色下拉框，选择希望查询该合约的事件。
 
 <p align="center">
-  <img src="./screenshots/contract.png" width="720px">
+  <img src="./screenshots/contract_inspector.png" width="720px">
 </p>
+
 
 Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约时候通过 ABI 中的数据，生成上面的写入方法、数据读取、事件查询，和它们各自的参数表单。更多 ABI 的使用方法可以参考 [ABI Storage](#abi-storage)。
 
