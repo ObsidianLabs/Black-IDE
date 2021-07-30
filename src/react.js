@@ -17,8 +17,9 @@ if (platform.isDesktop) {
 }
 
 if (!process.env.CDN) {
-  import('./scss/fonts/open_sans.css')
-  import('./scss/fonts/hack.css')
+  import('./scss/fonts/open_sans/open_sans.css')
+  import('./scss/fonts/hack/hack.css')
+  import('./scss/fonts/fira/fira_code.css')
   import('@fortawesome/fontawesome-pro/js/all')
 }
 

@@ -124,7 +124,7 @@ $btn-border-radius-xs: $border-radius-xs;
 
 $table-border-color: $border;
 $table-border-width: $border-width;
-$table-hover-bg: var(--color-hover);
+$table-hover-bg: rgba($secondary, 0.5);
 $table-accent-bg: $background2;
 $progress-bg: $dark2;
 
