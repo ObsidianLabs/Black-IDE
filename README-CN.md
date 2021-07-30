@@ -14,14 +14,15 @@ Ethereum Studio 是一个帮助开发者快速开发 [Ethereum](https://Ethereum
 
 Ethereum Studio 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/EthereumStudio/releases) 进行下载。目前 Ethereum Studio 桌面版支持 macOS、Linux 和 Windows 系统，请根据系统下载对应的版本 （macOS 下载 `.dmg` 或者 `.zip`，Linux 下载 `.AppImage`， Windows 下载 `.exe`）。
 
-- **macOS**: 双击打开 `EthereumStudio-x.x.x.dmg` 并将 `Ethereum Studio` 拖动到应用文件夹内。
-  - 第一次运行 Ethereum Studio 时，可能会收到系统 *”无法打开 "Ethereum Studio"，因为 Apple 无法检查其是否包含恶意软件“* 的提示。此时请打开 *系统偏好设置* ，前往 *安全性与隐私* 。点按 *通用* 面板中 *仍要打开* 按钮以允许 Ethereum Studio 运行。
-- **Linux**: 双击打开 `EthereumStudio-x.x.x.AppImage`， 选择 *Properties* => *Permissions* => *Execute*， 将 *Allow executing file as program* 选项打勾。关闭属性设置窗口并双击打开应用（不同的 Linux 发行版可能会有不同的安装方式）。
+- **macOS**: 双击打开 `EthereumStudio-x.x.x.dmg` 并将 `Ethereum Studio` 拖动到应用文件夹内；
+  - 第一次运行 Ethereum Studio 时，可能会收到系统 *”无法打开 Ethereum Studio，因为 Apple 无法检查其是否包含恶意软件“* 的提示。此时请打开 *系统偏好设置* ，前往 *安全性与隐私* 。点按 *通用* 面板中 *仍要打开* 按钮以允许 Ethereum Studio 运行；
+- **Linux**: 双击打开 `EthereumStudio-x.x.x.AppImage`；
+  - 如果双击打开无效，右键点击 `EthereumStudio-x.x.x.AppImage`，选择 *Properties* => *Permissions* => *Execute*，将 *Allow executing file as program* 选项打勾。关闭属性设置窗口并双击打开应用（不同的 Linux 发行版可能会有不同的安装方式）；
 - **Windows**:  双击打开 `EthereumStudio-x.x.x.exe`。
 
 ### Ethereum Studio Web 版
 
-在浏览器中打开 [https://eth.ide.black](https://eth.ide.black) 以访问 Ethereum Studio Web 版。
+在浏览器中打开 https://eth.ide.black 以访问 Ethereum Studio Web 版。
 
 ## 功能预览
 
@@ -29,15 +30,15 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 
 ### 准备工作 
 
-在正确安装 Ethereum Studio 桌面版并初次启动时，你将看到一个欢迎页面，同时也是环境准备界面。这里列出了 Ethereum Studio 正常运行所需要的依赖，包括了 Docker，Geth in Docker 以及 Truffle in Docker 。因为 Ethereum Studio Web 版无需安装依赖，所以访问 Web 版将直接进入主界面。
+在正确安装 Ethereum Studio 桌面版并初次启动时，你将看到一个欢迎页面，同时也是环境准备界面。这里列出了 Ethereum Studio 正常运行所需要的依赖，包括了 Docker，Geth in Docker 以及 Truffle in Docker。Ethereum Studio Web 版无需安装依赖，访问 Web 版将直接进入主界面。
 
 <p align="center">
   <img src="./screenshots/welcome.png" width="720px">
 </p>
 
-- Ethereum Studio 使用 [**Docker**](https://www.docker.com/) 来启动 Ethereum 节点和进行项目编译。如果你之前没有安装过 Docker，可以点击 *Install Docker* 按钮访问 Docker 官方网站并进行下载安装。
-- [**Geth**](https://github.com/ethereum/go-ethereum) 全称 Go Ethereum ，是以太坊基金会提供的基于 Go 语言编写的官方以太坊协议实现。 Ethereum Studio 使用这个工具运行以太坊节点以及项目编译
-- [**Truffle**](https://github.com/trufflesuite/truffle) 是一套世界领先的智能合约开发框架和工具包。 Ethereum Studio 使用这个工具包进行项目的创建和编译。
+- Ethereum Studio 使用 [**Docker**](https://www.docker.com/) 来启动 Ethereum 节点和进行项目编译。如果你之前没有安装过 Docker，可以点击 *Install Docker* 按钮访问 Docker 官方网站并进行下载安装；
+- [**Geth**](https://github.com/ethereum/go-ethereum) 全称 Go Ethereum，是以太坊基金会提供的基于 Go 语言编写的官方以太坊协议实现。 Ethereum Studio 使用这个工具运行以太坊节点；
+- [**Truffle**](https://github.com/trufflesuite/truffle) 是一套应用广泛的 Solidity 智能合约开发框架和工具包。Ethereum Studio 使用这个工具包进行项目的创建和编译。
 
 当所有依赖都正确安装并运行后，灰色的 *Skip* 按钮将会变成蓝紫色的 *Get Started* 按钮。点击这个按钮进入 Ethereum Studio 的主界面。
 
@@ -48,6 +49,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 <p align="center">
   <img src="./screenshots/keypairs.png" width="720px">
 </p>
+
 你可以在密钥管理器中创建、导入并管理密钥对。点击密钥管理器左下角的 *Create* 按钮，根据提示输入密钥对名称并选择网络以新建一个密钥对。密钥对名称是一个由用户自定义的名称，目的是方便在后续的使用中进行识别。Ethereum Studio 支持以私钥或助记词的方式生成密钥。生成密钥时，默认以私钥方式生成。如需切换为助记词，请点击 *Regenerate* 按钮旁边的三角箭头切换。
 
 <p align="center">
@@ -86,7 +88,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 
 #### Ethereum 测试网/主网
 
-Ethereum Studio 中已经内置了 Ethereum 三个测试网 Ropsten，Rinkeby 和 Kovan，以及主网的链接信息。点击 *Network* 标签旁的三角箭头，可以直接选择连接或者一键切换希望使用的 Ethereum 网络。
+Ethereum Studio 中已经内置了 Ethereum 三个测试网 [Ropsten](https://github.com/ethereum/ropsten)，[Rinkeby](https://www.rinkeby.io/) 和 [Kovan](https://kovan-testnet.github.io/)，以及 Ethereum 主网的连接信息。点击 *Network* 标签旁的三角箭头，可以直接一键切换希望使用的 Ethereum 网络。
 
 <p align="center">
   <img src="./screenshots/network_selector.png" width="720px">
@@ -106,7 +108,6 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
   <img src="./screenshots/explorer.png" width="720px">
 </p>
 
-
 当连接主网查询信息时，区块浏览器可以显示地址下已被 [Trust Wallet](https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/tokenlist.json) 收录的的 ERC-20 代币信息。
 
 <p align="center">
@@ -115,24 +116,23 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
 
 Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便用户使用，可以单击按钮调用相应工具：
 
-- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或任意地址中拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会在[历史交易记录](#历史交易记录)中以便之后再次查看。
+- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或当前地址拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会被存储在[历史交易记录](#历史交易记录)中，以便之后再次查看；
 
 <p align="center">
   <img src="./screenshots/transfer.png" width="720px">
 </p>
 
-- 点击 *Convert* 按钮以进行地址格式转换。
 - 当连接测试网时，点击 *Faucet* 按钮，Ethereum Studio 会打开申请测试代币的网站，以供开发测试使用。测试网上所申请的代币均为测试代币，是没有实际价值的。
 
 ### 智能合约项目
 
 #### 项目列表
 
-点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，首先选择新建项目的储存位置，本地或者云端。然后输入项目储存位置，名称并选择合适的模版。Ethereum Studio 目前提供了多种模版：
+点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，首先选择新建项目的储存位置，本地或者云端。然后输入项目名称，并选择合适的模版。Ethereum Studio 目前提供了多种模版：
 
-- `Coin`：Ethereum 实例提供的 Coin 智能合约。
-- `ERC20 Token`：Ethereum 实例提供的简易 ERC-20 代币合约。
-- `[Open Zeppelin] Basics`：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约。
+- `Coin`：一个简单的 Coin 智能合约；
+- `ERC20 Token`：ERC-20 代币合约；
+- `[Open Zeppelin] Basics`：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约；
 - `[Truffle] Metacoin`：使用 Ethereum Truffle 创建的合约。 目前 Ethereum Studio 暂不支持部署 Metacoin 合约。
 
 <p align="center">
@@ -149,38 +149,36 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
   <img src="./screenshots/editor.png" width="720px">
 </p>
 
-点击工具栏中右侧的 *Project Settings*（齿轮形状）图标，打开项目设置标签页。在这里可以查看和修改项目的基本配置，编译器配置以及 Linter 配置等信息。
+点击工具栏中右侧的 *Project Settings*（齿轮形状）图标，打开项目设置页。在这里可以查看和修改项目的基本配置，编译器配置以及 Linter 配置等信息。
 
 <p align="center">
   <img src="./screenshots/project_setting.png" width="720px">
 </p>
 
-
-Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程中自动检查代码并提示项目代码中的警告和错误。 项目编辑器会在有警告的代码行前标注黄色的惊叹号，在错误的代码行前标注红色的叉作为提示。
+Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程中自动检查代码并提示项目代码中的警告和错误。项目编辑器会在有警告的代码行前标注黄色的惊叹号，在错误的代码行前标注红色的叉作为提示。
 
 <p align="center">
   <img src="./screenshots/linter.png" width="720px">
 </p>
 
-
 #### 编译智能合约
 
-点击工具栏的 *Build* 按钮（锤子形状），Ethereum Studio 将进行项目的编译，你可以通过下方的日志查看器来查看编译结果。编译后将在项目目录下的 `build/contracts` 文件夹中查看到编译完成的 `*.json` 文件，这些编译输出文件的数据格式可参阅 [solc 文档](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)。
+点击工具栏的 *Build* 按钮（锤子形状），Ethereum Studio 将进行项目的编译，你可以通过下方的日志查看器来查看编译结果。编译后将在项目目录下的 `build/contracts` 文件夹中查看到编译完成的 `*.json` 文件，这些编译输出文件的数据格式可参阅 [Solc 文档](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)。
 
 <p align="center">
   <img src="./screenshots/compile.png" width="720px">
 </p>
 
-另外也可以通过右键点击 `sol` 文件，在菜单中选择 *Compile*，单独编译选中的合约文件。
+另外也可以通过右键点击一个 `*.sol` 文件，在菜单中选择 *Compile*，单独编译选中的合约文件。
 
 #### 部署智能合约
 
-点击工具栏的 *Deploy* 按钮（船形状），部署合约弹窗将被打开，在这里可以输入部署合约所需要的各项参数：
+点击工具栏的 *Deploy* 按钮（船形状），合约部署弹窗将被打开，在这里可以输入部署合约所需要的各项参数：
 
 - Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件；
 - Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数；
-- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单中选择；
-- Gas Limit、Gas Price、Storage Limit：合约部署的交易费用信息，部署前 Ethereum Studio 会进行估算，也可使用自行填写的值进行覆盖。
+- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择；
+- Gas Limit、Gas Price：合约部署的交易费用信息，部署前 Ethereum Studio 会进行估算，也可使用自行填写的值进行覆盖。
 
 另外，也可以在文件浏览器中，右键点击一个 JSON 格式的编译输出文件，在菜单中选择 *Deploy*，对该合约进行部署。 
 
@@ -188,8 +186,7 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
   <img src="./screenshots/deploy_parameters.png" width="720px">
 </p>
 
-
-现在右键点击 `GLDToken.json` ，选择 *Deploy* 以调出部署弹窗。在弹窗中填写构造函数参数，并选择签名密钥地址后，点击 *Estimate & Deploy* 按钮，Ethereum Studio 会自动估算所需的交易费用并填入对应栏目中。如需重新估算，请点击左侧绿色 *Re-estimate* 按钮。有时候预估的交易费用可能是不够的，如果部署的时候出现交易费用不足的错误，可以手动提高交易费用后重试。点击蓝紫色 *Deploy* 按钮，Ethereum Studio 将发送合约部署交易。
+在合约部署弹窗中选择 `GLDToken.json`，填写构造函数参数，并选择 `my-keypair-1` 为签名密钥地址。在这个例子中，合约部署时，将会把初始的 1000 token 全部分配给为部署交易签名的地址 `my-keypair-1`。将点击 *Estimate & Deploy* 按钮，Ethereum Studio 会自动估算所需的交易费用并填入对应栏目中。如需重新估算，请点击左侧绿色 *Re-estimate* 按钮。有时候预估的交易费用可能是不够的，如果部署的时候出现交易费用不足的错误，可以手动提高 Gas Limit 或 Gas Price 后重试。点击蓝紫色 *Deploy* 按钮，Ethereum Studio 将发送合约部署交易。
 
 部署交易需要一些时间被区块链网络处理。大约十几秒后，Ethereum Studio 会弹出交易详情弹窗显示部署结果，包括部署参数（Parameters）、交易数据（Tx）、交易收据（Receipt）、ABI 等详细信息，可点击弹窗中的标签进行切换。若在本弹窗关闭之后仍想查看本次部署结果和交易详情信息，请参考[历史交易记录](#历史交易记录)。
 
@@ -211,16 +208,15 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
   <img src="./screenshots/contract_inspector.png" width="720px">
 </p>
 
-
 Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约时候通过 ABI 中的数据，生成上面的写入方法、数据读取、事件查询，和它们各自的参数表单。更多 ABI 的使用方法可以参考 [ABI Storage](#abi-storage)。
 
 接下来我们在合约浏览器中打开刚刚部署的 `GLDToken` 合约，演示如何使用写入方法、读取数据和查询事件。
 
 首先在写入方法调用窗口中选择 *transfer* 方法，这个方法将指定数量的代币从一个地址转账到另外一个地址。接下来填入完成交易必须的各项参数：
 
-- 在 Parameters 下从 recipient 下拉菜单中选择 my-keypair-2 作为收款人地址（可以从密钥管理器双击复制），并在 amount 中填入合适的数量。
-- 无需填写 Gas & Storage 栏目中的交易费用（由 Ethereum Studio 自动估算），
-- 在 Authorization 的 Signer 下拉菜单中选择 my-keypair-1 创世地址，在本例中我们用创世地址作为汇款人地址。
+- 在 Parameters 下从 recipient 下拉菜单中选择 `my-keypair-2` 作为收款人地址（也可以输入其它密钥管理器中未保存的地址），并在 amount 中填入合适的数量；
+- 无需填写 Gas & Storage 栏目中的交易费用（由 Ethereum Studio 自动估算）；
+- 在 Authorization 的 Signer 下拉菜单中选择 `my-keypair-1` 作为汇款人地址。
 
 完成后，点击上方的方法名称旁的 *Execute* 按钮（三角形状）执行交易。稍后弹窗会提示交易成功及交易费用信息。
 
@@ -228,19 +224,17 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
   <img src="./screenshots/transfer_call.png" width="720px">
 </p>
 
-
-接下来，我们来验证一下上笔交易的结果。在合约读取窗口中选择 *balanceOf* 数据栏，在 Parameters 下 account 下拉菜单中选择 my-keypair-2 地址，最后点击上方的数据名称旁的 *Execute* 按钮（三角形状）。结果会显示在下方 Result 栏目中，这个结果与我们上笔交易中向 my-keypair-2 转账的 amount 数量一致，这验证了我们之前交易的结果。
+接下来，我们来验证一下上笔交易的结果。在合约读取窗口中选择 *balanceOf* 数据栏，在 Parameters 下 account 下拉菜单中选择 `my-keypair-2` 地址，最后点击上方的数据名称旁的 *Execute* 按钮（三角形状）。结果会显示在下方 Result 栏目中，这个结果与我们上笔交易中向 `my-keypair-2` 转账的 amount 数量一致，这验证了我们之前交易的结果。
 
 <p align="center">
   <img src="./screenshots/balanceof.png" width="720px">
 </p>
 
-最后我们在事件查询窗口中选择 *Transfer* 事件，并点击 *Get event logs* 按钮（三角形状）以查询合约中所有 *Transfer* 相关事件，结果会显示在下方 Event Logs 窗口中。在进行事件查询时， Ethereum Studio 允许自定义查询范围。但当连接本地开发节点或者测试网时，事件查询最多只能返回 10,000 条记录，请保持自定义范围小于等于该数字。默认情况下事件查询窗口将返回最新 10,000 条记录。当连接 Ethereum 主网时，事件查询最多只能返回 1,000 条记录。
+最后我们在事件查询窗口中选择 *Transfer* 事件，并点击 *Get event logs* 按钮（三角形状）以查询合约中所有 *Transfer* 相关事件，结果会显示在下方 Event Logs 表格中。在进行事件查询时，Ethereum Studio 允许自定义查询范围。但当连接本地开发节点或者测试网时，事件查询最多只能返回 10,000 条记录，请保持自定义范围小于等于该数字。默认情况下事件查询窗口将返回最新 10,000 条记录。当连接 Ethereum 主网时，事件查询最多只能返回 1,000 条记录。
 
 <p align="center">
   <img src="./screenshots/event_log.png" width="720px">
 </p>
-
 
 #### ABI Storage
 
@@ -258,7 +252,7 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
 
 #### 历史交易记录
 
-Ethereum Studio 会记录每笔发布到链上的交易。如需查看最近的交易记录，点击底部栏的 *Transactions* 按钮即可唤出最近交易记录的列表。可以点击单笔交易以打开交易确认弹窗，并查看交易详情、参数 （Parameters） 、交易数据 （Tx）、交易收据 （Receipt）和 ABI 等详细信息。
+Ethereum Studio 会记录每笔发布到链上的交易。如需查看最近的交易记录，点击底部栏的 *Transactions* 按钮即可唤出最近交易记录的列表。可以点击单笔交易以打开交易确认弹窗，并查看交易详情、参数 （Parameters） 、交易数据 （Tx）、交易收据 （Receipt）等详细信息。
 
 <p align="center">
   <img src="./screenshots/transactions.png" width="720px">
