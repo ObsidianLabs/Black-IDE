@@ -21,6 +21,7 @@ if (!process.env.CDN) {
   window.document.head.innerHTML += `<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-9ZfPnbegQSumzaE7mks2IYgHoayLtuto3AS6ieArECeaR8nCfliJVuLh/GaQ1gyM" crossorigin="anonymous">`
   window.document.head.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css" />`
   window.document.head.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.21.2/min/vs/editor/editor.main.css" />`
+  window.document.head.innerHTML += `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">`
 
   $loadjs.ready('bundle', () => {
     import('./react')
