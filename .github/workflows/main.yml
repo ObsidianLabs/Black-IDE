@@ -50,7 +50,8 @@ jobs:
       version: ${{ steps.version.outputs.VERSION }}
       v_version: v${{ steps.version.outputs.VERSION }}
       component_version: v${{ steps.version.outputs.VERSION }}-${{ env.project_build }}
-      new_release: ${{ steps.version.outputs.VERSION != 'master' &&  steps.version.outputs.VERSION != 'develop' }}
+      new_release: ${{ steps.version.outputs.VERSION != 'master' && steps.version.outputs.VERSION != 'develop' }}
+      rc_release: contains(${{ steps.version.outputs.VERSION }}, 'rc')
 
   # Update package.json version to match release version
   bump:
@@ -104,6 +105,16 @@ jobs:
           node-version: 14
 
       - name: Checkout ${{ env.share_components }}
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.share_components }}
+          ref: develop
+          path: ./${{ env.share_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.share_components }}
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
@@ -111,13 +122,25 @@ jobs:
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
+
       - name: Checkout ${{ env.own_components }}
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.own_components }}
+          ref: develop
+          path: ./${{ env.own_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.own_components }}
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
           ref: master
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
+
 
       - name: Checkout Premium Editor
         uses: actions/checkout@v2
@@ -127,11 +150,21 @@ jobs:
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
+
       - name: Checkout ${{ env.project_name }}
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          ref: develop
+          path: ./studio
+
+      - name: Checkout ${{ env.project_name }}
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
         uses: actions/checkout@v2
         with:
           ref: master
           path: ./studio
+
 
       - name: Install ${{ env.share_components }} submodule
         working-directory: ./${{ env.share_components }}
