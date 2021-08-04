@@ -51,7 +51,7 @@ jobs:
       v_version: v${{ steps.version.outputs.VERSION }}
       component_version: v${{ steps.version.outputs.VERSION }}-${{ env.project_build }}
       new_release: ${{ steps.version.outputs.VERSION != 'master' && steps.version.outputs.VERSION != 'develop' }}
-      rc_release: contains(${{ steps.version.outputs.VERSION }}, 'rc')
+      rc_release: ${{ contains(steps.version.outputs.VERSION, 'rc') }}
 
   # Update package.json version to match release version
   bump:
@@ -103,6 +103,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
+
+      - name: Echo rc
+        run: echo "${{ needs.versions.outputs.rc_release }}"
+
+      - name: Echo rc 2
+        run: echo "${{ needs.versions.outputs.rc_release == true }}"
+
+      - name: Echo rc 3
+        run: echo "${{ needs.versions.outputs.rc_release == 'true' }}"
 
       - name: Checkout ${{ env.share_components }}
         if: ${{ needs.versions.outputs.rc_release == 'true' }}
