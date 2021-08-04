@@ -1,7 +1,7 @@
 {
   "name": "ethereum-studio",
   "description": "Graphic IDE for Ethereum smart contract development",
-  "version": "0.7.2",
+  "version": "0.8.0-rc.2",
   "author": {
     "name": "Phil Li",
     "email": "phil.li@obsidians.io",
