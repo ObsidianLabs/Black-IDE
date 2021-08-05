@@ -26,7 +26,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 
 ## 功能预览
 
-以下示例以 Ethereum Studio v0.7.0 macOS 桌面版为例，Ethereum Studio 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
+以下示例以 Ethereum Studio v0.7.1 macOS 桌面版为例，Ethereum Studio 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
 
 ### 准备工作 
 
@@ -37,7 +37,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 </p>
 
 - Ethereum Studio 使用 [**Docker**](https://www.docker.com/) 来启动 Ethereum 节点和进行项目编译。如果你之前没有安装过 Docker，可以点击 *Install Docker* 按钮访问 Docker 官方网站并进行下载安装；
-- [**Geth**](https://github.com/ethereum/go-ethereum) 全称 Go Ethereum，是以太坊基金会提供的基于 Go 语言编写的官方以太坊协议实现。 Ethereum Studio 使用这个工具运行以太坊节点；
+- [**Geth**](https://github.com/ethereum/go-ethereum) 全称 Go Ethereum，是以太坊基金会提供的基于 Go 语言编写的官方以太坊协议实现。 Ethereum Studio 使用这个工具运行以太坊节点。
 - [**Truffle**](https://github.com/trufflesuite/truffle) 是一套应用广泛的 Solidity 智能合约开发框架和工具包。Ethereum Studio 使用这个工具包进行项目的创建和编译。
 
 当所有依赖都正确安装并运行后，灰色的 *Skip* 按钮将会变成蓝紫色的 *Get Started* 按钮。点击这个按钮进入 Ethereum Studio 的主界面。
@@ -77,7 +77,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 创建新的 Ethereum 节点实例时，你需要在密钥管理器已保存的密钥地址中指定一个矿工（Miner）。Miner 将作为本地网络的矿工进行出块。此处我们选择 miner 密钥作为我们本地 Ethereum 节点的矿工。 当本地节点启动时，会将矿工地址作为创世地址，并赋予创世地址一定数量的代币。
 
 <p align="center">
-  <img src="./screenshots/new_instance.png" width="720px">
+  <img src="./screenshots/create_instance.png" width="720px">
 </p>
 
 节点实例创建完成后，点击实例的绿色 *Start* 按钮启动 Ethereum 节点。启动完成后，你可以在下方的日志查看器中检查节点运行日志。
@@ -111,12 +111,12 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
 当连接主网查询信息时，区块浏览器可以显示地址下已被 [Trust Wallet](https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/tokenlist.json) 收录的的 ERC-20 代币信息。
 
 <p align="center">
-  <img src="./screenshots/crc-20_token_explorer.png" width="720px">
+  <img src="./screenshots/erc_20.png" width="720px">
 </p>
 
 Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便用户使用，可以单击按钮调用相应工具：
 
-- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或当前地址拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会被存储在[历史交易记录](#历史交易记录)中，以便之后再次查看。在这里，我们使用转账功能向 my-keypair-1 转账 1000 ETH 代币。
+- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或当前地址拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会被存储在[历史交易记录](#历史交易记录)中，以便之后再次查看。这里，我们使用转账功能向 my-keypair-1 转账 10,000 ETH 代币。
 
 <p align="center">
   <img src="./screenshots/transfer.png" width="720px">
@@ -175,9 +175,9 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 
 点击工具栏的 *Deploy* 按钮（船形状），合约部署弹窗将被打开，在这里可以输入部署合约所需要的各项参数：
 
-- Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件；
-- Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数；
-- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对；
+- Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件。
+- Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数，我们在这里点击 initialSupply 参数栏，输入 1000 。
+- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对。
 - Gas Limit、Gas Price：合约部署的交易费用信息，部署前 Ethereum Studio 会进行估算，也可使用自行填写的值进行覆盖。
 
 另外，也可以在文件浏览器中，右键点击一个 JSON 格式的编译输出文件，在菜单中选择 *Deploy*，对该合约进行部署。 
@@ -191,7 +191,7 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 部署交易需要一些时间被区块链网络处理。大约十几秒后，Ethereum Studio 会弹出交易详情弹窗显示部署结果，包括部署参数（Parameters）、交易数据（Tx）、交易收据（Receipt）、ABI 等详细信息，可点击弹窗中的标签进行切换。若在本弹窗关闭之后仍想查看本次部署结果和交易详情信息，请参考[历史交易记录](#历史交易记录)。
 
 <p align="center">
-  <img src="./screenshots/deploy.png" width="720px">
+.png  <img src="./screenshots/deploy.png" width="720px">
 </p>
 
 ### 调用合约
@@ -205,8 +205,9 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 - 右边栏用于进行合约的事件查询，点击蓝紫色下拉框，选择希望查询该合约的事件。
 
 <p align="center">
-  <img src="./screenshots/contract_inspector.png" width="720px">
+  <img src="./screenshots/contract.png" width="720px">
 </p>
+
 
 Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约时候通过 ABI 中的数据，生成上面的写入方法、数据读取、事件查询，和它们各自的参数表单。更多 ABI 的使用方法可以参考 [ABI Storage](#abi-storage)。
 
@@ -214,7 +215,7 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
 
 首先在写入方法调用窗口中选择 *transfer* 方法，这个方法将指定数量的代币从一个地址转账到另外一个地址。接下来填入完成交易必须的各项参数：
 
-- 在 Parameters 下从 recipient 下拉菜单中选择 my-keypair-2 作为收款人地址（也可以输入其它密钥管理器中未保存的地址），并在 amount 中填入合适的数量；
+- 在 Parameters 下从 recipient 下拉菜单中选择 my-keypair-2 作为收款人地址（也可以输入其它密钥管理器中未保存的地址），并在 amount 中填入合适的数量，例子中我们本次转账 100 token ；
 - 无需填写 Gas & Storage 栏目中的交易费用（由 Ethereum Studio 自动估算）；
 - 在 Authorization 的 Signer 下拉菜单中选择 my-keypair-1 作为汇款人地址。
 
@@ -224,7 +225,7 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
   <img src="./screenshots/transfer_call.png" width="720px">
 </p>
 
-接下来，我们来验证一下上笔交易的结果。在合约读取窗口中选择 *balanceOf* 数据栏，在 Parameters 下 account 下拉菜单中选择 `my-keypair-2` 地址，最后点击上方的数据名称旁的 *Execute* 按钮（三角形状）。结果会显示在下方 Result 栏目中，这个结果与我们上笔交易中向 `my-keypair-2` 转账的 amount 数量一致，这验证了我们之前交易的结果。
+接下来，我们来验证一下上笔交易的结果。在合约读取窗口中选择 *balanceOf* 数据栏，在 Parameters 下 account 下拉菜单中选择 `my-keypair-2` 地址，最后点击上方的数据名称旁的 *Execute* 按钮（三角形状）。结果会显示在下方 Result 栏目中，可以看到查询到的值为 100。这个结果与我们上笔交易中向 `my-keypair-2` 转账的 amount 数量一致，这验证了我们之前交易的结果。
 
 <p align="center">
   <img src="./screenshots/balanceof.png" width="720px">
@@ -233,7 +234,7 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
 最后我们在事件查询窗口中选择 *Transfer* 事件，并点击 *Get event logs* 按钮（三角形状）以查询合约中所有 *Transfer* 相关事件，结果会显示在下方 Event Logs 表格中。在进行事件查询时，Ethereum Studio 允许自定义查询范围。但当连接本地开发节点或者测试网时，事件查询最多只能返回 10,000 条记录，请保持自定义范围小于等于该数字。默认情况下事件查询窗口将返回最新 10,000 条记录。当连接 Ethereum 主网时，事件查询最多只能返回 1,000 条记录。
 
 <p align="center">
-  <img src="./screenshots/event_log.png" width="720px">
+  <ievenmg src="./screenshots/event_log.png" width="720px">
 </p>
 
 #### ABI Storage
