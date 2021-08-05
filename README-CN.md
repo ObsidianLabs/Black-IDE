@@ -62,7 +62,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
   <img src="./screenshots/import_keypairs.png" width="720px">
 </p>
 
-在继续之前，请先在密钥管理器中创建一些密钥对，以便我们完成接下来的操作步骤。
+在继续之前，请先在密钥管理器中创建一些密钥对，以便我们完成接下来的操作步骤。在本示例中，我们将使用 miner , my-keypair-1 , my-keypair-2 三对密钥完成接下来的步骤。
 
 **注意：私钥和助记词是证明密钥所有权的关键凭证，请妥善保管，不要与他人分享。泄漏私钥或助记词，可能导致数字资产永久丢失。**
 
@@ -74,7 +74,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 
 点击主页面中右上角的 *New Instance* 按钮打开创建新实例的弹窗，填写实例名称和选择合适的版本，点击 *Create* 按钮完成节点实例的创建。
 
-创建新的 Ethereum 节点实例时，你需要在密钥管理器已保存的密钥地址中指定一个矿工（Miner）。Miner 将作为本地网络的矿工进行出块。
+创建新的 Ethereum 节点实例时，你需要在密钥管理器已保存的密钥地址中指定一个矿工（Miner）。Miner 将作为本地网络的矿工进行出块。此处我们选择 miner 密钥作为我们本地 Ethereum 节点的矿工。 当本地节点启动时，会将矿工地址作为创世地址，并赋予创世地址一定数量的代币。
 
 <p align="center">
   <img src="./screenshots/new_instance.png" width="720px">
@@ -116,7 +116,7 @@ Ethereum Studio 支持连接自定义远程网络节点。点击 *Network* 标�
 
 Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便用户使用，可以单击按钮调用相应工具：
 
-- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或当前地址拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会被存储在[历史交易记录](#历史交易记录)中，以便之后再次查看；
+- 点击 *Transfer* 按钮以进行快速转账，该转账功能支持使用 ETH 或当前地址拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 *Sign and Push* 以执行交易。每笔转账交易都会被存储在[历史交易记录](#历史交易记录)中，以便之后再次查看。在这里，我们使用转账功能向 my-keypair-1 转账 1000 ETH 代币。
 
 <p align="center">
   <img src="./screenshots/transfer.png" width="720px">
@@ -177,7 +177,7 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 
 - Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件；
 - Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数；
-- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择；
+- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对；
 - Gas Limit、Gas Price：合约部署的交易费用信息，部署前 Ethereum Studio 会进行估算，也可使用自行填写的值进行覆盖。
 
 另外，也可以在文件浏览器中，右键点击一个 JSON 格式的编译输出文件，在菜单中选择 *Deploy*，对该合约进行部署。 
@@ -186,7 +186,7 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
   <img src="./screenshots/deploy_parameters.png" width="720px">
 </p>
 
-在合约部署弹窗中选择 `GLDToken.json`，填写构造函数参数，并选择 `my-keypair-1` 为签名密钥地址。在这个例子中，合约部署时，将会把初始的 1000 token 全部分配给为部署交易签名的地址 `my-keypair-1`。将点击 *Estimate & Deploy* 按钮，Ethereum Studio 会自动估算所需的交易费用并填入对应栏目中。如需重新估算，请点击左侧绿色 *Re-estimate* 按钮。有时候预估的交易费用可能是不够的，如果部署的时候出现交易费用不足的错误，可以手动提高 Gas Limit 或 Gas Price 后重试。点击蓝紫色 *Deploy* 按钮，Ethereum Studio 将发送合约部署交易。
+在合约部署弹窗中选择 `GLDToken.json`，填写构造函数参数，并选择 my-keypair-1 为签名密钥地址。在这个例子中，合约部署时，将会把初始的 1000 token 全部分配给为部署交易签名的地址 my-keypair-1 。将点击 *Estimate & Deploy* 按钮，Ethereum Studio 会自动估算所需的交易费用并填入对应栏目中。如需重新估算，请点击左侧绿色 *Re-estimate* 按钮。有时候预估的交易费用可能是不够的，如果部署的时候出现交易费用不足的错误，可以手动提高 Gas Limit 或 Gas Price 后重试。点击蓝紫色 *Deploy* 按钮，Ethereum Studio 将发送合约部署交易。
 
 部署交易需要一些时间被区块链网络处理。大约十几秒后，Ethereum Studio 会弹出交易详情弹窗显示部署结果，包括部署参数（Parameters）、交易数据（Tx）、交易收据（Receipt）、ABI 等详细信息，可点击弹窗中的标签进行切换。若在本弹窗关闭之后仍想查看本次部署结果和交易详情信息，请参考[历史交易记录](#历史交易记录)。
 
@@ -214,9 +214,9 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
 
 首先在写入方法调用窗口中选择 *transfer* 方法，这个方法将指定数量的代币从一个地址转账到另外一个地址。接下来填入完成交易必须的各项参数：
 
-- 在 Parameters 下从 recipient 下拉菜单中选择 `my-keypair-2` 作为收款人地址（也可以输入其它密钥管理器中未保存的地址），并在 amount 中填入合适的数量；
+- 在 Parameters 下从 recipient 下拉菜单中选择 my-keypair-2 作为收款人地址（也可以输入其它密钥管理器中未保存的地址），并在 amount 中填入合适的数量；
 - 无需填写 Gas & Storage 栏目中的交易费用（由 Ethereum Studio 自动估算）；
-- 在 Authorization 的 Signer 下拉菜单中选择 `my-keypair-1` 作为汇款人地址。
+- 在 Authorization 的 Signer 下拉菜单中选择 my-keypair-1 作为汇款人地址。
 
 完成后，点击上方的方法名称旁的 *Execute* 按钮（三角形状）执行交易。稍后弹窗会提示交易成功及交易费用信息。
 
