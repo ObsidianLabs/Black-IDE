@@ -130,10 +130,10 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
 
 点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，首先选择新建项目的储存位置，本地或者云端。然后输入项目名称，并选择合适的模版。Ethereum Studio 目前提供了多种模版：
 
-- `Coin`：一个简单的 Coin 智能合约；
-- `ERC20 Token`：ERC-20 代币合约；
-- `[Open Zeppelin] Basics`：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约；
-- `[Truffle] Metacoin`：使用 Ethereum Truffle 创建的合约。 目前 Ethereum Studio 暂不支持部署 Metacoin 合约。
+- **Coin**：一个简单的 Coin 智能合约；
+- **ERC20 Token**：ERC-20 代币合约；
+- **[Open Zeppelin] Basics**：基于 [Open Zeppelin](https://openzeppelin.com/) 智能合约库的模板，提供了 ERC-20、ERC-721（NFT）、ERC-777 和 ERC-1155 等合约；
+- **[Truffle] Metacoin**：使用 Ethereum Truffle 创建的合约。 目前 Ethereum Studio 暂不支持部署 Metacoin 合约。
 
 <p align="center">
   <img src="./screenshots/create_project.png" width="720px">
