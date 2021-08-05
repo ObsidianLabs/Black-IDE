@@ -37,7 +37,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 </p>
 
 - Ethereum Studio 使用 [**Docker**](https://www.docker.com/) 来启动 Ethereum 节点和进行项目编译。如果你之前没有安装过 Docker，可以点击 *Install Docker* 按钮访问 Docker 官方网站并进行下载安装；
-- [**Geth**](https://github.com/ethereum/go-ethereum) 全称 Go Ethereum，是以太坊基金会提供的基于 Go 语言编写的官方以太坊协议实现。 Ethereum Studio 使用这个工具运行以太坊节点。
+- [**Geth**](https://github.com/ethereum/go-ethereum) 全称 Go Ethereum，是以太坊基金会提供的基于 Go 语言编写的官方以太坊协议实现。 Ethereum Studio 使用这个工具运行以太坊节点；
 - [**Truffle**](https://github.com/trufflesuite/truffle) 是一套应用广泛的 Solidity 智能合约开发框架和工具包。Ethereum Studio 使用这个工具包进行项目的创建和编译。
 
 当所有依赖都正确安装并运行后，灰色的 *Skip* 按钮将会变成蓝紫色的 *Get Started* 按钮。点击这个按钮进入 Ethereum Studio 的主界面。
@@ -175,9 +175,9 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 
 点击工具栏的 *Deploy* 按钮（船形状），合约部署弹窗将被打开，在这里可以输入部署合约所需要的各项参数：
 
-- Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件。
-- Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数，我们在这里点击 initialSupply 参数栏，输入 1000 。
-- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对。
+- Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件；
+- Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数，我们在这里点击 initialSupply 参数栏，输入 1000 ；
+- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对；
 - Gas Limit、Gas Price：合约部署的交易费用信息，部署前 Ethereum Studio 会进行估算，也可使用自行填写的值进行覆盖。
 
 另外，也可以在文件浏览器中，右键点击一个 JSON 格式的编译输出文件，在菜单中选择 *Deploy*，对该合约进行部署。 
