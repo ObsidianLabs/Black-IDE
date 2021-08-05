@@ -177,7 +177,7 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 
 - Compiled Contract：等待部署的合约[编译输出文件](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)，为 JSON 格式。一个项目内可能存在多个合约，可以通过下拉菜单中选择需要部署合约的编译输出文件；
 - Constructor Parameters：合约构造函数需要的参数，Ethereum Studio 将自动根据数据格式生成参数表单，在此填入创建合约所需要的各项参数，我们在这里点击 initialSupply 参数栏，输入 1000 ；
-- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对；
+- Signer：为合约部署交易进行签名的密钥地址，需要为密钥管理器中已有的密钥，通过下拉菜单选择 my-keypair-1 密钥对；
 - Gas Limit、Gas Price：合约部署的交易费用信息，部署前 Ethereum Studio 会进行估算，也可使用自行填写的值进行覆盖。
 
 另外，也可以在文件浏览器中，右键点击一个 JSON 格式的编译输出文件，在菜单中选择 *Deploy*，对该合约进行部署。 
