@@ -107,7 +107,7 @@ class HeaderWithRedux extends PureComponent {
     return (
       <Header
         profile={profile}
-        projects={projects.get('local').toJS()}
+        projects={projects}
         selectedProject={selectedProject}
         selectedContract={selectedContract}
         selectedAccount={selectedAccount}
