@@ -26,7 +26,7 @@ Ethereum Studio 安装包可以在 [Github Releases](https://github.com/Obsidian
 
 ## 功能预览
 
-以下示例以 Ethereum Studio v0.7.1 macOS 桌面版为例，Ethereum Studio 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
+以下示例以 Ethereum Studio v0.8.0 macOS 桌面版为例，Ethereum Studio 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
 
 ### 准备工作 
 
@@ -126,7 +126,7 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
 
 ### 智能合约项目
 
-#### 项目列表
+#### 创建新项目
 
 点击顶部的 *Project* 标签，主页面将切换至项目管理器。点击页面右上角的 *New* 按钮打开创建项目弹窗，首先选择新建项目的储存位置，本地或者云端。然后输入项目名称，并选择合适的模版。Ethereum Studio 目前提供了多种模版：
 
@@ -139,7 +139,9 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
   <img src="./screenshots/create_project.png" width="720px">
 </p>
 
-这里我们使用 Open Zeppelin 的 Basics 模版在本地创建一个名为 `my-project` 的项目，并使用这个项目完成后续操作。
+Ethereum Studio 支持使用 [Truffle](https://www.trufflesuite.com/truffle), [Hardhat](https://hardhat.org/) 和 [Waffle](https://ethereum-waffle.readthedocs.io/) 三个框架来创建并管理一个合约项目。
+
+这里我们使用 Open Zeppelin 的 Basics 模版，并选择 Truffle 框架，在本地创建一个名为 `my-project` 的项目，并使用这个项目完成后续操作。
 
 #### 项目编辑器
 
