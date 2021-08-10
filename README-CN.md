@@ -236,7 +236,7 @@ Ethereum Studio 在部署合约后将自动保存合约 ABI，并在读取合约
 最后我们在事件查询窗口中选择 *Transfer* 事件，并点击 *Get event logs* 按钮（三角形状）以查询合约中所有 *Transfer* 相关事件，结果会显示在下方 Event Logs 表格中。在进行事件查询时，Ethereum Studio 允许自定义查询范围。但当连接本地开发节点或者测试网时，事件查询最多只能返回 10,000 条记录，请保持自定义范围小于等于该数字。默认情况下事件查询窗口将返回最新 10,000 条记录。当连接 Ethereum 主网时，事件查询最多只能返回 1,000 条记录。
 
 <p align="center">
-  <ievenmg src="./screenshots/event_log.png" width="720px">
+  <img src="./screenshots/event_log.png" width="720px">
 </p>
 
 #### ABI Storage
