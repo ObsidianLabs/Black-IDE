@@ -30,19 +30,13 @@ To increase inotify watchers at boot, execute the following command in Terminal:
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
 
-## 
-
 ### Accessing Ethereum Studio Web
 
 Open https://eth.ide.black in your browser to access Ethereum Studio Web.
 
-
-
 ## Feature Walkthrough
 
 The following demo are run on Ethereum Studio v0.8.0 on macOS. All screenshots are for demonstration purposes only.
-
-
 
 ### Prerequisites
 
@@ -82,21 +76,19 @@ Before we proceed, please create a few keypairs in the Keypair Manager. We'll be
 
 ### Network Manager
 
-#### Local Ethereum Instance
+#### Local Ethereum Node
 
-Click *Network* tab to switch to network manager. Users can manage Ethereum instances and Geth installation, including installing, deleting Geth images, or create, delete and run Ethereum instances with a specific version of Geth.
+Click *Network* tab to switch to Network Manager. Users can manage Ethereum nodes and Geth installation, including installing, deleting Geth images, or create, delete and run Ethereum node with a specific version of Geth.
 
-Click *New Instance* button on the top-right corner to pull up the new instance wizard, then key in a name for the instance and specify the version for the underlying Geth, and the address of Miner. Finally click *Create* to complete the process.
+Click *New Instance* button on the top-right corner to pull up the new instance (node) wizard, then key in a name for the node and specify the version for the underlying Geth, and the address of Miner. Finally click *Create* to complete the process.
 
-When create an Ethereum instance, you need to specify a Miner from your keypairs stored in Keypair Manager. Miner mines blocks locally for the Ethereum instance. Here we picked `miner` keypair in our demo, which will also be the genesis address and thus will be issued some tokens upon first startup of our local Ethereum instance.
-
-
+When create an Ethereum node, you need to specify a Miner from your keypairs stored in Keypair Manager. Miner mines blocks locally for the Ethereum node. Here, we pick `miner` keypair in our demo, which will also be the genesis address and thus will be issued some tokens upon first startup of our local Ethereum node.
 
 <p align="center">
-  <img src="./screenshots/create_instance.png" width="720px">
+  <img src="./screenshots/create_node.png" width="720px">
 </p>
 
-When the instance completes its creation, click the green *Start* button to start Ethereum instance. You may also view node log in the log viewer window below.
+When the node completes its creation, click the green *Start* button to start Ethereum node. You may also view node log in the log viewer window below.
 
 <p align="center">
   <img src="./screenshots/node_log.png" width="720px">
@@ -104,7 +96,7 @@ When the instance completes its creation, click the green *Start* button to star
 
 #### Ethereum Testnet / Mainnet
 
-Ethereum Studio has built in configuration to connect three Ethereum testnets [Ropsten](https://github.com/ethereum/ropsten), [Rinkeby](https://www.rinkeby.io/) and [Kovan](https://kovan-testnet.github.io/)，as well as the Ethereum mainnet. Click on the arrow net to *Network* tab and select the network you wish to connect from the drop-down list.
+Ethereum Studio has built in configuration to connect three Ethereum testnets [Ropsten](https://github.com/ethereum/ropsten), [Rinkeby](https://www.rinkeby.io/) and [Kovan](https://kovan-testnet.github.io/), as well as the Ethereum mainnet. Click on the arrow net to *Network* tab and select the network you wish to connect from the drop-down list.
 
 <p align="center">
   <img src="./screenshots/network_selector.png" width="720px">
@@ -116,9 +108,9 @@ Ethereum Studio supports custom network connection. Click on the arrow next to *
 
 ### Block Explorer
 
-When instance is up and running, click *Explorer* tag on the top-right corner to switch to block explorer. Block Explorer provides tool to query information at a given address that usually includes token information and transaction history. 
+When Ethereum node is up and running, click *Explorer* tag on the top-right corner to switch to Block Explorer. Block Explorer provides tool to query information at a given address that usually includes token information and transaction history. 
 
-Click the arrow next to *Explorer* tag, and select the address you would like to query from the drop-down list. You should now see the information being pulled up on the screen. Meanwhile, you may also manually key in an address to view its corresponding information. Ethereum Studio currently cannot display transaction history on local Ethereum instance. Switching to testnet or mainnet to display transaction history at the address.
+Click the arrow next to *Explorer* tag, and select the address you would like to query from the drop-down list. You should now see the information being pulled up on the screen. Meanwhile, you may also manually key in an address to view its corresponding information. Ethereum Studio currently cannot display transaction history on local Ethereum node. Switching to testnet or mainnet to display transaction history at the address.
 
 <p align="center">
   <img src="./screenshots/explorer.png" width="720px">
@@ -143,12 +135,12 @@ For user's convenience, Ethereum Studio's block explorer comes with a few widget
 
 #### Create New Project
 
-Click *Project* tag to switch to project manager. Then click *New* button on the top-right cornet to open create project popup. Select the whether you wish to create a local or cloud project, then key in project name and select the template which will be the base of your project. Ethereum Studio currently offers several choices on templates:
+Click *Project* tag to switch to Project Manager. Then click *New* button on the top-right cornet to open create project popup. Select the whether you wish to create a local or cloud project, then key in project name and select the template which will be the base of your project. Ethereum Studio currently offers several choices on templates:
 
-- **Coin**：A simple coin contract template；
-- **ERC20 Token**：An ERC-20 token contract template；
-- **[Open Zeppelin] Basics**：A set of templates based on [Open Zeppelin](https://openzeppelin.com/) , which includes ERC-20, ERC-721(NFT), ERC-777 and ERC-1155 contract;
-- **[Truffle] Metacoin**：Contracted created by Ethereum Truffle. Ethereum Studio does not support deployment of Metacoin contract.
+- **Coin**: A simple coin contract template；
+- **ERC20 Token**: An ERC-20 token contract template；
+- **[Open Zeppelin] Basics**: A set of templates based on [Open Zeppelin](https://openzeppelin.com/) , which includes ERC-20, ERC-721(NFT), ERC-777 and ERC-1155 contract;
+- **[Truffle] Metacoin**: Contracted created by Ethereum Truffle. Ethereum Studio does not support deployment of Metacoin contract.
 
 <p align="center">
   <img src="./screenshots/create_project.png" width="720px">
@@ -160,9 +152,9 @@ Right now, we'll create a new project named `my-project` with Basics template fr
 
 We'll stick to this project later in this tutorial as we demo a complete cycle of smart contract development.
 
-#### Code Editor
+#### Project Editor
 
-When the project is successfully created, we will be redirected to code editor. Code editor have a few useful built-in widgets, including file explorer on the left with toolbar above it, code editor to the right and log viewer in the lower half.
+When the project is successfully created, we will be redirected to Project Editor. Project Editor have a few useful built-in widgets, including file explorer on the left with toolbar above it, code editor to the right and log viewer in the lower half.
 
 <p align="center">
   <img src="./screenshots/editor.png" width="720px">
@@ -173,7 +165,7 @@ Click the *Project Settings* (gear-shape) icon on the toolbar to open project se
   <img src="./screenshots/project_setting.png" width="720px">
 </p>
 
-Ethereum Studio's code editor integrated linter, which automatically check codes and flag for potential warning or errors. Code editor will indicate an exclamation mark on the line that has warnings and a red cross mark on the line that has errors.
+Ethereum Studio's project editor integrated linter, which automatically check codes and flag for potential warning or errors. Project editor will indicate an exclamation mark on the line that has warnings and a red cross mark on the line that has errors.
 
 <p align="center">
   <img src="./screenshots/linter.png" width="720px">
@@ -193,10 +185,10 @@ Users may also trigger compilation of a specfic `.sol` contract by a right click
 
 Click *Deploy* (docker whale) button on the toolbox to open the contract deployment popup. Users may proceed deployment by filling out necessary parameters:
 
-- Compiled Contract：The [compiled contract](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description) to be deployed, in json format. There might be multiple contracts in single project, choose the proper contract from the drop-down list. Here, we'll be deploying `GLDToken.json` this time;
-- Constructor Parameters：Required parameters to construct functions. Ethereum Studio automatically generates parameter form from data structures predefined in the contract, so that users only need to fill the form. Here, click on the initialSupply column, and type in 1000;
-- Signer：Keypair to sign the deployment transaction. This must be a keypair stored in Keypair Manager. Here we pick `my-key-pair-1` from the drop-down list;
-- Gas Limit, Gas Price：Transaction fees for this deployment transaction. You may leave it blank for Ethereum Studio to estimate on its own or manually override it with your numbers.
+- Compiled Contract: The [compiled contract](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description) to be deployed, in json format. There might be multiple contracts in single project, choose the proper contract from the drop-down list. Here, we'll be deploying `GLDToken.json` this time;
+- Constructor Parameters: Required parameters to construct functions. Ethereum Studio automatically generates parameter form from data structures predefined in the contract, so that users only need to fill the form. Here, click on the initialSupply column, and type in 1000;
+- Signer: Keypair to sign the deployment transaction. This must be a keypair stored in Keypair Manager. Here we pick `my-key-pair-1` from the drop-down list;
+- Gas Limit, Gas Price: Transaction fees for this deployment transaction. You may leave it blank for Ethereum Studio to estimate on its own or manually override it with your numbers.
 
 Users may also trigger deployment of a specfic `.json` output by a right click on the file, and select *Deploy* from the drop-down menu. 
 
@@ -218,14 +210,13 @@ After contract is deployed, click the contract address in the Transaction Detail
 
 Contract Inspector are mainly divided into three parts:
 
-- Write methods on the left：Invoke write methods in the contract by selecting from the violet drop-down list;
+- Write methods on the left: Invoke write methods in the contract by selecting from the violet drop-down list;
 - Read data in the middle: Read data as predefined data types in the contract by selecting from the violet drop-down list;
 - Query event logs on the right: Query event logs as defined in the contract by selecting from the violet drop-down list.
 
 <p align="center">
   <img src="./screenshots/contract.png" width="720px">
 </p>
-
 
 Ethereum Studio automatically stores contract ABI after deployment and generate above lists of write methods, data retrieval, event query and their corresponding parameter forms. For more information on ABI, please refer to [ABI Storage](#abi-storage).
 
@@ -247,7 +238,7 @@ Let's proceed by verifying the outcome of last transaction. Select *balanceOf* f
 <p align="center">
   <img src="./screenshots/balanceof.png" width="720px">
 </p>
-Finally, we pick *Transfer* from the drop-down list of contract events, and click *Get event logs* (Play) button to query all transfer-related events. Results is shown below in the Event Logs section. Ethereum Studio supports customized range for events query, but can only return maximum 10,000 queries when connecting to local instances or testnets, and by default the most recent 10,000 records. Therefore, users should keep custom range within the aforementioned number. When connecting to Ethereum mainnet, the maximum number of event log query goes down to 1,000.
+Finally, we pick *Transfer* from the drop-down list of contract events, and click *Get event logs* (Play) button to query all transfer-related events. Results is shown below in the Event Logs section. Ethereum Studio supports customized range for events query, but can only return maximum 10,000 queries when connecting to local nodes or testnets, and by default the most recent 10,000 records. Therefore, users should keep custom range within the aforementioned number. When connecting to Ethereum mainnet, the maximum number of event log query goes down to 1,000.
 
 <p align="center">
   <img src="./screenshots/event_log.png" width="720px">
@@ -276,7 +267,7 @@ Ethereum Studio records every transaction pushed to network. To view recent tran
 
 #### RPC Client
 
-Ethereum Studio also comes with low-level RPC client to interact with Ethereum instances. Click the network name tab at the bottom and select *RPC Client* from the drop-down list to pull up RPC Client popup. RPC Clients supports all Ethereum RPC methods. Select from the drop-down list to start, and Ethereum Studio will generate corresponding parameter form automatically. Fill out necessary parameters and hit *Execute* button to call the method and view response in the Result section.
+Ethereum Studio also comes with low-level RPC client to interact with Ethereum nodes. Click the network name tab at the bottom and select *RPC Client* from the drop-down list to pull up RPC Client popup. RPC Clients supports all Ethereum RPC methods. Select from the drop-down list to start, and Ethereum Studio will generate corresponding parameter form automatically. Fill out necessary parameters and hit *Execute* button to call the method and view response in the Result section.
 
 <p align="center">
   <img src="./screenshots/rpc_client.png" width="720px">
