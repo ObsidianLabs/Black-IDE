@@ -139,7 +139,7 @@ Ethereum Studio 区块浏览器在地址栏右侧集成了常用工具以方便�
   <img src="./screenshots/create_project.png" width="720px">
 </p>
 
-Ethereum Studio 支持使用 [Truffle](https://www.trufflesuite.com/truffle), [Hardhat](https://hardhat.org/) 和 [Waffle](https://ethereum-waffle.readthedocs.io/) 三个框架来创建并管理一个合约项目。
+Ethereum Studio 支持使用 [Truffle](https://www.trufflesuite.com/truffle), [Hardhat](https://hardhat.org/) 和 [Waffle](https://getwaffle.io/) 三个框架来创建并管理一个合约项目。
 
 这里我们使用 Open Zeppelin 的 Basics 模版，并选择 Truffle 框架，在本地创建一个名为 `my-project` 的项目，并使用这个项目完成后续操作。
 
