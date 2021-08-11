@@ -72,9 +72,9 @@ In case of importing keypairs, click *Import* button on the bottom-left and put 
   <img src="./screenshots/import_keypairs.png" width="720px">
 </p>
 
-Before we proceed, please create a few keypairs in the Keypair Manager. We'll be using three keypairs in the following demos, namely  `miner` , `my-keypair-1`  , `my-keypair-2` . 
+Before we proceed, please create a few keypairs in the Keypair Manager. We'll be using three keypairs in the following demos, namely  `miner` , `my-keypair-1`  , `my-keypair-2` .
 
-**Please note: private key and mnemonic exclusively prove ownership of a keypair. Please securely store it and DO NOT share with others under any circumstances. Leaking or losing private key or mnemonic may lead to permanent loss of digital asset. ** 
+**Please note: private key and mnemonic exclusively prove ownership of a keypair.Please securely store it and DO NOT share with others under any circumstances. Leaking or losing private key or mnemonic may lead to permanent loss of digital asset.**
 
 ### Network Manager
 
