@@ -193,7 +193,7 @@ Ethereum Studio 的项目编辑器内置了 Linter，可以在代码编辑过程
 部署交易需要一些时间被区块链网络处理。大约十几秒后，Ethereum Studio 会弹出交易详情弹窗显示部署结果，包括部署参数（Parameters）、交易数据（Tx）、交易收据（Receipt）、ABI 等详细信息，可点击弹窗中的标签进行切换。若在本弹窗关闭之后仍想查看本次部署结果和交易详情信息，请参考[历史交易记录](#历史交易记录)。
 
 <p align="center">
-.png  <img src="./screenshots/deploy.png" width="720px">
+<img src="./screenshots/deploy.png" width="720px">
 </p>
 
 ### 调用合约
