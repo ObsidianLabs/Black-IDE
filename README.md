@@ -15,7 +15,7 @@ Ethereum Studio is an integrated development environment (IDE), making developin
 Download Ethereum Studio installation package in [Github Release](https://github.com/ObsidianLabs/EthereumStudio/releases) according to the computer system type ( `.dmg` for macOS, `.AppImage` for Linux, `.exe` for Windows ).
 
 - **macOS**: Double click to open `EthereumStudio-x.x.x.dmg` and drag `Ethereum Studio` to the application folder.
-  - In case system prompts *"Cannot open Ethereum Studio, because Apple cannot inspect if it's malicious."* , Open *System Perference* , Go to *Security and Privacy* . Click *Open Anyway* in *General* section to allow Ethereum Studio to run.
+  - In case system prompts *"“Ethereum Studio” can’t be opened because Apple cannot check it for malicious software."* , Open *System Perference* , Go to *Security and Privacy* . Click *Open Anyway* in *General* section to allow Ethereum Studio to run.
 - **Linux**: Double-click to open `EthereumStudio-x.x.x.AppImage`
   - If application doesn't respond,double click to select *Properties* => *Permissions* => *Execute*, and tick the *Allow executing file as progrom* option. Close the properties window and double-click to open the application (different Linux distributions may have different installation methods).
 - **Windows**:  Double click to run the `EthereumStudio-x.x.x.exe`.
