@@ -268,7 +268,7 @@ Ethereum Studio records every transaction pushed to network. To view recent tran
 
 #### RPC Client
 
-Ethereum Studio also comes with low-level RPC client to interact with Ethereum nodes. Click the network name tab at the bottom and select *RPC Client* from the drop-down list to pull up RPC Client popup. RPC Clients supports all Ethereum RPC methods. Select from the drop-down list to start, and Ethereum Studio will generate corresponding parameter form automatically. Fill out necessary parameters and hit *Execute* button to call the method and view response in the Result section.
+Ethereum Studio also comes with a RPC client allowing users to interact with Ethereum nodes on the low-level and examine the raw data. Click the network name tab at the bottom and select *RPC Client* from the drop-down list to pull up RPC Client popup. RPC Clients supports all Ethereum RPC methods. Select from the drop-down list to start, and Ethereum Studio will generate corresponding parameter form automatically. Fill out necessary parameters and hit *Execute* button to call the method and view response in the Result section.
 
 <p align="center">
   <img src="./screenshots/rpc_client.png" width="720px">
