@@ -234,11 +234,13 @@ Then click *Execute* (Play) button next to *transfer* to push and execute the tr
 <p align="center">
   <img src="./screenshots/transfer_call.png" width="720px">
 </p>
+
 Let's proceed by verifying the outcome of last transaction. Select *balanceOf* from drop-down list of data types, then select `my-keypair-2` from the drop-down list in the account column. And finally hit *Execute* (Play) button to read the data. Result will be shown below, which in our example, is 100. This verifies that, above transfer transaction of 100 token to  `my-keypair-2` has been successfully carried out.
 
 <p align="center">
   <img src="./screenshots/balanceof.png" width="720px">
 </p>
+
 Finally, we pick *Transfer* from the drop-down list of contract events, and click *Get event logs* (Play) button to query all transfer-related events. Results is shown below in the Event Logs section. Ethereum Studio supports customized range for events query, but can only return maximum 10,000 queries when connecting to local nodes or testnets, and by default the most recent 10,000 records. Therefore, users should keep custom range within the aforementioned number. When connecting to Ethereum mainnet, the maximum number of event log query goes down to 1,000.
 
 <p align="center">
