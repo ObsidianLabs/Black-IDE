@@ -22,7 +22,7 @@ Download Ethereum Studio installation package in [Github Release](https://github
 
 ### Post-installation steps for Linux
 
-EthereumStudio Studio uses `inotify` by default on Linux to monitor directories for changes. You will need to increase the amount of inotify watchers to ensure the filetree is refreshed properly.
+EthereumStudio Studio uses `inotify` by default on Linux to monitor directories for changes. Users will need to increase the amount of inotify watchers to ensure the filetree is refreshed properly.
 
 To increase inotify watchers at boot, execute the following command in Terminal:
 
@@ -36,7 +36,7 @@ Open https://eth.ide.black in your browser to access Ethereum Studio Web.
 
 ## Feature Walkthrough
 
-The following demo runs on Ethereum Studio v0.8.0 for macOS. All screenshots are for demonstration purposes only. Actual user interface might differ.
+The following demo runs on Ethereum Studio v0.8.0 for macOS. All screenshots are for demonstration purposes only. Actual user interfaces might differ.
 
 ### Prerequisites
 
@@ -84,13 +84,13 @@ Click *Network* tab to switch to Network Manager. Users can manage Ethereum node
 
 Click *New Instance* button on the top-right corner to pull up the new instance (node) wizard, then key in a name for the node and specify the version for the underlying Geth, and the address of Miner. Finally click *Create* to complete the process.
 
-When create an Ethereum node, you need to specify a Miner from your keypairs stored in Keypair Manager. Miner mines blocks locally for the Ethereum node. Here, we pick `miner` keypair in our demo, which will also be the genesis address and thus will be issued some tokens upon first startup of our local Ethereum node.
+When create an Ethereum node, user need to specify a Miner from the keypairs stored in Keypair Manager. Miner mines blocks locally for the Ethereum node. Here, we pick `miner` keypair in our demo, which will also be the genesis address and thus will be issued some tokens upon first startup of our local Ethereum node.
 
 <p align="center">
   <img src="./screenshots/create_instance.png" width="720px">
 </p>
 
-When the node is successfully created, click the green *Start* button to start Ethereum node. You may also view node log in the log viewer below.
+When the node is successfully created, click the green *Start* button to start Ethereum node. Users may also view node log in the log viewer below.
 
 <p align="center">
   <img src="./screenshots/node_log.png" width="720px">
@@ -112,7 +112,7 @@ Ethereum Studio supports custom network connection. Click on the arrow next to *
 
 When Ethereum node is up and running, click *Explorer* tag on the top-right corner to switch to Block Explorer. Block Explorer provides tool to query information at a given address that usually includes token information and transaction history. 
 
-Click the arrow next to *Explorer* tag, and select the address you would like to query from the drop-down list. Users should now see the information being pulled up on the screen. Meanwhile, you may also manually key in an address to view its corresponding information. Ethereum Studio currently does not support display of transaction history on local Ethereum node. Switching to testnet or mainnet to display transaction history associated with the address.
+Click the arrow next to *Explorer* tag, and select the address you would like to query from the drop-down list. Users should now see the information being pulled up on the screen. Meanwhile, user may also manually key in an address to view its corresponding information. Ethereum Studio currently does not support display of transaction history on local Ethereum node. Switching to testnet or mainnet to display transaction history associated with the address.
 
 <p align="center">
   <img src="./screenshots/explorer.png" width="720px">
@@ -131,13 +131,13 @@ For user's convenience, Ethereum Studio's block explorer comes with a few widget
   <img src="./screenshots/transfer.png" width="720px">
 </p>
 
-- When connecting to testnet, a click on *Faucet* button will direct you to the website where you can apply for test tokens for development / test purposes. All faucet token are test tokens and have no monetary value.
+- When connecting to testnet, a click on *Faucet* button will direct user to the website where he / she can apply for test tokens for development / test purposes. All faucet token are test tokens and have no monetary value.
 
 ### Smart Contract Project
 
 #### Create New Project
 
-Click *Project* tag to switch to Project Manager. Then click *New* button on the top-right corner to open create project popup. Select whether you wish to create a local or cloud project, then key in project name and select the template which will be the base of your project. Ethereum Studio currently offers following templates:
+Click *Project* tag to switch to Project Manager. Then click *New* button on the top-right corner to open create project popup. Select whether user wishes to create a local or cloud project, then key in project name and select the template which will be the base of your project. Ethereum Studio currently offers following templates:
 
 - **Coin**: A simple coin contract template；
 - **ERC20 Token**: An ERC-20 token contract template；
@@ -156,7 +156,7 @@ We'll stick to this project later in this tutorial as we demo a complete cycle o
 
 #### Project Editor
 
-When the project is successfully created, we will be redirected to Project Editor. Project Editor have a few useful built-in widgets, including file explorer on the left with toolbar above it, code editor to the right and log viewer in the lower half.
+When the project is successfully created, user will be redirected to Project Editor. Project Editor have a few useful built-in widgets, including file explorer on the left with toolbar above it, code editor to the right and log viewer in the lower half.
 
 <p align="center">
   <img src="./screenshots/editor.png" width="720px">
@@ -187,10 +187,10 @@ Users may also trigger compilation of a specfic `.sol` contract by a right click
 
 Click *Deploy* (docker whale) button on the toolbox to open the contract deployment popup. Users may proceed deployment by filling out necessary parameters:
 
-- Compiled Contract: The [compiled contract](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description) to be deployed, in `.json` format. There might be multiple contracts in single project, choose the proper contract from the drop-down list. Here, we'll be deploying `GLDToken.json` this time;
+- Compiled Contract: The [compiled contract](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description) to be deployed in `.json` format. There might be multiple contracts in single project, choose the proper contract from the drop-down list. Here, we'll be deploying `GLDToken.json` this time;
 - Constructor Parameters: Required parameters to construct functions. Ethereum Studio automatically generates parameter form from data structures predefined in the contract, so that users only need to fill the form. Here, click on the initialSupply column and type in 1000;
-- Signer: Keypair to sign the deployment transaction. This must be a keypair stored in Keypair Manager. Here, we pick `my-key-pair-1` from the drop-down list;
-- Gas Limit, Gas Price: Transaction fees for this deployment transaction. You may leave it blank for Ethereum Studio to estimate on its own or manually override it with your numbers.
+- Signer: Keypair to sign the deployment transaction. This must be a keypair stored in Keypair Manager. Here, we pick `my-keypair-1` from the drop-down list;
+- Gas Limit, Gas Price: Transaction fees for this deployment transaction. Users may leave them blank for Ethereum Studio to estimate on its own or manually override them with your own estimates.
 
 Users may also trigger deployment of a specfic `.json` output by a right click on the file, and select *Deploy* from the drop-down menu. 
 
@@ -208,10 +208,9 @@ Deployment transaction may take some time to be processed by the Ethereum networ
 
 ### Invoke smart contract
 
-After contract is deployed, click the contract address in the Transaction Details popup and you will be redirected to Contract Inspector. Users may also click *Contract* tab to switch to Contract Inspector, and type in the address to open a contract. Ethereum Studio's contract inspector allows user to open and debug multiple contracts at the same time.
+After contract is deployed, click the contract address in the Transaction Details popup and user will be redirected to Contract Inspector. Users may also click *Contract* tab to switch to Contract Inspector, and type in the address to open a contract. Ethereum Studio's contract inspector allows user to open and debug multiple contracts at the same time.
 
 Contract Inspector are mainly divided into three parts:
-
 - Write methods on the left: Invoke write methods in the contract by selecting from the violet drop-down list;
 - Read data in the middle: Read data as predefined data types in the contract by selecting from the violet drop-down list;
 - Query event logs on the right: Query event logs as defined in the contract by selecting from the violet drop-down list.
@@ -222,7 +221,7 @@ Contract Inspector are mainly divided into three parts:
 
 Ethereum Studio automatically stores contract ABI after deployment and generate above lists of write methods, data retrieval, event query and their corresponding parameter forms. For more information on ABI, please refer to [ABI Storage](#abi-storage).
 
-Next, let's open the `GLDToken` contract we deployed moments ago to demo how to access contract with Contract Inspector.
+Now, let's open the `GLDToken` contract we deployed moments ago to demo how to access contract with Contract Inspector.
 
 First, select *transfer* method from the drop-down list on the left column. *Transfer* method moves a specified amount of token from one address to another. We need to populate the parameter form to complete the transaction:
 
