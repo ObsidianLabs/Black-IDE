@@ -142,6 +142,7 @@ Click *Project* tag to switch to Project Manager. Then click *New* button on the
 - **Coin**: A simple coin contract template；
 - **ERC20 Token**: An ERC-20 token contract template；
 - **[Open Zeppelin] Basics**: A set of templates based on [Open Zeppelin](https://openzeppelin.com/) , which includes ERC-20, ERC-721(NFT), ERC-777 and ERC-1155 contract;
+- **[Truffle] Metacoin**：Contract templates created by Ethereum Truffle. Ethereum Studio currently does not support deploying Metacoin contracts.
 
 <p align="center">
   <img src="./screenshots/create_project.png" width="720px">
