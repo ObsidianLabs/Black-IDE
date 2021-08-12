@@ -142,7 +142,6 @@ Click *Project* tag to switch to Project Manager. Then click *New* button on the
 - **Coin**: A simple coin contract template；
 - **ERC20 Token**: An ERC-20 token contract template；
 - **[Open Zeppelin] Basics**: A set of templates based on [Open Zeppelin](https://openzeppelin.com/) , which includes ERC-20, ERC-721(NFT), ERC-777 and ERC-1155 contract;
-- **[Truffle] Metacoin**: Contracted created by Ethereum Truffle. Ethereum Studio currently does not support deployment of Metacoin contracts.
 
 <p align="center">
   <img src="./screenshots/create_project.png" width="720px">
@@ -212,6 +211,7 @@ Deployment transaction(s) may take some time to be processed by the Ethereum net
 After the contract is deployed, click the contract address in the Transaction Details popup and user will be redirected to Contract Inspector. Users may also click *Contract* tab to switch to Contract Inspector and type in the address to open a contract. Ethereum Studio's contract inspector allows users to open and debug multiple contracts at the same time.
 
 Contract Inspector is mainly divided into three parts:
+
 - Write methods on the left: Invoke write methods in the contract by selecting from the violet drop-down list;
 - Read data in the middle: Read data as predefined data types in the contract by selecting from the violet drop-down list;
 - Query event logs on the right: Query event logs as defined in the contract by selecting from the violet drop-down list.
@@ -235,6 +235,7 @@ Then click *Execute* (Play) button next to *transfer* to push and execute the tr
 <p align="center">
   <img src="./screenshots/transfer_call.png" width="720px">
 </p>
+
 
 Let's proceed by verifying the outcome of last transaction. Select *balanceOf* from the drop-down list of data types, then select `my-keypair-2` from the drop-down list in the account column. And finally hit *Execute* (Play) button to read the data. The result will be shown below, which in our example, is 100. This verifies that the above transfer transaction of 100 tokens to  `my-keypair-2` has been successfully carried out.
 
