@@ -22,7 +22,7 @@ Download Ethereum Studio installation package in [Github Release](https://github
 
 ### Post-installation steps for Linux
 
-EthereumStudio Studio uses `inotify` by default on Linux to monitor directories for changes. Users will need to increase the amount of inotify watchers to ensure the filetree is refreshed properly.
+Ethereum Studio uses `inotify` by default on Linux to monitor directories for changes. Users will need to increase the amount of inotify watchers to ensure the filetree is refreshed properly.
 
 To increase inotify watchers at boot, execute the following command in Terminal:
 
@@ -40,7 +40,7 @@ The following demo runs on Ethereum Studio v0.8.0 for macOS. All screenshots are
 
 ### Prerequisites
 
-When Ethereum Studio is properly installed and started for the first time, users will see a welcome page, where the dependencies for Ethereum are displayed, including Docker, Ethereum Node and Ethereum Truffle. Ethereum Studio Web does not have any local prerequisitie, simply visit https://eth.ide.black to start.
+When Ethereum Studio is properly installed and started for the first time, users will see a welcome page, where the dependencies for Ethereum are displayed, including Docker, Ethereum Node and Ethereum Truffle. Ethereum Studio Web does not have any local prerequisite, simply visit https://eth.ide.black to start.
 
 <p align="center">
   <img src="./screenshots/welcome.png" width="720px">
