@@ -254,6 +254,7 @@ When working with Code Inspector, Ethereum Studio relies on contract ABI to gene
 <p align="center">
   <img src="./screenshots/abi.png" width="720px">
 </p>
+
 In case when users need to access other contracts (a online contract, for example), he/she needs to add the contract ABI to ABI Storage. Click *New* button in the ABI Storage popup tostart the process. For users' convenience, Ethereum Studio also reads ABI from all compiled contracts in the current project. Click *Select from the current project* and select to import ABI from the drop-down list.
 
 <p align="center">
