@@ -13762,7 +13762,7 @@ react-is@^17.0.1:
 
 react-json-view@ObsidianLabs/react-json-view#obsidians:
   version "1.21.3"
-  resolved "https://codeload.github.com/ObsidianLabs/react-json-view/tar.gz/c99766ef297cd1463dc2070a278076bd5f5bba6e"
+  resolved "https://codeload.github.com/ObsidianLabs/react-json-view/tar.gz/e0bdb9c2cdc99f7cdf6bedbd6d4ef93e03953313"
   dependencies:
     flux "^4.0.1"
     react-base16-styling "^0.6.0"
