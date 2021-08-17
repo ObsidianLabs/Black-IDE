@@ -15,6 +15,6 @@ module.exports = function () {
   compilerManager = new CompilerManager()
   instanceManager = new InstanceManager()
   projectChannel = new ProjectChannel()
-  sdkChannel = new SdkChannel()
+  sdkChannel = new SdkChannel(keypairManager)
   authChannel = new AuthChannel()
 }
