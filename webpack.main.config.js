@@ -14,6 +14,7 @@ module.exports = merge.smart(baseConfig, {
   output: {
     path: path.resolve(__dirname, 'dev')
   },
+  resolve: { mainFields: ['main', 'module'] },
   module: {
     rules: [
       {
