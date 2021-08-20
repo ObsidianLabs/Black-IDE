@@ -68,7 +68,7 @@ class HeaderWithRedux extends PureComponent {
 
   setNetwork () {
     if (!networkManager.network) {
-      networkManager.setNetwork(this.state.networkList.get(0))
+      networkManager.setNetwork(this.state.networkList.get(0), { notify: false })
     }
   }
 
