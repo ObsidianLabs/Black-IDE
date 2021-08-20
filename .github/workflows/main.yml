@@ -143,10 +143,20 @@ jobs:
 
 
       - name: Checkout Premium Editor
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/premium-editor
           ref: develop
+          path: ./premium-editor
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout Premium Editor
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/premium-editor
+          ref: master
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
