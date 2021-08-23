@@ -4,7 +4,7 @@ const { AutoUpdate } = require('@obsidians/global')
 const CompilerManager = require('@obsidians/eth-compiler')
 const { InstanceManager } = require('@obsidians/eth-network')
 const ProjectChannel = require('@obsidians/eth-project')
-const SdkChannel = require('@obsidians/eth-sdk')
+const { SdkChannel } = require('@obsidians/eth-sdk')
 const AuthChannel = require('@obsidians/auth')
 
 let ipcChannel, keypairManager, autoUpdate, compilerManager, instanceManager, projectChannel, sdkChannel, authChannel
@@ -15,6 +15,6 @@ module.exports = function () {
   compilerManager = new CompilerManager()
   instanceManager = new InstanceManager()
   projectChannel = new ProjectChannel()
-  sdkChannel = new SdkChannel()
+  sdkChannel = new SdkChannel(keypairManager)
   authChannel = new AuthChannel()
 }

@@ -1,5 +1,6 @@
 const os = require('os')
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 const {
   override,
   addWebpackExternals,
@@ -24,6 +25,20 @@ function overrideProcessEnv (value) {
   }
 }
 
+function turnOffMangle () {
+  return config => {
+    config.optimization.minimizer = config.optimization.minimizer.map(
+      minimizer => {
+        if (minimizer instanceof TerserPlugin) {
+          minimizer.options.terserOptions.mangle = false
+        }
+        return minimizer
+      }
+    )
+    return config
+  }
+}
+
 function addWasmLoader (options) {
   return config => {
     config.resolve.extensions.push('.wasm')
@@ -41,6 +56,7 @@ function addWasmLoader (options) {
 const overrides = [
   addWebpackAlias({
     crypto: 'crypto-browserify',
+    '@solidity-parser/parser': '@solidity-parser/parser/dist/index.cjs.js',
     '@': path.resolve(__dirname, 'src/lib'),
     '@obsidians/welcome': `@obsidians/${process.env.BUILD}-welcome`,
     '@obsidians/header': `@obsidians/${process.env.BUILD}-header`,
@@ -49,7 +65,6 @@ const overrides = [
     '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
     '@obsidians/contract': `@obsidians/${process.env.BUILD}-contract`,
     '@obsidians/explorer': `@obsidians/${process.env.BUILD}-explorer`,
-    '@obsidians/sdk': `@obsidians/${process.env.PROJECT}-sdk`,
     '@obsidians/network': `@obsidians/${process.env.BUILD}-network`,
     '@obsidians/node': `@obsidians/${process.env.BUILD}-node`,
     '@obsidians/premium-editor': path.resolve(__dirname, process.env.PREMIUM_EDITOR || 'empty.js'),
@@ -61,6 +76,9 @@ const overrides = [
     DEPLOY: JSON.stringify(process.env.DEPLOY),
     PROJECT_NAME: JSON.stringify(process.env.PROJECT_NAME),
     LOGIN_PROVIDERS: JSON.stringify(process.env.LOGIN_PROVIDERS),
+    PROJECT_WEB_URL: JSON.stringify('https://eth.ide.black'),
+    PROJECT_DESKTOP_URL: JSON.stringify('https://app.obsidians.io/eth'),
+    PROJECT_GITHUB_REPO: JSON.stringify('https://github.com/ObsidianLabs/EthereumStudio'),
     OS_IS_LINUX: JSON.stringify(os.type() === 'Linux'),
     OS_IS_WINDOWS: JSON.stringify(os.type() === 'Windows_NT'),
     OS_IS_MAC: JSON.stringify(os.type() === 'Darwin'),
@@ -68,7 +86,6 @@ const overrides = [
     CHAIN_SHORT_NAME: '"ETH"',
     CHAIN_EXECUTABLE_NAME: '"Geth"',
     CHAIN_EXECUTABLE_NAME_IN_LABEL: '"Geth"',
-    TOKEN_SYMBOL: '"ETH"',
     COMPILER_NAME: '"Truffle"',
     COMPILER_NAME_IN_LABEL: '"Truffle"',
     COMPILER_EXECUTABLE_NAME: '"truffle"',
@@ -76,10 +93,12 @@ const overrides = [
     DOCKER_IMAGE_NODE: '"ethereum/client-go"',
     DOCKER_IMAGE_COMPILER: '"obsidians/truffle"',
     INFURA_PROJECT_ID: '"cc547d769203404cb928ec965af26894"',
+    TOKENVIEW_API_TOKEN: '"EKOSwQf1EICfbxcVyNvt"',
     BROWSER_EXTENSION_NAME: '"MetaMask"',
-    LANG: '"en"',
-    // ENABLE_AUTH: true,
+    LANG: JSON.stringify(process.env.LANGUAGE || 'en'),
+    ENABLE_AUTH: true,
   }),
+  turnOffMangle(),
   addWasmLoader(),
 ]
 

@@ -16,9 +16,10 @@ env:
   project_name: Ethereum Studio
   project_build_script: yarn && PUBLIC_URL=/ CDN=true yarn build:react
   enable_auth: true
+  premium_editor: ../premium-editor
   cos_bucket: ethereum-ide-1303090311
   cos_region: ap-singapore
-  dns_path: http://eth.obsidians.io/
+  dns_path: https://eth.ide.black/
 
 jobs:
   # Build and release
@@ -45,6 +46,14 @@ jobs:
           repository: ${{ env.owner }}/${{ env.own_components }}
           ref: develop
           path: ./${{ env.own_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout Premium Editor
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/premium-editor
+          ref: develop
+          path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.project_name }}
@@ -77,6 +86,14 @@ jobs:
         working-directory: ./${{ env.own_components }}
         run: yarn build
 
+      - name: Install Premium Editor dependencies
+        working-directory: ./premium-editor
+        run: yarn
+
+      - name: Build Premium Editor
+        working-directory: ./premium-editor
+        run: yarn build
+
       - name: Build ${{ env.project_name }}
         uses: ObsidianLabs/studio-build-action@master
         with:
@@ -91,6 +108,8 @@ jobs:
           mac_certs_password: ${{ secrets.certs_password }}
           windows_certs: ${{ secrets.certs }}
           windows_certs_password: ${{ secrets.certs_password }}
+          react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
+          premium_editor: ${{ env.premium_editor }}
           github_token: ${{ github.token }}
 
       - name: Create a placeholder for COS

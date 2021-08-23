@@ -16,6 +16,7 @@ env:
   project_build_script: yarn && yarn dist
   os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
   enable_auth: false
+  premium_editor: ../premium-editor
 
 jobs:
   # Generate matrix for the following steps
@@ -49,7 +50,8 @@ jobs:
       version: ${{ steps.version.outputs.VERSION }}
       v_version: v${{ steps.version.outputs.VERSION }}
       component_version: v${{ steps.version.outputs.VERSION }}-${{ env.project_build }}
-      new_release: ${{ steps.version.outputs.VERSION != 'master' &&  steps.version.outputs.VERSION != 'develop' }}
+      new_release: ${{ steps.version.outputs.VERSION != 'master' && steps.version.outputs.VERSION != 'develop' }}
+      rc_release: ${{ contains(steps.version.outputs.VERSION, 'rc') }}
 
   # Update package.json version to match release version
   bump:
@@ -103,6 +105,16 @@ jobs:
           node-version: 14
 
       - name: Checkout ${{ env.share_components }}
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.share_components }}
+          ref: develop
+          path: ./${{ env.share_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.share_components }}
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
@@ -110,7 +122,18 @@ jobs:
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
+
       - name: Checkout ${{ env.own_components }}
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.own_components }}
+          ref: develop
+          path: ./${{ env.own_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.own_components }}
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
@@ -118,11 +141,40 @@ jobs:
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
+
+      - name: Checkout Premium Editor
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/premium-editor
+          ref: develop
+          path: ./premium-editor
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout Premium Editor
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/premium-editor
+          ref: master
+          path: ./premium-editor
+          token: ${{ secrets.obsidians_token }}
+
+
       - name: Checkout ${{ env.project_name }}
+        if: ${{ needs.versions.outputs.rc_release == 'true' }}
+        uses: actions/checkout@v2
+        with:
+          ref: develop
+          path: ./studio
+
+      - name: Checkout ${{ env.project_name }}
+        if: ${{ needs.versions.outputs.rc_release != 'true' }}
         uses: actions/checkout@v2
         with:
           ref: master
           path: ./studio
+
 
       - name: Install ${{ env.share_components }} submodule
         working-directory: ./${{ env.share_components }}
@@ -148,6 +200,14 @@ jobs:
         working-directory: ./${{ env.own_components }}
         run: yarn build
 
+      - name: Install Premium Editor dependencies
+        working-directory: ./premium-editor
+        run: yarn
+
+      - name: Build Premium Editor
+        working-directory: ./premium-editor
+        run: yarn build
+
       - name: Build ${{ env.project_name }}
         uses: ObsidianLabs/studio-build-action@master
         with:
@@ -162,6 +222,8 @@ jobs:
           mac_certs_password: ${{ secrets.certs_password }}
           windows_certs: ${{ secrets.certs }}
           windows_certs_password: ${{ secrets.certs_password }}
+          react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
+          premium_editor: ${{ env.premium_editor }}
           github_token: ${{ github.token }}
 
       - name: Clean up Build assets

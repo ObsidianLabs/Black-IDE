@@ -14,15 +14,15 @@ class ProjectWithProps extends PureComponent {
   render () {
     const { projects, uiState, match } = this.props
     const { username, project } = match.params
+    const selected = projects.get('selected')?.toJS() || {}
 
-    let type, projectRoot, selected
+    let type, projectRoot
     if (username === 'local') {
       type = 'Local'
-      selected = projects.get('selected')?.toJS() || {}
       projectRoot = selected.path
     } else {
       type = 'Remote'
-      projectRoot = `${username}/${project}`
+      projectRoot = selected.id ? `${username}/${project}` : undefined
     }
 
     if (type === 'Local' && platform.isWeb) {

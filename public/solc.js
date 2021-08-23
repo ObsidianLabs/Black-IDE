@@ -1,5 +1,5 @@
 process = { env: {} }
-importScripts('/solc-wrapper.js')
+importScripts('./solc-wrapper.js')
 
 onmessage = function (e) {
   const { id, method, data } = e.data
@@ -13,7 +13,6 @@ function compileProject ({ solcUrl, input }) {
   if (typeof solc === 'undefined') {
     importScripts(solcUrl)
     solc = wrapper(Module)
-    console.log('solc ready', solc)
   }
   const output = solc.compile(input, { import: importFile })
   return JSON.parse(output)

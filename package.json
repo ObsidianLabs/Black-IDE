@@ -1,7 +1,7 @@
 {
   "name": "ethereum-studio",
   "description": "Graphic IDE for Ethereum smart contract development",
-  "version": "0.3.0-rc.1",
+  "version": "0.10.1-rc.1",
   "author": {
     "name": "Phil Li",
     "email": "phil.li@obsidians.io",
@@ -35,12 +35,16 @@
   },
   "dependencies": {
     "crypto-browserify": "^3.12.0",
-    "ethers": "^5.0.30",
     "fs-extra": "^9.1.0",
     "keytar": "^7.4.0",
     "monaco-ace-tokenizer": "^0.2.1",
     "node-pty": "0.10.0",
+    "prettier": "^2.2.1",
+    "prettier-plugin-solidity": "1.0.0-beta.10",
     "socket.io-client": "^2.4.0",
+    "solhint": "ObsidianLabs/solhint#obsidians",
+    "solium": "ObsidianLabs/Ethlint",
+    "solparse-exp-jb": "ObsidianLabs/solparse",
     "strip-ansi": "^6.0.0",
     "trash": "^7.0.0"
   },
@@ -95,11 +99,13 @@
     "webpack-merge": "^4.2.2"
   },
   "resolutions": {
+    "@solidity-parser/parser": "^0.12.1",
     "sass-loader": "^10.1.0"
   },
   "workspaces": [
     "../electron-components/packages/*",
-    "../eth-components/packages/*"
+    "../eth-components/packages/*",
+    "../bsc-components/packages/*"
   ],
   "browserslist": {
     "production": [
@@ -134,9 +140,8 @@
       "appId": "com.obsidians.ethereumstudio",
       "category": "developer-tools",
       "target": {
-        "target": "dmg",
+        "target": "default",
         "arch": [
-          "arm64",
           "x64"
         ]
       }

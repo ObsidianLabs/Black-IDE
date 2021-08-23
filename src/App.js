@@ -15,11 +15,7 @@ export default function App () {
       <Suspense fallback={<LoadingScreen />}>
         <Switch>
           <Route path='/callback' render={props => {
-            if (process.env.DEPLOY === 'bsn') {
-              handleBsnCallback.call(Auth, props)
-            } else {
-              Auth.handleCallback(props)
-            }
+            Auth.callback(props)
             return <LoadingScreen />
           }}/>
           <Route component={ReduxApp} />
