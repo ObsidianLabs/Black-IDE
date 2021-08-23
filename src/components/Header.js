@@ -3,12 +3,11 @@ import React, { PureComponent } from 'react'
 import { connect } from '@obsidians/redux'
 import { IpcChannel } from '@obsidians/ipc'
 
-import headerActions, { Header, NavGuard } from '@obsidians/header'
+import headerActions, { Header, NavGuard, AuthModal } from '@obsidians/header'
 import { networkManager } from '@obsidians/network'
 import { BaseProjectManager } from '@obsidians/workspace'
 import { actions } from '@obsidians/workspace'
 import { createProject } from '../lib/bsn'
-import icon from './bsn.png'
 import keypairManager from '@obsidians/keypair'
 
 import { List } from 'immutable'
@@ -40,8 +39,6 @@ class HeaderWithRedux extends PureComponent {
       const interval = setInterval(() => this.getNetworks(), 30 * 1000)
       this.setState({ interval })
     } else {
-      networkManager.networks = networks
-      this.setNetwork({ notify: true })
       this.setState({ networkList: List(networkManager.networks) }, this.setNetwork)
     }
   }
@@ -105,9 +102,14 @@ class HeaderWithRedux extends PureComponent {
   }
 
   renderLogo () {
-    return <div className="d-flex align-items-center" style={{ margin: '7px 17px' }}>
-      <img src={icon} style={{ background: 'transparent', height: '100%' }}/>
-    </div>
+    if (process.env.RENDER_LOGO && process.env.DEPLOY) {
+      return (
+        <div className="d-flex align-items-center" style={{ margin: '7px 17px' }}>
+          <img src={require(`./logo/${process.env.DEPLOY}.png`).default} style={{ background: 'transparent', height: '100%' }}/>
+        </div>
+      )
+    }
+    return null
   }
 
   render () {
@@ -141,7 +143,7 @@ class HeaderWithRedux extends PureComponent {
         networkList={groupedNetworks}
         AuthModal={AuthModal}
         createProject={this.setCreateProject()}
-        navbarCenter={this.renderLogo()}
+        logo={this.renderLogo()}
       />
     )
   }
