@@ -28,7 +28,7 @@ class ProjectWithProps extends PureComponent {
     if (type === 'Local' && platform.isWeb) {
       return null
     }
-    
+
     return (
       <Project
         theme='obsidians'

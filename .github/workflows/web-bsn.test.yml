@@ -1,6 +1,10 @@
-name: Build BSN Web
+name: Build BSN Web Test
 
 on:
+  push:
+    branches:
+      - bsn
+
   workflow_dispatch:
 
 env:
@@ -12,9 +16,9 @@ env:
   project_name: Ethereum Studio
   project_build_script: yarn && PUBLIC_URL=/ CDN=true yarn build:react
   enable_auth: true
-  cos_bucket: bsn-eth-1303090311
+  cos_bucket: bsn-eth-test-1303090311
   cos_region: ap-singapore
-  dns_path: https://ethide.bsnbase.io/
+  dns_path: http://bsn-eth.test.ide.black/
 
 jobs:
   # Build and release
@@ -51,7 +55,7 @@ jobs:
 
       - name: Replace .env
         working-directory: ./studio
-        run: cp .env.bsn .env
+        run: cp .env.bsn.test .env
 
       - name: Install ${{ env.share_components }} submodule
         working-directory: ./${{ env.share_components }}
