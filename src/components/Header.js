@@ -102,10 +102,10 @@ class HeaderWithRedux extends PureComponent {
   }
 
   renderLogo () {
-    if (process.env.RENDER_LOGO && process.env.DEPLOY) {
+    if (process.env.REACT_APP_LOGO) {
       return (
-        <div className="d-flex align-items-center" style={{ margin: '7px 17px' }}>
-          <img src={require(`./logo/${process.env.DEPLOY}.png`).default} style={{ background: 'transparent', height: '100%' }}/>
+        <div className='d-flex align-items-center' style={{ margin: '7px 17px' }}>
+          <img src={require(process.env.REACT_APP_LOGO).default} style={{ background: 'transparent', height: '100%' }}/>
         </div>
       )
     }
