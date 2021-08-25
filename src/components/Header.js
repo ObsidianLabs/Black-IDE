@@ -60,6 +60,7 @@ class HeaderWithRedux extends PureComponent {
           notification: `Switched to <b>${project.network.name}</b>.`,
           url,
           chainId: project.id,
+          symbol: 'ETH',
           raw: project
         }
       })
