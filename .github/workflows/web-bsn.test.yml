@@ -1,9 +1,6 @@
 name: Build BSN Web Test
 
 on:
-  push:
-    branches:
-      - bsn
 
   workflow_dispatch:
 
