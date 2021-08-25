@@ -34,6 +34,7 @@ class HeaderWithRedux extends PureComponent {
 
   async refresh() {
     if (process.env.DEPLOY === 'bsn') {
+      networkManager.networks = []
       this.getNetworks()
       clearInterval(this.state.interval)
       const interval = setInterval(() => this.getNetworks(), 30 * 1000)
@@ -47,7 +48,7 @@ class HeaderWithRedux extends PureComponent {
     try {
       const ipc = new IpcChannel('bsn')
       const projects = await ipc.invoke('projects', { chain: 'eth' })
-      networkManager.networks = projects.map(project => {
+      const remoteNetworks = projects.map(project => {
         const url = project.endpoints?.find(endpoint => endpoint.startsWith('http'))
         return {
           id: `bsn_${project.id}`,
@@ -62,6 +63,7 @@ class HeaderWithRedux extends PureComponent {
           raw: project
         }
       })
+      networkManager.addSdk(EthSdk, remoteNetworks)
       this.setNetwork({ redirect: false, notify: false })
     } catch (error) {
       networkManager.networks = []
