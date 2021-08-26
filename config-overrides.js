@@ -5,7 +5,7 @@ const {
   override,
   addWebpackExternals,
   addWebpackAlias,
-  addWebpackPlugin
+  addWebpackPlugin,
 } = require('customize-cra')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
@@ -118,5 +118,15 @@ if (process.env.CDN) {
 }
 
 module.exports = {
-  webpack: override(...overrides)
+  webpack: override(...overrides),
+  devServer: function (configFunction) {
+    return function (proxy, allowedHost) {
+      const config = configFunction(proxy, allowedHost);
+      config.headers = {
+        'Cross-Origin-Opener-Policy': 'same-origin',
+        'Cross-Origin-Embedder-Policy': 'require-corp',
+      }
+      return config
+    }
+  },
 }
