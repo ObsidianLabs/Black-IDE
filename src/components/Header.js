@@ -12,10 +12,10 @@ import keypairManager from '@obsidians/keypair'
 
 import { List } from 'immutable'
 
-import EthSdk, { kp } from '@obsidians/eth-sdk'
+import EthSdk from '@obsidians/eth-sdk'
 // import BscSdk from '@obsidians/bsc-sdk'
 
-keypairManager.kp = kp
+keypairManager.kp = EthSdk.kp
 networkManager.addSdk(EthSdk, EthSdk.networks)
 // networkManager.addSdk(BscSdk, BscSdk.networks)
 networkManager.addSdk(EthSdk, EthSdk.customNetworks)
