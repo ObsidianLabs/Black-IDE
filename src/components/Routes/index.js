@@ -23,7 +23,7 @@ const Network = lazy(() => import('./Network' /* webpackChunkName: "tabs" */))
 
 export default function (props) {
   return (
-    <React.Fragment>
+    <>
       {props.children}
       <Suspense fallback={<LoadingScreen />}>
         <CacheSwitch>
@@ -72,6 +72,6 @@ export default function (props) {
         component={BottomBar}
         className='border-top-1 d-flex flex-row'
       />
-    </React.Fragment>
+    </>
   )
 }

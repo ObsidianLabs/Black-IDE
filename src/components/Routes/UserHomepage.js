@@ -1,5 +1,5 @@
 import { BaseUserHomepage } from '@obsidians/user'
-import redux, { connect } from '@obsidians/redux'
+import { connect } from '@obsidians/redux'
 import { networkManager } from '@obsidians/network'
 
 class UserHomepage extends BaseUserHomepage {
