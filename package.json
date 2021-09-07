@@ -85,7 +85,6 @@
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
-    "react-json-view": "^1.21.3",
     "react-router": "^5.2.0",
     "react-router-cache-route": "^1.11.0",
     "react-router-dom": "^5.2.0",
