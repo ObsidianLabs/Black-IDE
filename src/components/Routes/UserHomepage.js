@@ -5,11 +5,17 @@ import { networkManager } from '@obsidians/network'
 class UserHomepage extends BaseUserHomepage {
   componentDidMount (props) {
     super.componentDidMount(props)
-    this.updateNetwork()
+    if (process.env.DEPLOY === 'bsn') {
+      this.updateNetwork()
+    }
   }
 
   async updateNetwork () {
     const urlParams = new URLSearchParams(this.props.location.search);
+    const projectId = urlParams.get('projectId')
+    if (!projectId) {
+      return
+    }
     const networkId = `bsn_${urlParams.get('projectId')}`
     this.setNetwork(networkId)
   }
