@@ -2,21 +2,21 @@
   "plugins": ["react", "prettier"],
   "extends": ["react-app", "prettier"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "semi": false,
-        "trailingComma": "es5",
-        "bracketSameLine": false,
-        "arrowParens": "avoid"
-      }
-    ],
-    "react/jsx-filename-extension": [
-      "warn",
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ]
+    // "prettier/prettier": [
+    //   "error",
+    //   {
+    //     "singleQuote": true,
+    //     "semi": false,
+    //     "trailingComma": "es5",
+    //     "bracketSameLine": false,
+    //     "arrowParens": "avoid"
+    //   }
+    // ],
+    // "react/jsx-filename-extension": [
+    //   "warn",
+    //   {
+    //     "extensions": [".js", ".jsx"]
+    //   }
+    // ]
   }
 }
