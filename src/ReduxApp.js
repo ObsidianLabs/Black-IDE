@@ -74,6 +74,6 @@ export default class ReduxApp extends Component {
 
 async function onReduxLoaded () {
   Auth.restore()
-  const version = fileOps.current.getAppVersion()
+  const version = await fileOps.current.getAppVersion()
   redux.dispatch('SET_VERSION', { version })
 }
