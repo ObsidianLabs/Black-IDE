@@ -48,6 +48,12 @@ function createWindow () {
       webviewTag: true,
     }
   })
+
+  win.webContents.setWindowOpenHandler(() => {
+    // TODO: need add condition for the external link in the code editor
+    return { action: 'deny' }
+  })
+
   win.loadURL(
     isDev
       ? 'http://localhost:3000'
