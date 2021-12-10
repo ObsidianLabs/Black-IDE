@@ -63,7 +63,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -102,7 +102,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Checkout ${{ env.share_components }}
         if: ${{ needs.versions.outputs.rc_release == 'true' }}

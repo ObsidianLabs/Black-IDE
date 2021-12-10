@@ -12,7 +12,7 @@
   "homepage": "./",
   "main": "build/main/index.js",
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "scripts": {
     "install": "electron-rebuild",
@@ -36,10 +36,10 @@
   "dependencies": {
     "crypto-browserify": "^3.12.0",
     "fs-extra": "^9.1.0",
-    "keytar": "^7.4.0",
+    "keytar": "7.7.0",
     "monaco-ace-tokenizer": "^0.2.1",
     "node-pty": "0.10.0",
-    "prettier": "^2.2.1",
+    "prettier": "^2.5.0",
     "prettier-plugin-solidity": "1.0.0-beta.10",
     "socket.io-client": "^2.4.0",
     "solhint": "ObsidianLabs/solhint#obsidians",
@@ -49,6 +49,7 @@
     "trash": "^7.0.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",
@@ -67,11 +68,19 @@
     "customize-cra": "^1.0.0",
     "default-shell": "^1.0.1",
     "dotenv": "^8.0.0",
-    "electron": "11.3.0",
-    "electron-builder": "^22.10.5",
+    "electron": "^16.0.2",
+    "electron-builder": "^22.14.5",
     "electron-is-dev": "^2.0.0",
-    "electron-rebuild": "^2.3.5",
-    "electron-updater": "^4.3.8",
+    "electron-rebuild": "^3.2.5",
+    "electron-updater": "^4.6.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "immutable": "^4.0.0-rc.12",
     "jsbi": "^3.1.1",
     "loadjs": "^4.2.0",
@@ -81,16 +90,14 @@
     "monaco-editor-webpack-plugin": "^1.9.0",
     "native-ext-loader": "^2.3.0",
     "node-fetch": "^2.6.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.0",
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
-    "react-json-view": "^1.21.3",
     "react-router": "^5.2.0",
     "react-router-cache-route": "^1.11.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "sass-loader": "^10.1.1",
     "shell-path": "^2.1.0",
     "source-map-loader": "^0.2.4",
     "typescript": "3.7.2",
@@ -100,7 +107,8 @@
   },
   "resolutions": {
     "@solidity-parser/parser": "^0.12.1",
-    "sass-loader": "^10.1.0"
+    "node-abi": "3.5.0",
+    "sass-loader": "10.2.0"
   },
   "workspaces": [
     "../electron-components/packages/*",

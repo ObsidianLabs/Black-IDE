@@ -55,8 +55,8 @@ async function createProject ({ networkManager, projectChannel, bsnChannel }, { 
       compilerVersion,
       meta: {
         build: 'bsn',
-        bsnProjectId: networkManager.network.raw.id,
-        organizationId: networkManager.network.raw.organization.id,
+        bsnProjectId: networkManager?.network?.raw?.id,
+        organizationId: networkManager?.network?.raw?.organization?.id,
         chaincodeName: name,
       }
     })
