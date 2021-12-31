@@ -1,0 +1,56 @@
+name: "Bug report"
+description: Create a report to help the EthereumStudio to be better.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We can help you better if you fill in more information.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a clear and concise description of what you're running into.
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: What's client ware are you using?
+      value: |
+        - Web
+        - Desktop
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce
+      description: The report without steps to reproduce will be ignored or closed.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: What's the actual result? (including assertion message & call stack if applicable).
+    validations:
+      required: true
+  - type: textarea
+    id: Error
+    attributes:
+      label: Error log
+      description: You can paste more related error.log.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What's the expected result?
