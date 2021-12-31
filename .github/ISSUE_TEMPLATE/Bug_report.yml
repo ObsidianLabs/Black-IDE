@@ -1,0 +1,56 @@
+name: "Create an Issue"
+description: Create an issue to help Ethereum Studio improve.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        More information about the bug would help us better to locate the issue.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Provide a clear and concise description of what you're running into.
+    validations:
+      required: true
+  - type: dropdown
+    id: client
+    attributes:
+      label: Client
+      description: Are you use the web version or the desktop version?
+      value: |
+        - Web
+        - Desktop
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce
+      description: The report without steps to reproduce will be ignored or closed.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: What's the actual result? (including assertion message & call stack if applicable).
+    validations:
+      required: true
+  - type: textarea
+    id: Error
+    attributes:
+      label: Error log
+      description: You can paste more related error logs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What's the expected result?
