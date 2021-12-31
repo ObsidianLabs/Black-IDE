@@ -1,12 +1,12 @@
-name: "Bug report"
-description: Create a report to help the EthereumStudio to be better.
-title: "bug: "
+name: "Create an Issue"
+description: Create an issue to help Ethereum Studio improve.
+title: "Bug: "
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        We can help you better if you fill in more information.
+        More information about the bug would help us better to locate the issue.
   - type: textarea
     id: description
     attributes:
@@ -15,10 +15,10 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: environment
+    id: client
     attributes:
-      label: Environment
-      description: What's client ware are you using?
+      label: Client
+      description: Are you use the web version or the desktop version?
       value: |
         - Web
         - Desktop
@@ -46,7 +46,7 @@ body:
     id: Error
     attributes:
       label: Error log
-      description: You can paste more related error.log.
+      description: You can paste more related error logs.
     validations:
       required: true
   - type: textarea
