@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - develop
 
   workflow_dispatch:
 
@@ -27,6 +28,13 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+      - name: Development Branch Detected
+        if: endsWith(github.ref, 'develop')
+        run: |
+          echo "Deploying ${{ github.ref }} branch"
+          echo "cos_bucket=ethereum-ide-1303090311" >> $GITHUB_ENV
+          echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
+          
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
