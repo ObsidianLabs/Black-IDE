@@ -32,7 +32,7 @@ jobs:
         if: endsWith(github.ref, 'develop')
         run: |
           echo "Deploying ${{ github.ref }} branch"
-          echo "cos_bucket=ethereum-ide-1303090311" >> $GITHUB_ENV
+          echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
           echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
           
       - name: Install Node.js, NPM and Yarn
