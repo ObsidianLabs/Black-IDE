@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-recommended"],
+  "syntax": "scss",
+  "rules": {
+    "indentation": 2,
+    "at-rule-semicolon-newline-after": "always",
+    "declaration-block-semicolon-newline-after": "always-multi-line"
+  }
+}
