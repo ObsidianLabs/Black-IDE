@@ -1,0 +1,9 @@
+{
+  "*.{css,json,md,yaml,yml}": ["prettier --write"],
+  "**/*.{scss, css}": ["stylelint"],
+  "**/*.{js,jsx,ts,tsx}": [
+    "import-sort --write",
+    "prettier --write",
+    "eslint --fix"
+  ]
+}
