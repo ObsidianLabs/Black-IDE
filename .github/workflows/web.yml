@@ -1,10 +1,6 @@
 name: Build Web
 
 on:
-  push:
-    branches:
-      - master
-
   workflow_dispatch:
 
 env:
@@ -43,7 +39,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: develop
+          ref: master
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -51,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: develop
+          ref: master
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -59,7 +55,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/premium-editor
-          ref: develop
+          ref: master
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
