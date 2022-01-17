@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Development Branch Detected
-        if: endsWith(github.ref, 'develop')
+        if: endsWith(github.ref, 'poc')
         run: |
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
