@@ -120,3 +120,15 @@ export const network = {
     }
   }
 }
+
+export const avaliableNetworks = {
+  default: Immutable.fromJS({
+    networks: [],
+  }),
+  persist: false,
+  actions: {
+    SET_AVALIABLE_NETWORKS: {
+      reducer: (state, { payload }) => state.setIn(['networks'], Immutable.fromJS(payload)),
+    },
+  },
+}

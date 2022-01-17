@@ -118,10 +118,9 @@ class HeaderWithRedux extends PureComponent {
 
   render () {
     console.debug('[render] HeaderWithRedux')
-    const { uiState, profile, projects, contracts, accounts, network } = this.props
+    const { customNetworks ,uiState, profile, projects, contracts, accounts, network } = this.props
 
     const selectedProject = projects.get('selected')?.toJS() || {}
-
     const networkList = List(networkManager.networks)
     const networkGroups = networkList.groupBy(n => n.group)
     const groupedNetworks = this.groupedNetworks(networkGroups)
@@ -154,6 +153,7 @@ class HeaderWithRedux extends PureComponent {
 }
 
 export default connect([
+  'customNetworks',
   'uiState',
   'profile',
   'projects',
