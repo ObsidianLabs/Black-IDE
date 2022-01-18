@@ -23,12 +23,12 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Development Branch Detected
-        if: endsWith(github.ref, 'poc')
+        if: endsWith(github.ref, 'develop')
         run: |
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
           echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
-          echo "project_build_script= yarn && PUBLIC_URL=/ CDN=true  NODE_ENV=test yarn build:react" >> $GITHUB_ENV
+          echo "project_build_script= yarn && PUBLIC_URL=/ CDN=true REACT_APP_ENV=test yarn build:react" >> $GITHUB_ENV
 
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
@@ -114,6 +114,9 @@ jobs:
           react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
           premium_editor: ${{ env.premium_editor }}
           github_token: ${{ github.token }}
+          build_id: ${{ github.run_id }}
+          build_time: ${{ github.update_at }}
+          commit_id: ${{ github.sha }}
 
       - name: Create a placeholder for COS
         run: echo cos > ./.placeholder
