@@ -8,6 +8,8 @@ const {
   addWebpackPlugin,
 } = require('customize-cra')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin')
 
 function findWebpackPlugin (plugins, pluginName) {
   return plugins.find(plugin => plugin.constructor.name === pluginName)
@@ -113,7 +115,9 @@ if (process.env.CDN) {
   overrides.push(addWebpackPlugin(
     new MonacoWebpackPlugin({
       languages: ['json', 'javascript', 'typescript', 'css', 'html', 'markdown', 'c', 'cpp', 'shell']
-    })
+    }),
+    new BundleAnalyzerPlugin(),
+    new BundleStatsWebpackPlugin()
   ))
 }
 

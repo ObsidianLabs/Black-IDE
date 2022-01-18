@@ -15,11 +15,11 @@ Input.defaultProps = {
   spellCheck: 'false'
 }
 
-const UserHomepage = lazy(() => import('./UserHomepage' /* webpackChunkName: "tabs" */))
-const Project = lazy(() => import('./Project' /* webpackChunkName: "tabs" */))
-const Contract = lazy(() => import('./Contract' /* webpackChunkName: "tabs" */))
-const Explorer = lazy(() => import('./Explorer' /* webpackChunkName: "tabs" */))
-const Network = lazy(() => import('./Network' /* webpackChunkName: "tabs" */))
+const UserHomepage = lazy(() => import('./UserHomepage' /* webpackChunkName: "Homepage" */))
+const Project = lazy(() => import('./Project' /* webpackChunkName: "Project" */))
+const Contract = lazy(() => import('./Contract' /* webpackChunkName: "Contract" */))
+const Explorer = lazy(() => import('./Explorer' /* webpackChunkName: "Explorer" */))
+const Network = lazy(() => import('./Network' /* webpackChunkName: "Network" */))
 
 export default function (props) {
   return (
