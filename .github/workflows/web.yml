@@ -28,7 +28,7 @@ jobs:
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
           echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
-          echo "project_build_script=yarn && PUBLIC_URL=/ CDN=true REACT_APP_ENV=test yarn build:react" >> $GITHUB_ENV
+          echo "project_build_script=yarn && REACT_APP_ENV=test yarn build:web" >> $GITHUB_ENV
           
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
