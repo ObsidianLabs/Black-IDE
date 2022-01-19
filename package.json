@@ -122,7 +122,8 @@
   "resolutions": {
     "@solidity-parser/parser": "^0.12.1",
     "node-abi": "3.5.0",
-    "sass-loader": "10.2.0"
+    "sass-loader": "10.2.0",
+    "react-highlight": "^0.13.0"
   },
   "workspaces": [
     "../electron-components/packages/*",
