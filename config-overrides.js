@@ -11,11 +11,11 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin')
 
-function findWebpackPlugin (plugins, pluginName) {
+function findWebpackPlugin(plugins, pluginName) {
   return plugins.find(plugin => plugin.constructor.name === pluginName)
 }
 
-function overrideProcessEnv (value) {
+function overrideProcessEnv(value) {
   return config => {
     const plugin = findWebpackPlugin(config.plugins, 'DefinePlugin')
     const processEnv = plugin.definitions['process.env'] || {}
@@ -27,7 +27,7 @@ function overrideProcessEnv (value) {
   }
 }
 
-function turnOffMangle () {
+function turnOffMangle() {
   return config => {
     config.optimization.minimizer = config.optimization.minimizer.map(
       minimizer => {
@@ -41,7 +41,7 @@ function turnOffMangle () {
   }
 }
 
-function addWasmLoader (options) {
+function addWasmLoader(options) {
   return config => {
     config.resolve.extensions.push('.wasm')
     config.module.rules.forEach(rule => {
@@ -55,6 +55,36 @@ function addWasmLoader (options) {
   }
 }
 
+function customSplitting() {
+  return config => {
+    config.optimization = {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            name(module) {
+              // get the name. E.g. node_modules/packageName/not/this/part.js
+              // or node_modules/packageName
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+    
+              // npm package names are URL-safe, but some servers don't like @ symbols
+              return `npm.${packageName.replace('@', '')}`;
+            },
+            test: /[\\/]node_modules[\\/]/,
+            chunks: "all",
+          },
+          common: {
+            test: /[\\/]src[\\/]components[\\/]/,
+            chunks: "all",
+            minSize: 0,
+          }
+        }
+      }
+    }
+    return config
+  }
+}
+
 const overrides = [
   addWebpackAlias({
     crypto: 'crypto-browserify',
@@ -64,7 +94,7 @@ const overrides = [
     '@obsidians/header': `@obsidians/${process.env.BUILD}-header`,
     '@obsidians/bottombar': `@obsidians/${process.env.BUILD}-bottombar`,
     '@obsidians/compiler': `@obsidians/${process.env.BUILD}-compiler`,
-    '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
+    // '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
     '@obsidians/contract': `@obsidians/${process.env.BUILD}-contract`,
     '@obsidians/explorer': `@obsidians/${process.env.BUILD}-explorer`,
     '@obsidians/network': `@obsidians/${process.env.BUILD}-network`,
@@ -103,6 +133,7 @@ const overrides = [
   }),
   turnOffMangle(),
   addWasmLoader(),
+  customSplitting()
 ]
 
 if (process.env.CDN) {

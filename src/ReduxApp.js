@@ -54,7 +54,6 @@ export default class ReduxApp extends Component {
         </Suspense>
       )
     }
-
     return (
       <Provider store={redux.store}>
         <div
