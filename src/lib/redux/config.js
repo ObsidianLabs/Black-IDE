@@ -120,3 +120,15 @@ export const network = {
     }
   }
 }
+
+export const chainList = {
+  default: Immutable.fromJS({
+    networks: [],
+  }),
+  persist: false,
+  actions: {
+    SET_CHAIN_LIST: {
+      reducer: (state, { payload }) => state.setIn(['networks'], Immutable.fromJS(payload)),
+    },
+  },
+}
