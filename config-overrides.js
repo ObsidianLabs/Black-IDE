@@ -66,12 +66,11 @@ function customSplitting() {
               const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
               return `vendor.${packageName.replace('@', '')}`;
             },
-            name: 'vendor',
-            test: /[\\/]node_modules[\\/]/,
+            test: /[\\/]node_modules[\\/]((?!(@obsidians)))[\\/]/,
             chunks: 'initial',
           },
           common: {
-            test: /[\\/]node_modules[\\/]@obsidians[\\/]/,
+            test: /[\\/]src[\\/]components[\\/]/,
             chunks: "async",
           },
         }
