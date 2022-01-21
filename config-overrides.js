@@ -63,21 +63,17 @@ function customSplitting() {
         cacheGroups: {
           vendor: {
             name(module) {
-              // get the name. E.g. node_modules/packageName/not/this/part.js
-              // or node_modules/packageName
               const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-    
-              // npm package names are URL-safe, but some servers don't like @ symbols
-              return `npm.${packageName.replace('@', '')}`;
+              return `vendor.${packageName.replace('@', '')}`;
             },
+            name: 'vendor',
             test: /[\\/]node_modules[\\/]/,
-            chunks: "all",
+            chunks: 'initial',
           },
           common: {
-            test: /[\\/]src[\\/]components[\\/]/,
-            chunks: "all",
-            minSize: 0,
-          }
+            test: /[\\/]node_modules[\\/]@obsidians[\\/]/,
+            chunks: "async",
+          },
         }
       }
     }
@@ -94,7 +90,7 @@ const overrides = [
     '@obsidians/header': `@obsidians/${process.env.BUILD}-header`,
     '@obsidians/bottombar': `@obsidians/${process.env.BUILD}-bottombar`,
     '@obsidians/compiler': `@obsidians/${process.env.BUILD}-compiler`,
-    // '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
+    '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
     '@obsidians/contract': `@obsidians/${process.env.BUILD}-contract`,
     '@obsidians/explorer': `@obsidians/${process.env.BUILD}-explorer`,
     '@obsidians/network': `@obsidians/${process.env.BUILD}-network`,
