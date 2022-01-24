@@ -113,7 +113,6 @@ jobs:
 
   # Generate matrix for the following steps
   generate-matrix:
-    needs: set-build-env
     runs-on: ubuntu-18.04
     steps:
       - name: Generate os matrix
@@ -129,7 +128,7 @@ jobs:
       component: ${{ steps.set-component-matrix.outputs.component }}
 
   release:
-    needs: [generate-matrix, set-build-env, bump]
+    needs: [generate-matrix, versions, bump]
 
     strategy:
       matrix:
@@ -147,7 +146,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: ${{ needs.set-build-env.outputs.branch }}
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -155,7 +154,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: ${{ needs.set-build-env.outputs.branch }}
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -163,14 +162,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/premium-editor
-          ref: ${{ needs.set-build-env.outputs.branch }}
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.project_name }}
         uses: actions/checkout@v2
         with:
-          ref: ${{ needs.set-build-env.outputs.branch }}
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./studio
 
       - name: Install ${{ env.share_components }} submodule
