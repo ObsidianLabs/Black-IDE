@@ -22,8 +22,8 @@ jobs:
   release:
     runs-on: ubuntu-18.04
     steps:
-      - name: POC Branch Detected
-        if: endsWith(github.ref, 'poc')
+      - name: Development Branch Detected
+        if: endsWith(github.ref, 'release')
         run: |
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: master
+          ref: release
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: master
+          ref: release
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -55,14 +55,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/premium-editor
-          ref: master
+          ref: release
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.project_name }}
         uses: actions/checkout@v2
         with:
-          ref: poc
+          ref: release
           path: ./studio
 
       - name: Install ${{ env.share_components }} submodule
