@@ -44,7 +44,9 @@ jobs:
       - name: Get ${{ env.project_name }} version
         id: version
         shell: bash
-        run: echo ::set-output name=VERSION::${GITHUB_REF##*[\/v]}
+        run: |
+          echo ::set-output name=VERSION::${GITHUB_REF##*[\/v]}
+          echo Version: {GITHUB_REF##*[\/v]}
 
     outputs:
       version: ${{ steps.version.outputs.VERSION }}
