@@ -83,14 +83,11 @@ jobs:
       - name: Push changes
         if: ${{ needs.versions.outputs.new_release == 'true' }}
         run: |
-          git checkout develop
-          git merge master
-          git push origin master:master
-          git push origin develop:develop
+          git push origin release:release
 
   # Build and release
   release:
-    needs: [ generate-matrix, versions, bump ]
+    needs: [generate-matrix, versions, bump]
 
     strategy:
       matrix:
@@ -122,7 +119,6 @@ jobs:
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
-
       - name: Checkout ${{ env.own_components }}
         if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
@@ -140,7 +136,6 @@ jobs:
           ref: master
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
-
 
       - name: Checkout Premium Editor
         if: ${{ needs.versions.outputs.rc_release == 'true' }}
@@ -160,7 +155,6 @@ jobs:
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
-
       - name: Checkout ${{ env.project_name }}
         if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
@@ -174,7 +168,6 @@ jobs:
         with:
           ref: master
           path: ./studio
-
 
       - name: Install ${{ env.share_components }} submodule
         working-directory: ./${{ env.share_components }}
