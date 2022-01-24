@@ -8,12 +8,14 @@ const {
   addWebpackPlugin,
 } = require('customize-cra')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin')
 
-function findWebpackPlugin (plugins, pluginName) {
+function findWebpackPlugin(plugins, pluginName) {
   return plugins.find(plugin => plugin.constructor.name === pluginName)
 }
 
-function overrideProcessEnv (value) {
+function overrideProcessEnv(value) {
   return config => {
     const plugin = findWebpackPlugin(config.plugins, 'DefinePlugin')
     const processEnv = plugin.definitions['process.env'] || {}
@@ -25,7 +27,7 @@ function overrideProcessEnv (value) {
   }
 }
 
-function turnOffMangle () {
+function turnOffMangle() {
   return config => {
     config.optimization.minimizer = config.optimization.minimizer.map(
       minimizer => {
@@ -39,7 +41,7 @@ function turnOffMangle () {
   }
 }
 
-function addWasmLoader (options) {
+function addWasmLoader(options) {
   return config => {
     config.resolve.extensions.push('.wasm')
     config.module.rules.forEach(rule => {
@@ -49,6 +51,31 @@ function addWasmLoader (options) {
         }
       })
     })
+    return config
+  }
+}
+
+function customSplitting() {
+  return config => {
+    config.optimization = {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            name(module) {
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              return `vendor.${packageName.replace('@', '')}`;
+            },
+            test: /[\\/]node_modules[\\/]((?!(@obsidians)))[\\/]/,
+            chunks: 'initial',
+          },
+          common: {
+            test: /[\\/]src[\\/]components[\\/]/,
+            chunks: "async",
+          },
+        }
+      }
+    }
     return config
   }
 }
@@ -101,6 +128,7 @@ const overrides = [
   }),
   turnOffMangle(),
   addWasmLoader(),
+  customSplitting()
 ]
 
 if (process.env.CDN) {
@@ -113,7 +141,9 @@ if (process.env.CDN) {
   overrides.push(addWebpackPlugin(
     new MonacoWebpackPlugin({
       languages: ['json', 'javascript', 'typescript', 'css', 'html', 'markdown', 'c', 'cpp', 'shell']
-    })
+    }),
+    new BundleAnalyzerPlugin(),
+    new BundleStatsWebpackPlugin()
   ))
 }
 

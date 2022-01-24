@@ -30,6 +30,12 @@ window.addEventListener('auxclick', (event) => {
   if (event.button === 1) event.preventDefault()
 })
 
+window.__APP_INFO__ = {
+  BUILD_TIME: process.env.BUILD_TIME,
+  BUILD_ID: process.env.BUILD_ID,
+  COMMIT_ID: process.env.COMMIT_ID
+}
+
 window.addEventListener('contextmenu', e => e.preventDefault())
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
