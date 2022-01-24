@@ -8925,11 +8925,6 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.nlark.com/hex-color-regex/download/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha1-TAb8y0YC/iYCs8k9+C1+fb8aio4=
 
-highlight.js@^10.5.0:
-  version "10.7.3"
-  resolved "https://registry.npmmirror.com/highlight.js/download/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
-  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
-
 history@^4.9.0:
   version "4.10.1"
   resolved "https://registry.npmmirror.com/history/download/history-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
@@ -14779,13 +14774,6 @@ react-freeze@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/react-freeze/download/react-freeze-1.0.0.tgz?cache=0&sync_timestamp=1635752493672&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Freact-freeze%2Fdownload%2Freact-freeze-1.0.0.tgz#b21c65fe1783743007c8c9a2952b1c8879a77354"
   integrity sha1-shxl/heDdDAHyMmilSsciHmnc1Q=
-
-react-highlight@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.nlark.com/react-highlight/download/react-highlight-0.13.0.tgz#3331d47fe45a3db0cdcca2e5b479ed81b117ac20"
-  integrity sha1-MzHUf+RaPbDNzKLltHntgbEXrCA=
-  dependencies:
-    highlight.js "^10.5.0"
 
 react-input-autosize@^3.0.0:
   version "3.0.0"
