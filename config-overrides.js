@@ -1,88 +1,92 @@
-const os = require('os')
-const path = require('path')
-const TerserPlugin = require('terser-webpack-plugin')
+const os = require('os');
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 const {
   override,
   addWebpackExternals,
   addWebpackAlias,
   addWebpackPlugin,
-} = require('customize-cra')
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin')
+} = require('customize-cra');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
 function findWebpackPlugin(plugins, pluginName) {
-  return plugins.find(plugin => plugin.constructor.name === pluginName)
+  return plugins.find((plugin) => plugin.constructor.name === pluginName);
 }
 
 function overrideProcessEnv(value) {
-  return config => {
-    const plugin = findWebpackPlugin(config.plugins, 'DefinePlugin')
-    const processEnv = plugin.definitions['process.env'] || {}
+  return (config) => {
+    const plugin = findWebpackPlugin(config.plugins, 'DefinePlugin');
+    const processEnv = plugin.definitions['process.env'] || {};
     plugin.definitions['process.env'] = {
       ...processEnv,
-      ...value
-    }
-    return config
-  }
+      ...value,
+    };
+    return config;
+  };
 }
 
 function turnOffMangle() {
-  return config => {
+  return (config) => {
     config.optimization.minimizer = config.optimization.minimizer.map(
-      minimizer => {
+      (minimizer) => {
         if (minimizer instanceof TerserPlugin) {
-          minimizer.options.terserOptions.mangle = false
+          minimizer.options.terserOptions.mangle = false;
         }
-        return minimizer
+        return minimizer;
       }
-    )
-    return config
-  }
+    );
+    return config;
+  };
 }
 
 function addWasmLoader(options) {
-  return config => {
-    config.resolve.extensions.push('.wasm')
-    config.module.rules.forEach(rule => {
-      (rule.oneOf || []).forEach(oneOf => {
+  return (config) => {
+    config.resolve.extensions.push('.wasm');
+    config.module.rules.forEach((rule) => {
+      (rule.oneOf || []).forEach((oneOf) => {
         if (oneOf.loader && oneOf.loader.indexOf('file-loader') >= 0) {
           oneOf.exclude.push(/\.wasm$/);
         }
-      })
-    })
-    return config
-  }
+      });
+    });
+    return config;
+  };
 }
 
 function customSplitting() {
-  return config => {
+  return (config) => {
     config.optimization = {
       splitChunks: {
         chunks: 'all',
         cacheGroups: {
           vendor: {
             name(module) {
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+              const packageName = module.context.match(
+                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+              )[1];
               return `vendor.${packageName.replace('@', '')}`;
             },
-            test: /[\\/]node_modules[\\/]((?!(@obsidians)))[\\/]/,
-            chunks: 'initial',
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'all',
           },
           common: {
             test: /[\\/]src[\\/]components[\\/]/,
-            chunks: "async",
+            chunks: 'async',
           },
-        }
-      }
-    }
-    return config
-  }
+        },
+      },
+    };
+    return config;
+  };
 }
 
 const overrides = [
   addWebpackAlias({
     crypto: 'crypto-browserify',
+    'react-highlight': path.resolve(__dirname, 'node_modules/react-highlight'),
     '@solidity-parser/parser': '@solidity-parser/parser/dist/index.cjs.js',
     '@': path.resolve(__dirname, 'src/lib'),
     '@obsidians/welcome': `@obsidians/${process.env.BUILD}-welcome`,
@@ -94,7 +98,10 @@ const overrides = [
     '@obsidians/explorer': `@obsidians/${process.env.BUILD}-explorer`,
     '@obsidians/network': `@obsidians/${process.env.BUILD}-network`,
     '@obsidians/node': `@obsidians/${process.env.BUILD}-node`,
-    '@obsidians/premium-editor': path.resolve(__dirname, process.env.PREMIUM_EDITOR || 'empty.js'),
+    '@obsidians/premium-editor': path.resolve(
+      __dirname,
+      process.env.PREMIUM_EDITOR || 'empty.js'
+    ),
   }),
   overrideProcessEnv({
     CDN: JSON.stringify(!!process.env.CDN),
@@ -105,7 +112,9 @@ const overrides = [
     LOGIN_PROVIDERS: JSON.stringify(process.env.LOGIN_PROVIDERS),
     PROJECT_WEB_URL: JSON.stringify('https://eth.ide.black'),
     PROJECT_DESKTOP_URL: JSON.stringify('https://app.obsidians.io/eth'),
-    PROJECT_GITHUB_REPO: JSON.stringify('https://github.com/ObsidianLabs/EthereumStudio'),
+    PROJECT_GITHUB_REPO: JSON.stringify(
+      'https://github.com/ObsidianLabs/EthereumStudio'
+    ),
     OS_IS_LINUX: JSON.stringify(os.type() === 'Linux'),
     OS_IS_WINDOWS: JSON.stringify(os.type() === 'Windows_NT'),
     OS_IS_MAC: JSON.stringify(os.type() === 'Darwin'),
@@ -128,23 +137,37 @@ const overrides = [
   }),
   turnOffMangle(),
   addWasmLoader(),
-  customSplitting()
-]
+  customSplitting(),
+];
 
 if (process.env.CDN) {
-  overrides.unshift(addWebpackExternals({
-    react: 'React',
-    'react-dom': 'ReactDOM',
-    'monaco-editor': 'monaco'
-  }))
+  overrides.unshift(
+    addWebpackExternals({
+      react: 'React',
+      'react-dom': 'ReactDOM',
+      'monaco-editor': 'monaco',
+    })
+  );
 } else {
-  overrides.push(addWebpackPlugin(
-    new MonacoWebpackPlugin({
-      languages: ['json', 'javascript', 'typescript', 'css', 'html', 'markdown', 'c', 'cpp', 'shell']
-    }),
-    new BundleAnalyzerPlugin(),
-    new BundleStatsWebpackPlugin()
-  ))
+  overrides.push(
+    addWebpackPlugin(
+      new MonacoWebpackPlugin({
+        languages: [
+          'json',
+          'javascript',
+          'typescript',
+          'css',
+          'html',
+          'markdown',
+          'c',
+          'cpp',
+          'shell',
+        ],
+      }),
+      new BundleAnalyzerPlugin(),
+      new BundleStatsWebpackPlugin()
+    )
+  );
 }
 
 module.exports = {
@@ -155,8 +178,8 @@ module.exports = {
       config.headers = {
         'Cross-Origin-Opener-Policy': 'same-origin',
         'Cross-Origin-Embedder-Policy': 'require-corp',
-      }
-      return config
-    }
+      };
+      return config;
+    };
   },
-}
+};
