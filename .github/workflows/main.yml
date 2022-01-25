@@ -44,45 +44,26 @@ jobs:
       - name: Get ${{ env.project_name }} version
         id: version
         shell: bash
-        run: echo ::set-output name=VERSION::${GITHUB_REF##*[\/v]}
+        run: |
+          echo ::set-output name=BRANCH::${GITHUB_REF#refs/heads/}
+          echo ::set-output name=VERSION::${GITHUB_REF##*[\/v]}
+          if [[ ${{ contains(steps.version.outputs.BRANCH, 'rc') }} ]]; then
+            echo ::set-output name=BRANCH::release
+          fi
+          echo curren version: ${GITHUB_REF##*[\/v]}
+          echo curren branch: ${GITHUB_REF#refs/heads/}
 
     outputs:
+      branch: ${{ steps.version.outputs.BRANCH }}
       version: ${{ steps.version.outputs.VERSION }}
       v_version: v${{ steps.version.outputs.VERSION }}
       component_version: v${{ steps.version.outputs.VERSION }}-${{ env.project_build }}
-      new_release: ${{ steps.version.outputs.VERSION != 'master' && steps.version.outputs.VERSION != 'develop' }}
-      rc_release: ${{ contains(steps.version.outputs.VERSION, 'rc') }}
-
-  # Update package.json version to match release version
-  bump:
-    needs: versions
-
-    runs-on: ubuntu-18.04
-
-    steps:
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: master
-          fetch-depth: 0
-
-      - name: Bump version
-        if: ${{ needs.versions.outputs.new_release == 'true' }}
-        run: |
-          yarn config set version-git-tag false
-          yarn version --new-version ${{ needs.versions.outputs.version }}
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git diff-index --quiet HEAD || git commit -am '${{ needs.versions.outputs.v_version }}'
+      new_release: ${{ steps.version.outputs.BRANCH != 'master' && steps.version.outputs.BRANCH != 'develop' }}
+      rc_release: ${{ contains(steps.version.outputs.BRANCH, 'rc') }}
 
   # Build and release
   release:
-    needs: [generate-matrix, versions, bump]
+    needs: [generate-matrix, versions]
 
     strategy:
       matrix:
@@ -97,71 +78,33 @@ jobs:
           node-version: 16
 
       - name: Checkout ${{ env.share_components }}
-        if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: release
-          path: ./${{ env.share_components }}
-          token: ${{ secrets.obsidians_token }}
-
-      - name: Checkout ${{ env.share_components }}
-        if: ${{ needs.versions.outputs.rc_release != 'true' }}
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: release
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.own_components }}
-        if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: release
-          path: ./${{ env.own_components }}
-          token: ${{ secrets.obsidians_token }}
-
-      - name: Checkout ${{ env.own_components }}
-        if: ${{ needs.versions.outputs.rc_release != 'true' }}
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: release
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout Premium Editor
-        if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/premium-editor
-          ref: release
-          path: ./premium-editor
-          token: ${{ secrets.obsidians_token }}
-
-      - name: Checkout Premium Editor
-        if: ${{ needs.versions.outputs.rc_release != 'true' }}
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.owner }}/premium-editor
-          ref: release
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.project_name }}
-        if: ${{ needs.versions.outputs.rc_release == 'true' }}
         uses: actions/checkout@v2
         with:
-          ref: release
-          path: ./studio
-
-      - name: Checkout ${{ env.project_name }}
-        if: ${{ needs.versions.outputs.rc_release != 'true' }}
-        uses: actions/checkout@v2
-        with:
-          ref: release
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./studio
 
       - name: Install ${{ env.share_components }} submodule
