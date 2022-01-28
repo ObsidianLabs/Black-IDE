@@ -32,9 +32,9 @@ jobs:
         run: |
           echo ::set-output name=BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=VERSION::${GITHUB_REF##*/}
-          if [[ ${{ contains(steps.version.outputs.BRANCH, 'rc') }} ]]; then
-            echo ::set-output name=BRANCH::release
-          fi
+          # if [[ ${{ contains(steps.version.outputs.BRANCH, 'rc') }} ]]; then
+          #   echo ::set-output name=BRANCH::release
+          # fi
           echo curren version: ${GITHUB_REF##*[\/v]}
           echo curren branch: ${GITHUB_REF#refs/heads/}
 
@@ -51,14 +51,14 @@ jobs:
     needs: versions
     runs-on: ubuntu-18.04
     steps:
-      - name: Development Branch Detected
-        if: ${{ needs.versions.outouts.branch != 'master'}}
-        run: |
-          echo "Deploying ${{ github.ref }} branch"
-          echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
-          echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
-          echo "project_build_script=yarn && REACT_APP_ENV=test yarn build:web" >> $GITHUB_ENV
-          
+      # - name: Development Branch Detected
+      #   if: ${{ needs.versions.outouts.branch != 'master'}}
+      #   run: |
+      #     echo "Deploying ${{ github.ref }} branch"
+      #     echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
+      #     echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
+      #     echo "project_build_script=yarn && REACT_APP_ENV=test yarn build:web" >> $GITHUB_ENV
+
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
