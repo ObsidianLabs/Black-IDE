@@ -13,7 +13,7 @@ import '@/menu'
 
 import Routes from './components/Routes'
 import icon from './components/icon.png'
-const Header = lazy(() => import('./components/Header' /* webpackChunkName: "components" */))
+const Header = lazy(() => import('./components/Header' /* webpackChunkName: "header" */))
 
 export default class ReduxApp extends Component {
   state = {
@@ -54,7 +54,6 @@ export default class ReduxApp extends Component {
         </Suspense>
       )
     }
-
     return (
       <Provider store={redux.store}>
         <div

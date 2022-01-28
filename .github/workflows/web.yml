@@ -1,6 +1,9 @@
 name: Build Web
 
 on:
+  release:
+    types: [published]
+
   workflow_dispatch:
 
 env:
@@ -18,18 +21,44 @@ env:
   dns_path: https://eth.ide.black/
 
 jobs:
+  # Extract version
+  versions:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Get ${{ env.project_name }} version
+        id: version
+        shell: bash
+        run: |
+          echo ::set-output name=BRANCH::${GITHUB_REF#refs/heads/}
+          echo ::set-output name=VERSION::${GITHUB_REF##*/}
+          if [[ ${{ contains(steps.version.outputs.BRANCH, 'rc') }} ]]; then
+            echo ::set-output name=BRANCH::release
+          fi
+          echo curren version: ${GITHUB_REF##*[\/v]}
+          echo curren branch: ${GITHUB_REF#refs/heads/}
+
+    outputs:
+      branch: ${{ steps.version.outputs.BRANCH}}
+      version: ${{ steps.version.outputs.VERSION }}
+      v_version: v${{ steps.version.outputs.VERSION }}
+      component_version: v${{ steps.version.outputs.VERSION }}-${{ env.project_build }}
+      new_release: ${{ steps.version.outputs.BRANCH != 'master' && steps.version.outputs.BRANCH != 'develop' }}
+      rc_release: ${{ contains(steps.version.outputs.BRANCH, 'rc') }}
+
   # Build and release
   release:
+    needs: versions
     runs-on: ubuntu-18.04
     steps:
       - name: Development Branch Detected
-        if: endsWith(github.ref, 'develop')
+        if: ${{ needs.versions.outouts.branch != 'master'}}
         run: |
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
           echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
-          echo "project_build_script= yarn && PUBLIC_URL=/ CDN=true  NODE_ENV=test yarn build:react" >> $GITHUB_ENV
-
+          echo "project_build_script=yarn && REACT_APP_ENV=test yarn build:web" >> $GITHUB_ENV
+          
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
@@ -39,7 +68,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
-          ref: master
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -47,7 +76,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
-          ref: master
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
@@ -55,14 +84,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.owner }}/premium-editor
-          ref: master
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./premium-editor
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.project_name }}
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: ${{ needs.versions.outputs.branch }}
           path: ./studio
 
       - name: Install ${{ env.share_components }} submodule
@@ -114,6 +143,9 @@ jobs:
           react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
           premium_editor: ${{ env.premium_editor }}
           github_token: ${{ github.token }}
+          build_id: ${{ github.run_id }}
+          build_time: ${{ github.updated_at }}
+          commit_id: ${{ github.sha }}
 
       - name: Create a placeholder for COS
         run: echo cos > ./.placeholder
