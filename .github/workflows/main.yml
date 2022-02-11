@@ -50,8 +50,8 @@ jobs:
           if [[ ${{ contains(steps.version.outputs.BRANCH, 'rc') }} ]]; then
             echo ::set-output name=BRANCH::release
           fi
-          if [[ ${{ steps.version.outputs.BRANCH =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-              echo ::set-output name=BRANCH::master
+          if [[ ${{ steps.version.outputs.BRANCH =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ }} ]]; then
+            echo ::set-output name=BRANCH::master
           fi
           echo curren version: ${GITHUB_REF##*[\/v]}
           echo curren branch: ${GITHUB_REF#refs/heads/}
