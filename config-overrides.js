@@ -135,7 +135,7 @@ const overrides = [
     ENABLE_AUTH: true,
     RENDER_LOGO: JSON.stringify(process.env.RENDER_LOGO || false),
     BUILD_ID: process.env.BUILD_ID,
-    COMMIT_ID: process.env.COMMIT_ID,
+    COMMIT_ID: JSON.stringify(process.env.COMMIT_ID),
     BUILD_TIME: process.env.BUILD_TIME || new Date().getTime(),
   }),
   turnOffMangle(),
