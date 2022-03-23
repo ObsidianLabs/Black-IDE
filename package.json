@@ -125,7 +125,8 @@
     "node-abi": "3.5.0",
     "sass-loader": "10.2.0",
     "react-highlight": "^0.13.0",
-    "prettier": "2.5.0"
+    "prettier": "2.5.0",
+    "react-error-overlay": "6.0.9"
   },
   "workspaces": [
     "../electron-components/packages/*",
