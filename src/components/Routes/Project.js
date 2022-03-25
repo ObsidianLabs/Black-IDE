@@ -13,6 +13,9 @@ class ProjectWithProps extends PureComponent {
 
   render() {
     const { projects, uiState, match } = this.props;
+    if (!match?.params) {
+      return null;
+    }
     const { username, project } = match?.params;
     const selected = projects.get('selected')?.toJS() || {};
 
