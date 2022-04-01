@@ -1,5 +1,5 @@
 {
-  "name": "ethereum-studio",
+  "name": "black-ide",
   "description": "Graphic IDE for Ethereum smart contract development",
   "version": "0.14.6",
   "author": {
@@ -147,8 +147,8 @@
     ]
   },
   "build": {
-    "productName": "Ethereum Studio",
-    "artifactName": "EthereumStudio-${version}.${ext}",
+    "productName": "Black IDE",
+    "artifactName": "BlackIDE-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
