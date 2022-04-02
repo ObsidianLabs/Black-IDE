@@ -101,7 +101,7 @@
     "monaco-editor-webpack-plugin": "^1.9.0",
     "native-ext-loader": "^2.3.0",
     "node-fetch": "^2.6.1",
-    "node-sass": "^6.0.0",
+    "node-sass": "npm:sass",
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
@@ -123,6 +123,7 @@
   "resolutions": {
     "@solidity-parser/parser": "^0.12.1",
     "node-abi": "3.5.0",
+    "node-sass": "npm:sass",
     "sass-loader": "10.2.0",
     "react-highlight": "^0.13.0",
     "prettier": "2.5.0",
