@@ -98,6 +98,7 @@ const overrides = [
     '@obsidians/explorer': `@obsidians/${process.env.BUILD}-explorer`,
     '@obsidians/network': `@obsidians/${process.env.BUILD}-network`,
     '@obsidians/node': `@obsidians/${process.env.BUILD}-node`,
+    '@obsidians/sdk': `@obsidians/${process.env.BUILD}-sdk`,
     '@obsidians/premium-editor': path.resolve(
       __dirname,
       process.env.PREMIUM_EDITOR || 'empty.js'
@@ -113,7 +114,7 @@ const overrides = [
     PROJECT_WEB_URL: JSON.stringify('https://eth.ide.black'),
     PROJECT_DESKTOP_URL: JSON.stringify('https://app.obsidians.io/eth'),
     PROJECT_GITHUB_REPO: JSON.stringify(
-      'https://github.com/ObsidianLabs/EthereumStudio'
+      'https://github.com/ObsidianLabs/BlackIDE'
     ),
     OS_IS_LINUX: JSON.stringify(os.type() === 'Linux'),
     OS_IS_WINDOWS: JSON.stringify(os.type() === 'Windows_NT'),
@@ -136,7 +137,7 @@ const overrides = [
     RENDER_LOGO: JSON.stringify(process.env.RENDER_LOGO || false),
     BUILD_ID: process.env.BUILD_ID,
     COMMIT_ID: JSON.stringify(process.env.COMMIT_ID),
-    BUILD_TIME: process.env.BUILD_TIME || new Date().getTime(),
+    BUILD_TIME: JSON.stringify(process.env.BUILD_TIME),
   }),
   turnOffMangle(),
   addWasmLoader(),
