@@ -1,9 +1,6 @@
 name: Build Web
 
 on:
-  release:
-    types: [published]
-
   workflow_dispatch:
 
 env:
@@ -12,7 +9,7 @@ env:
   share_components: electron-components
   project_build: eth
   project_project: eth
-  project_name: Ethereum Studio
+  project_name: Black IDE
   project_build_script: yarn && PUBLIC_URL=/ CDN=true yarn build:react
   enable_auth: true
   premium_editor: ../premium-editor

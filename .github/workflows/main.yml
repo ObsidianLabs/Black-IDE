@@ -12,7 +12,7 @@ env:
   share_components: electron-components
   project_build: eth
   project_project: eth
-  project_name: Ethereum Studio
+  project_name: Black IDE
   project_build_script: yarn && yarn dist
   os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
   enable_auth: false
