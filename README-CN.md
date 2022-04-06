@@ -1,6 +1,6 @@
 # Black IDE
 
-[Click here for English version](https://github.com/ObsidianLabs/BlackIDE/blob/master/README-EN.md)
+[Click here for English version](https://github.com/ObsidianLabs/Black-IDE/blob/master/README-EN.md)
 
 Black IDE 是一个帮助开发者快速开发 [Ethereum](https://Ethereumnetwork.org/) 智能合约的集成化开发环境。Black IDE 现已提供运行于 macOS、Windows 和 Linux 的桌面版，以及运行于现代浏览器环境中的 [Black IDE Web](https://eth.ide.black) 版。
 
