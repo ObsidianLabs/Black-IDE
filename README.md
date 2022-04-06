@@ -1,6 +1,6 @@
 # Black IDE
 
-[点击查看简体中文版](https://github.com/ObsidianLabs/BlackIDE/blob/master/README-CN.md)
+[点击查看简体中文版](https://github.com/ObsidianLabs/Black-IDE/blob/master/README-CN.md)
 
 Black IDE is an integrated development environment (IDE), making developing [Ethereum](https://ethereum.org/) smart contracts faster and easier. Black IDE currently offers a standalone desktop application running on macOS, Windows and Linux, as well as [Black IDE Web](https://eth.ide.black) that runs in modern web browsers.
 
