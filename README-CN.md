@@ -12,13 +12,13 @@ Black IDE 是一个帮助开发者快速开发 [Ethereum](https://Ethereumnetwor
 
 ### Black IDE 桌面版
 
-Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/BlackIDE/releases) 进行下载。目前 Black IDE 桌面版支持 macOS、Linux 和 Windows 系统，请根据系统下载对应的版本 （macOS 下载 `.dmg` 或者 `.zip`，Linux 下载 `.AppImage`，Windows 下载 `.exe`）。
+Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/Black-IDE/releases) 进行下载。目前 Black IDE 桌面版支持 macOS、Linux 和 Windows 系统，请根据系统下载对应的版本 （macOS 下载 `.dmg` 或者 `.zip`，Linux 下载 `.AppImage`，Windows 下载 `.exe`）。
 
-- **macOS**: 双击打开 `BlackIDE-x.x.x.dmg` 并将 `Black IDE` 拖动到应用文件夹内；
+- **macOS**: 双击打开 `Black-IDE-x.x.x.dmg` 并将 `Black IDE` 拖动到应用文件夹内；
   - 第一次运行 Black IDE 时，可能会收到系统 _”无法打开 Black IDE，因为 Apple 无法检查其是否包含恶意软件“_ 的提示。此时请打开 _系统偏好设置_ ，前往 _安全性与隐私_。点按 _通用_ 面板中 _仍要打开_ 按钮以允许 Black IDE 运行；
-- **Linux**: 双击打开 `BlackIDE-x.x.x.AppImage`；
-  - 如果双击打开无效，右键点击 `BlackIDE-x.x.x.AppImage`，选择 _Properties_ => _Permissions_ => _Execute_，将 _Allow executing file as program_ 选项打勾。关闭属性设置窗口并双击打开应用（不同的 Linux 发行版可能会有不同的安装方式）；
-- **Windows**: 双击打开 `BlackIDE-x.x.x.exe`。
+- **Linux**: 双击打开 `Black-IDE-x.x.x.AppImage`；
+  - 如果双击打开无效，右键点击 `Black-IDE-x.x.x.AppImage`，选择 _Properties_ => _Permissions_ => _Execute_，将 _Allow executing file as program_ 选项打勾。关闭属性设置窗口并双击打开应用（不同的 Linux 发行版可能会有不同的安装方式）；
+- **Windows**: 双击打开 `Black-IDE-x.x.x.exe`。
 
 ### Black IDE Web 版
 
