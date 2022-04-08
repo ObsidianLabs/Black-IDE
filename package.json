@@ -149,7 +149,7 @@
   },
   "build": {
     "productName": "Black IDE",
-    "artifactName": "BlackIDE-${version}.${ext}",
+    "artifactName": "Black-IDE-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
