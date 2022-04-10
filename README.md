@@ -12,13 +12,13 @@ Black IDE is an integrated development environment (IDE), making developing [Eth
 
 ### Installing Black IDE Desktop
 
-Download Black IDE installation package in [Github Release](https://github.com/ObsidianLabs/BlackIDE/releases) according to the computer system type ( `.dmg` for macOS, `.AppImage` for Linux, `.exe` for Windows ).
+Download Black IDE installation package in [Github Release](https://github.com/ObsidianLabs/Black-IDE/releases) according to the computer system type ( `.dmg` for macOS, `.AppImage` for Linux, `.exe` for Windows ).
 
-- **macOS**: Double click to open `BlackIDE-x.x.x.dmg` and drag `Black IDE` to the application folder.
+- **macOS**: Double click to open `Black-IDE-x.x.x.dmg` and drag `Black IDE` to the application folder.
   - In case of system prompts _"“Black IDE” can’t be opened because Apple cannot check it for malicious software."_, Open _System Perference_, Go to _Security and Privacy_, Click _Open Anyway_ in _General_ section to allow Black IDE to run.
-- **Linux**: Double-click to open `BlackIDE-x.x.x.AppImage`
+- **Linux**: Double-click to open `Black-IDE-x.x.x.AppImage`
   - If application doesn't respond,double click to select _Properties_ => _Permissions_ => _Execute_, and tick the _Allow executing file as program_ option. Close the properties window and double-click to open the application (different Linux distributions may have different installation methods).
-- **Windows**: Double click to run the `BlackIDE-x.x.x.exe`.
+- **Windows**: Double click to run the `Black-IDE-x.x.x.exe`.
 
 ### Post-installation steps for Linux
 

@@ -114,7 +114,7 @@ const overrides = [
     PROJECT_WEB_URL: JSON.stringify('https://eth.ide.black'),
     PROJECT_DESKTOP_URL: JSON.stringify('https://app.obsidians.io/eth'),
     PROJECT_GITHUB_REPO: JSON.stringify(
-      'https://github.com/ObsidianLabs/BlackIDE'
+      'https://github.com/ObsidianLabs/Black-IDE'
     ),
     OS_IS_LINUX: JSON.stringify(os.type() === 'Linux'),
     OS_IS_WINDOWS: JSON.stringify(os.type() === 'Windows_NT'),
