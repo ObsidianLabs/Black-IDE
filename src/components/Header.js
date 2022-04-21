@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import { connect } from '@obsidians/redux'
+import redux, { connect } from '@obsidians/redux'
 import { IpcChannel } from '@obsidians/ipc'
 
 import headerActions, { Header, NavGuard, AuthModal } from '@obsidians/header'
