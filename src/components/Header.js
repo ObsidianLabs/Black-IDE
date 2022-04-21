@@ -20,16 +20,75 @@ networkManager.addSdk(EthSdk, EthSdk.networks)
 // networkManager.addSdk(BscSdk, BscSdk.networks)
 networkManager.addSdk(EthSdk, EthSdk.customNetworks)
 
+const customNetworksArray = (customNetworks, needSort = true) => {
+  customNetworks = customNetworks.toArray();
+  needSort &&
+    (customNetworks = customNetworks.sort((a, b) => a[0].localeCompare(b[0])));
+  return customNetworks.map(([name, item]) => ({
+    id: name,
+    group: 'others',
+    name,
+    fullName: name,
+    icon: 'fas fa-vial',
+    notification: `Switched to <b>${name}</b> network.`,
+    url: item.toJS()?.url,
+    chainId: item.toJS()?.url.chainId,
+    symbol: 'ETH',
+  }));
+};
+
+const addMyselfSdk = () => {
+  networkManager.addSdk(
+    EthSdk,
+    customNetworksArray(redux.getState()?.customNetworks)
+  );
+};
+
 class HeaderWithRedux extends PureComponent {
   state = {
     interval: null
   }
 
-  componentDidMount () {
+  componentDidMount() {
     actions.history = this.props.history
     headerActions.history = this.props.history
+    addMyselfSdk()
     this.refresh()
     this.navGuard = new NavGuard(this.props.history)
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevCustomNetworks = customNetworksArray(
+      prevProps.customNetworks,
+      false
+    );
+    const nowCustomNetworks = customNetworksArray(
+      redux.getState()?.customNetworks,
+      false
+    );
+    if (
+      prevCustomNetworks.length == nowCustomNetworks.length &&
+      JSON.stringify(prevCustomNetworks) !== JSON.stringify(nowCustomNetworks)
+    ) {
+      const updateCustomNetwork = nowCustomNetworks.slice(-1);
+      let nowCusNetworkName = nowCustomNetworks.map(
+        (item) => item.name + item.url
+      );
+      let prevCustomNetwork = prevCustomNetworks.find((item, index) => {
+        return !nowCusNetworkName.includes(item.name + item.url);
+      });
+      console.log('被更改的===',prevCustomNetwork,' 更改的===',updateCustomNetwork);
+      console.log('===现在的===', nowCustomNetworks);
+      console.log('===原本的===', prevCustomNetworks);
+      networkManager.disposeSdk(prevCustomNetwork);
+      networkManager.addSdk(EthSdk, updateCustomNetwork);
+    } else if (prevCustomNetworks.length < nowCustomNetworks.length) {
+      let addedCustomNetworks = nowCustomNetworks.slice(-1);
+      networkManager.addSdk(EthSdk, addedCustomNetworks);
+    } else if (prevCustomNetworks.length > nowCustomNetworks.length) {
+      // let addedCustomNetworks = nowCustomNetworks.slice(-1)
+      // networkManager.disposeSdk(addedCustomNetworks)
+    }
   }
 
   async refresh() {
@@ -44,7 +103,7 @@ class HeaderWithRedux extends PureComponent {
     }
   }
 
-  async getNetworks () {
+  async getNetworks() {
     try {
       const ipc = new IpcChannel('bsn')
       const projects = await ipc.invoke('projects', { chain: 'eth' })
@@ -72,26 +131,44 @@ class HeaderWithRedux extends PureComponent {
     }
   }
 
-  setNetwork (options) {
+  setNetwork(options) {
     if (!networkManager.network && networkManager.networks.length) {
       networkManager.setNetwork(networkManager.networks[0], options)
     }
   }
 
   groupedNetworks = networksByGroup => {
-    const networkList = []
-    const groups = networksByGroup.toJS()
-    const keys = Object.keys(groups)
+    // const networkList = []
+    // const groups = networksByGroup.toJS()
+    // const keys = Object.keys(groups)
+    // keys.forEach((key, index) => {
+    //   if (key !== 'default') {
+    //     networkList.push({ header: key })
+    //   }
+    //   groups[key].forEach(network => networkList.push(network))
+    //   if (index !== keys.length - 1) {
+    //     networkList.push({ divider: true })
+    //   }
+    // })
+    // return networkList
+
+    let networkList = [];
+    const groups = networksByGroup.toJS();
+    const keys = Object.keys(groups);
     keys.forEach((key, index) => {
       if (key !== 'default') {
-        networkList.push({ header: key })
+        networkList.push({ header: key });
       }
-      groups[key].forEach(network => networkList.push(network))
+      groups[key].forEach((network) => networkList.push(network));
       if (index !== keys.length - 1) {
-        networkList.push({ divider: true })
+        networkList.push({ divider: true });
       }
-    })
-    return networkList
+    });
+    networkList = networkList.reduce((prev, cur) => {
+      (!cur.id || !prev.find((el) => el.id == cur.id)) && prev.push(cur);
+      return prev;
+    }, []);
+    return networkList;
   }
 
   setCreateProject = () => {
@@ -105,20 +182,20 @@ class HeaderWithRedux extends PureComponent {
     return process.env.DEPLOY === 'bsn' && cp
   }
 
-  renderLogo () {
+  renderLogo() {
     if (process.env.REACT_APP_LOGO) {
       return (
         <div className='d-flex align-items-center' style={{ margin: '7px 17px' }}>
-          <img src={require(process.env.REACT_APP_LOGO).default} style={{ background: 'transparent', height: '100%' }}/>
+          <img src={require(process.env.REACT_APP_LOGO).default} style={{ background: 'transparent', height: '100%' }} />
         </div>
       )
     }
     return null
   }
 
-  render () {
+  render() {
     console.debug('[render] HeaderWithRedux')
-    const { uiState, profile, projects, contracts, accounts, network } = this.props
+    const { uiState, profile, projects, contracts, accounts, network, customNetworks } = this.props
 
     const selectedProject = projects.get('selected')?.toJS() || {}
 
@@ -160,4 +237,5 @@ export default connect([
   'contracts',
   'accounts',
   'network',
+  'customNetworks',
 ])(HeaderWithRedux)
