@@ -20,6 +20,7 @@
     "dev:react": "react-app-rewired start",
     "build:react": "react-app-rewired build",
     "build:web": "PUBLIC_URL=/ CDN=true yarn build:react",
+    "build:web-dev": "dotenv -e .env PUBLIC_URL=/ CDN=true yarn build:react",
     "dev:main": "webpack --config webpack.main.config.js && electron ./dev/index.js",
     "build:main": "cross-env NODE_ENV=production webpack --config webpack.main.prod.config.js",
     "prepare:main": "electron-rebuild && electron-builder install-app-deps",
