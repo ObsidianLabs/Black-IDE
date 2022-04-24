@@ -36,16 +36,18 @@ class HeaderWithRedux extends PureComponent {
       this.setState({ interval });
     } else {
       const customeNetworkMap = this.props.customNetworks.toJS();
-      const customeNetworkGroup = Object.keys(customeNetworkMap).map(
-        (name) => ({
+      const customeNetworkGroup = Object.keys(customeNetworkMap)
+        .map((name) => ({
           group: 'others',
           icon: 'fas fa-vial',
           id: name,
           name: name,
+          fullName: name,
           notification: `Switched to <b>${name}</b>.`,
           url: customeNetworkMap[name].url,
-        })
-      );
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
       networkManager.addSdk(EthSdk, customeNetworkGroup);
     }
   }

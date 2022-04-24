@@ -103,6 +103,7 @@
     "native-ext-loader": "^2.3.0",
     "node-fetch": "^2.6.1",
     "node-sass": "npm:sass",
+    "postcss": "8",
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
