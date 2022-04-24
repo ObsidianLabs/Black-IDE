@@ -42,7 +42,7 @@ class HeaderWithRedux extends PureComponent {
           icon: 'fas fa-vial',
           id: name,
           name: name,
-          notification: `Switched to <b>Fantom Testnet</b>.`,
+          notification: `Switched to <b>${name}</b>.`,
           url: customeNetworkMap[name].url,
         })
       );
