@@ -164,9 +164,8 @@ jobs:
         working-directory: ./studio/dist
         run: rm builder-debug.yml
 
-      - name: Upload Assets To  Github
+      - name: Upload Assets To Github
         if: ${{ needs.build-info.outputs.branch == 'master' }}
-      - name: Upload assets
         uses: AButler/upload-release-assets@v2.0
         with:
           files: 'studio/dist/*.(dmg|zip|exe|AppImage|yml)'
