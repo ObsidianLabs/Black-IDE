@@ -131,6 +131,16 @@ export const network = {
   },
 };
 
+export const workspacePath = {
+  default: '',
+  persist: true,
+  actions: {
+    SETTING_WORKSPACE_PATH: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
 // TODO: merge the network Info
 export const networkConnect = {
   default: false,
