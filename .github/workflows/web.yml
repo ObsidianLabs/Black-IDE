@@ -91,11 +91,6 @@ jobs:
           ref: ${{ needs.versions.outputs.branch }}
           path: ./studio
 
-      - name: Replace .env
-        working-directory: ./studio
-        if: ${{ needs.versions.outputs.branch != 'master'}}
-        run: cp .env.development .env
-
       - name: Install ${{ env.share_components }} submodule
         working-directory: ./${{ env.share_components }}
         run: git submodule update --init
