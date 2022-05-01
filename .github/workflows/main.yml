@@ -174,6 +174,16 @@ jobs:
         if: needs.build-info.outputs.new_release != 'true'
         run: echo upload aws s3
 
+      - name: Upload Artifact To AWS S3
+        if: ${{ needs.build-info.outputs.branch != 'master' }}
+        uses: ObsidianLabs/s3-artifacts-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_s3_bucket_name: ${{ secrets.AWS_S3_BUCKET }}
+          aws_region: 'cn-northwest-1'
+          source_dir: './studio/dist/'
+          destination_dir: black-ide-artifacts/${{ github.run_id }}-${{ github.sha }}/
 
   send-notification:
     needs: [build, build-info]
