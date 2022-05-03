@@ -89,7 +89,7 @@ jobs:
         with:
           repository: ${{ env.owner }}/${{ env.share_components }}
           ref: ${{ needs.build-info.outputs.branch }}
-          path: ./${{ env.share_components }}
+          path: ${{ env.share_components }}
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.own_components }}
@@ -97,7 +97,7 @@ jobs:
         with:
           repository: ${{ env.owner }}/${{ env.own_components }}
           ref: ${{ needs.build-info.outputs.branch }}
-          path: ./${{ env.own_components }}
+          path: ${{ env.own_components }}
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout Premium Editor
@@ -105,51 +105,51 @@ jobs:
         with:
           repository: ${{ env.owner }}/premium-editor
           ref: ${{ needs.build-info.outputs.branch }}
-          path: ./premium-editor
+          path: premium-editor
           token: ${{ secrets.obsidians_token }}
 
       - name: Checkout ${{ env.project_name }}
         uses: actions/checkout@v2
         with:
           ref: ${{ needs.build-info.outputs.branch }}
-          path: ./studio
+          path: studio
 
       - name: Extract version
         id: extract_version
         uses: Saionaro/extract-package-version@v1.1.1
         with:
-          path: ./studio
+          path: studio
 
       - name: Install ${{ env.share_components }} submodule
-        working-directory: ./${{ env.share_components }}
+        working-directory: ${{ env.share_components }}
         run: git submodule update --init
 
       - name: Install ${{ env.share_components }} dependencies
-        working-directory: ./${{ env.share_components }}
+        working-directory: ${{ env.share_components }}
         run: yarn
 
       - name: Build ${{ env.share_components }}
-        working-directory: ./${{ env.share_components }}
+        working-directory: ${{ env.share_components }}
         run: yarn build
 
       - name: Install ${{ env.own_components }} submodule
-        working-directory: ./${{ env.own_components }}
+        working-directory: ${{ env.own_components }}
         run: git submodule update --init
 
       - name: Install ${{ env.own_components }} dependencies
-        working-directory: ./${{ env.own_components }}
+        working-directory: ${{ env.own_components }}
         run: yarn
 
       - name: Build ${{ env.own_components }}
-        working-directory: ./${{ env.own_components }}
+        working-directory: ${{ env.own_components }}
         run: yarn build
 
       - name: Install Premium Editor dependencies
-        working-directory: ./premium-editor
+        working-directory: premium-editor
         run: yarn
 
       - name: Build Premium Editor
-        working-directory: ./premium-editor
+        working-directory: premium-editor
         run: yarn build
 
       - name: Build ${{ env.project_name }}-${{ steps.extract_version.outputs.version }}
@@ -159,7 +159,7 @@ jobs:
           project: ${{ env.project_project }}
           project_name: ${{ env.project_name }}
           build_script: ${{ env.project_build_script }}
-          working-directory: ./studio
+          working-directory: studio
           enable_auth: ${{ env.enable_auth }}
           fontawesome_token: ${{ secrets.fontawesome_token }}
           mac_certs: ${{ secrets.certs }}
@@ -182,7 +182,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_s3_bucket_name: ${{ secrets.AWS_S3_BUCKET }}
           aws_region: 'cn-northwest-1'
-          source_dir: './studio/dist/'
+          source_dir: 'studio/dist/'
           destination_dir: black-ide-artifacts/${{ github.run_id }}-${{ github.sha }}/
 
   send-notification:
