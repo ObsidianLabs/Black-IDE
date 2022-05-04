@@ -19,14 +19,15 @@
     "dev:local": "REACT_APP_IPC_SERVER_URL=http://localhost:7001 react-app-rewired start",
     "dev:react": "react-app-rewired start",
     "build:react": "react-app-rewired build",
-    "build:web": "PUBLIC_URL=/ CDN=true yarn build:react",
-    "build:web-dev": "dotenv -e .env PUBLIC_URL=/ CDN=true yarn build:react",
+    "build:web": "dotenv -e .env.production -v PUBLIC_URL=/ -v CDN=true yarn build:react",
+    "build:web-staging": "dotenv -e .env -v PUBLIC_URL=/ -v CDN=true yarn build:react",
     "dev:main": "webpack --config webpack.main.config.js && electron ./dev/index.js",
     "build:main": "cross-env NODE_ENV=production webpack --config webpack.main.prod.config.js",
     "prepare:main": "electron-rebuild && electron-builder install-app-deps",
     "dev": "concurrently \"yarn dev:react\" \"wait-on http://localhost:3000 && yarn dev:main\"",
     "build": "yarn build:react && yarn build:main",
     "dist": "yarn build && electron-builder -c.extraMetadata.main=build/main/index.js",
+    "dist:staging": "cross-env REACT_APP_ENV=development yarn build && electron-builder -c.extraMetadata.main=build/main/index.js",
     "lint": "tslint '{src,test,mocks}/**/*.{ts,tsx}' --project ./tsconfig.json",
     "test": "jest '(\\/test\\/(?!e2e/)).*'",
     "pretest:e2e": "yarn build",
@@ -76,11 +77,12 @@
     "customize-cra": "^1.0.0",
     "default-shell": "^1.0.1",
     "dotenv": "^8.0.0",
+    "dotenv-cli": "^5.1.0",
     "electron": "^16.0.2",
-    "electron-builder": "^22.14.5",
+    "electron-builder": "^23.0.2",
     "electron-is-dev": "^2.0.0",
     "electron-rebuild": "^3.2.5",
-    "electron-updater": "^4.6.1",
+    "electron-updater": "5.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^8.0.3",
@@ -160,6 +162,9 @@
       {
         "provider": "generic",
         "url": "http://www.obsidians.io"
+      },
+      {
+        "provider": "github"
       }
     ],
     "directories": {

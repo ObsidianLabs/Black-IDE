@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - develop
-      - release
-  release:
-    types:
-      - published
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 env:
@@ -21,6 +19,7 @@ env:
   os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
   enable_auth: false
   premium_editor: ../premium-editor
+  GH_TOKEN: ${{ secrets.obsidians_token }}
 
 jobs:
   build-info:
@@ -31,13 +30,13 @@ jobs:
         shell: bash
         run: |
           echo ::set-output name=BRANCH::${GITHUB_REF##*/}
-          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo ::set-output name=VERSION::${GITHUB_REF##*[\/v]}
+          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo ::set-output name=NEW_RELEASE::true
             echo ::set-output name=BRANCH::master
           fi
     outputs:
       branch: ${{ steps.build-info.outputs.BRANCH }}
-      version: ${{ steps.build-info.outputs.VERSION }}
+      new_release: ${{ steps.build-info.outputs.NEW_RELEASE}}
 
   # Generate matrix for the following steps
   generate-matrix:
@@ -69,6 +68,16 @@ jobs:
       version: ${{ steps.extract_version.outputs.version }}
 
     steps:
+      - name: Override Build Script
+        shell: bash
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
+            echo "project_build_script=yarn && yarn dist:staging" >> $GITHUB_ENV
+          fi
+          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "project_build_script=yarn && yarn dist --publish always" >> $GITHUB_ENV
+          fi
+
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
@@ -158,33 +167,17 @@ jobs:
           windows_certs_password: ${{ secrets.certs_password }}
           react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
           premium_editor: ${{ env.premium_editor }}
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.obsidians_token }}
 
-      - name: Clean Up Build Assets
-        working-directory: ./studio/dist
-        run: rm builder-debug.yml
+      - name: Upload AWS S3
+        if: needs.build-info.outputs.new_release != 'true'
+        run: echo upload aws s3
 
-      - name: Upload Assets To Github
-        if: ${{ needs.build-info.outputs.branch == 'master' }}
-        uses: AButler/upload-release-assets@v2.0
-        with:
-          files: 'studio/dist/*.(dmg|zip|exe|AppImage|yml)'
-          repo-token: ${{ github.token }}
-
-      - name: Upload Artifact To AWS S3
-        if: success()
-        uses: ObsidianLabs/s3-artifacts-action@master
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_s3_bucket_name: ${{ secrets.AWS_S3_BUCKET }}
-          aws_region: 'cn-northwest-1'
-          source_dir: './studio/dist/'
-          destination_dir: black-ide-artifacts/${{ github.run_id }}-${{ github.sha }}/
 
   send-notification:
     needs: [build, build-info]
     runs-on: ubuntu-18.04
+    if: success()
     steps:
       - name: Discord Notification
         uses: ObsidianLabs/github-discord-bot@master

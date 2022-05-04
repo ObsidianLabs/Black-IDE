@@ -135,7 +135,7 @@ module.exports = function createMenu () {
   }
 
   // template.push(debug)
-  isDev && template.push(debug)
+  (isDev || process.env.REACT_APP_ENV === 'development') && template.push(debug)
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 }
