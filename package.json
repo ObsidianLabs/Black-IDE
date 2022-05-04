@@ -1,7 +1,7 @@
 {
   "name": "black-ide",
   "description": "Graphic IDE for Ethereum smart contract development",
-  "version": "0.15.2",
+  "version": "0.15.3",
   "author": {
     "name": "Phil Li",
     "email": "phil.li@obsidians.io",
