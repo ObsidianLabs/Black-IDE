@@ -170,12 +170,8 @@ jobs:
           premium_editor: ${{ env.premium_editor }}
           github_token: ${{ secrets.obsidians_token }}
 
-      - name: Upload AWS S3
-        if: needs.build-info.outputs.new_release != 'true'
-        run: echo upload aws s3
-
       - name: Upload Artifact To AWS S3
-        if: ${{ needs.build-info.outputs.branch != 'master' }}
+        if: needs.build-info.outputs.new_release != 'true'
         uses: ObsidianLabs/s3-artifacts-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
