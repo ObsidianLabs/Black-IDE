@@ -5,6 +5,7 @@ import platform from '@obsidians/platform'
 import fileOps from '@obsidians/file-ops'
 
 import './scss/index.scss'
+import './scss/tailwindcss.scss'
 import './i18n'
 
 import * as serviceWorker from './serviceWorker'
