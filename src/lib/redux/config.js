@@ -131,6 +131,16 @@ export const network = {
   },
 };
 
+export const loadNetworkResources = {
+  default: false,
+  persist: false,
+  actions: {
+    LOAD_NETWORK_RESOURCES: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
 export const workspacePath = {
   default: '',
   persist: true,
