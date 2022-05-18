@@ -17,27 +17,26 @@ const oldIpc = require('./ipc');
 
 let win;
 let terminalChannelManager;
+
 app.on('ready', async () => {
   if (!getTheLock) {
     app.quit();
   } else {
-    app.on('ready', async () => {
-      if (process.platform !== 'win32') {
-        process.env.PATH =
-          shellPath.sync() ||
-          [
-            './node_modules/.bin',
-            '/.nodebrew/current/bin',
-            '/usr/local/bin',
-            process.env.PATH,
-          ].join(':');
-      }
+    if (process.platform !== 'win32') {
+      process.env.PATH =
+        shellPath.sync() ||
+        [
+          './node_modules/.bin',
+          '/.nodebrew/current/bin',
+          '/usr/local/bin',
+          process.env.PATH,
+        ].join(':');
+    }
 
-      terminalChannelManager = new TerminalChannelManager();
-      init();
-      ipc.window = createWindow();
-      createMenu();
-    });
+    terminalChannelManager = new TerminalChannelManager();
+    init();
+    ipc.window = createWindow();
+    createMenu();
   }
 });
 
