@@ -1,0 +1,38 @@
+name: Demo
+on:
+  push:
+    branches:
+      - develop
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  owner: ObsidianLabs
+  own_components: eth-components
+  share_components: electron-components
+  project_build: eth
+  project_project: eth
+  project_name: Black IDE
+  project_build_script: yarn && REACT_APP_ENV=development yarn dist
+  os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
+  enable_auth: false
+  premium_editor: ../premium-editor
+  GH_TOKEN: ${{ secrets.obsidians_token }}
+
+  send-notification:
+    needs: [build, build-info]
+    runs-on: ubuntu-18.04
+    if: success()
+    steps:
+      - name: Discord Notification
+        uses: ObsidianLabs/github-discord-bot@master
+        with:
+          discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          branch: ${{ needs.build-info.outputs.branch }}
+          version: ${{ needs.build.outputs.version }}
+          client: 'desktop'
+          commit_id: ${{ github.sha }}
+          runner_id: ${{ github.run_id }}
+          test_server_api_url: ${{ secrets.TEST_SERVER_API_URL }}
+          request_id: ${{ github.event.issue.number }}
