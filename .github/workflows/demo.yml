@@ -19,7 +19,166 @@ env:
   enable_auth: false
   premium_editor: ../premium-editor
   GH_TOKEN: ${{ secrets.obsidians_token }}
+jobs:
+  build-info:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Get ${{ env.project_name }}'s build info
+        id: build-info
+        shell: bash
+        run: |
+          echo ::set-output name=BRANCH::${GITHUB_REF##*/}
+          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo ::set-output name=NEW_RELEASE::true
+            echo ::set-output name=BRANCH::master
+            echo "project_build_script=yarn && yarn dist" >> $GITHUB_ENV
+          fi
+    outputs:
+      branch: ${{ steps.build-info.outputs.BRANCH }}
+      new_release: ${{ steps.build-info.outputs.NEW_RELEASE}}
+      
+  # Generate matrix for the following steps
+  generate-matrix:
+    runs-on: ubuntu-18.04
 
+    steps:
+      - name: Generate os matrix
+        id: set-os-matrix
+        run: echo ::set-output name=os::${{ env.os_matrix }}
+
+      - name: Generate component matrix
+        id: set-component-matrix
+        run: echo ::set-output name=component::[\"${{ env.own_components }}\", \"${{ env.share_components }}\"]
+
+    outputs:
+      os: ${{ steps.set-os-matrix.outputs.os }}
+
+  # Build and release
+  build:
+    needs: [generate-matrix, build-info]
+
+    strategy:
+      matrix:
+        os: ${{ fromJson(needs.generate-matrix.outputs.os) }}
+
+    runs-on: ${{ matrix.os }}
+
+    outputs:
+      version: ${{ steps.extract_version.outputs.version }}
+
+    steps:
+      - name: Override Build Script
+        shell: bash
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
+            echo "project_build_script=yarn && yarn dist:staging" >> $GITHUB_ENV
+          fi
+          if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "project_build_script=yarn && yarn dist --publish always" >> $GITHUB_ENV
+          fi
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Checkout ${{ env.share_components }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.share_components }}
+          ref: ${{ needs.build-info.outputs.branch }}
+          path: ${{ env.share_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.own_components }}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/${{ env.own_components }}
+          ref: ${{ needs.build-info.outputs.branch }}
+          path: ${{ env.own_components }}
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout Premium Editor
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.owner }}/premium-editor
+          ref: ${{ needs.build-info.outputs.branch }}
+          path: premium-editor
+          token: ${{ secrets.obsidians_token }}
+
+      - name: Checkout ${{ env.project_name }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ needs.build-info.outputs.branch }}
+          path: studio
+
+      - name: Extract version
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.1.1
+        with:
+          path: studio
+
+      - name: Install ${{ env.share_components }} submodule
+        working-directory: ${{ env.share_components }}
+        run: git submodule update --init
+
+      - name: Install ${{ env.share_components }} dependencies
+        working-directory: ${{ env.share_components }}
+        run: yarn
+
+      - name: Build ${{ env.share_components }}
+        working-directory: ${{ env.share_components }}
+        run: yarn build
+
+      - name: Install ${{ env.own_components }} submodule
+        working-directory: ${{ env.own_components }}
+        run: git submodule update --init
+
+      - name: Install ${{ env.own_components }} dependencies
+        working-directory: ${{ env.own_components }}
+        run: yarn
+
+      - name: Build ${{ env.own_components }}
+        working-directory: ${{ env.own_components }}
+        run: yarn build
+
+      - name: Install Premium Editor dependencies
+        working-directory: premium-editor
+        run: yarn
+
+      - name: Build Premium Editor
+        working-directory: premium-editor
+        run: yarn build
+
+      - name: Build ${{ env.project_name }}-${{ steps.extract_version.outputs.version }}
+        uses: ObsidianLabs/studio-build-action@master
+        with:
+          build: ${{ env.project_build }}
+          project: ${{ env.project_project }}
+          project_name: ${{ env.project_name }}
+          build_script: ${{ env.project_build_script }}
+          working-directory: studio
+          enable_auth: ${{ env.enable_auth }}
+          fontawesome_token: ${{ secrets.fontawesome_token }}
+          mac_certs: ${{ secrets.certs }}
+          mac_certs_password: ${{ secrets.certs_password }}
+          windows_certs: ${{ secrets.certs }}
+          windows_certs_password: ${{ secrets.certs_password }}
+          react_app_mixpanel_token: ${{ secrets.react_app_mixpanel_token }}
+          premium_editor: ${{ env.premium_editor }}
+          github_token: ${{ secrets.obsidians_token }}
+
+      - name: Upload Artifact To AWS S3
+        if: needs.build-info.outputs.new_release != 'true'
+        uses: ObsidianLabs/s3-artifacts-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_s3_bucket_name: ${{ secrets.AWS_S3_BUCKET }}
+          aws_region: 'cn-northwest-1'
+          source_dir: 'studio/dist/'
+          destination_dir: black-ide-artifacts/${{ github.run_id }}-${{ github.sha }}/
+    
   send-notification:
     needs: [build, build-info]
     runs-on: ubuntu-18.04
