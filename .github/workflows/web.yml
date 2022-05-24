@@ -43,7 +43,7 @@ jobs:
       version: ${{ steps.extract_version.outputs.version }}
     steps:
       - name: Development Branch Detected
-        if: ${{ needs.versions.outputs.branch != 'master'}}
+        if: ${{ needs.build-info.outputs.branch != 'master'}}
         run: |
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
