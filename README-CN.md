@@ -30,7 +30,7 @@ Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/B
 
 ## 功能预览
 
-以下示例以 Black IDE v0.8.0 macOS 桌面版为例，Black IDE 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
+以下示例以 Black IDE v0.18.0 macOS 桌面版为例，Black IDE 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
 
 ### 准备工作
 
@@ -90,7 +90,11 @@ Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/B
   <img src="./screenshots/node_log01.png" width="720px">
 </p>
 
-#### Ethereum 测试网/主网
+#### 网络节点
+
+Black IDE 现已支持多个区块链的主网以及测试网，包含： ETHEREUM， BNB CHAIN， AVALANCHE C-CHAIN， POLYGON， FANTOM， HARMONY， CONFLUX ESPACE， GNOSIS(XDAI)， AURORA(NEAR)， 和 EVMOS。下面以 EVM 为例。
+
+#### EVM 测试网/主网
 
 Black IDE 中已经内置了 Ethereum 四个测试网 [Ropsten](https://github.com/ethereum/ropsten)，[Rinkeby](https://www.rinkeby.io/), [Kovan](https://kovan-testnet.github.io/) 和 [Gorli](https://goerli.net/)以及 Ethereum 主网的连接信息。点击 _Network_ 标签旁的三角箭头，可以直接一键切换希望使用的 Ethereum 网络。
 
@@ -268,7 +272,7 @@ Black IDE 会记录每笔发布到链上的交易。如需查看最近的交易�
 
 #### 网络按钮
 
-Black IDE的底部栏有网络图标，可以直观的看到网络连接状态。网络未连接时，图标置灰。网络连接时，图标亮起。点击网络按钮可选择断开网络连接。
+Black IDE 的底部栏有网络图标，可以直观的看到网络连接状态。网络未连接时，图标置灰。网络连接时，图标亮起。点击网络按钮可选择断开或者重练网络连接。
 
 <p align="center">
   <img src="./screenshots/Disconnected.png" width="720px">
@@ -284,7 +288,7 @@ Black IDE 还提供了直接从底层调用 Ethereum 节点 RPC 接口的功能�
 
 #### 分享功能
 
-Black IDE还提供了项目分享功能，点击桌面版 _Cloud_ 按钮，在Cloud中创建的项目，可以被公开分享。点击项目中的 `README.md` 页面，能看见 _Private_ 按钮，表示此项目现状为私密。
+Black IDE 还提供了项目分享功能，点击桌面版 _Cloud_ 按钮，在 Cloud 中创建的项目，可以被公开分享。点击项目中的 `README.md` 页面，能看见 _Private_ 按钮，表示此项目现状为私密。
 
 <p align="center">
   <img src="./screenshots/Private.png" width="720px">
@@ -302,4 +306,4 @@ Black IDE还提供了项目分享功能，点击桌面版 _Cloud_ 按钮，在Cl
   <img src="./screenshots/Share.png" width="720px">
 </p>
 
-分享功能在桌面和 web 版均可使用。
+分享功能在桌面中的 Cloud 项目和 web 版均可使用。
