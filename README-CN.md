@@ -24,6 +24,10 @@ Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/B
 
 在浏览器中打开 https://eth.ide.black 以访问 Black IDE Web 版。
 
+### Black IDE Hub
+
+在浏览器中打开 https://hub-ide-black.vercel.app/ 以访问 Black IDE Hub。
+
 ## 功能预览
 
 以下示例以 Black IDE v0.8.0 macOS 桌面版为例，Black IDE 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
@@ -77,22 +81,24 @@ Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/B
 创建新的 Ethereum 节点实例时，你需要在密钥管理器已保存的密钥地址中指定一个矿工（Miner）。Miner 将作为本地网络的矿工进行出块。此处我们选择 `miner` 密钥作为我们本地 Ethereum 节点的矿工。当本地节点启动时，会将矿工地址作为创世地址，并赋予创世地址一定数量的代币。
 
 <p align="center">
-  <img src="./screenshots/create_instance.png" width="720px">
+  <img src="./screenshots/create_instance01.png" width="720px">
 </p>
 
 节点实例创建完成后，点击实例的绿色 _Start_ 按钮启动 Ethereum 节点。启动完成后，你可以在下方的日志查看器中检查节点运行日志。
 
 <p align="center">
-  <img src="./screenshots/node_log.png" width="720px">
+  <img src="./screenshots/node_log01.png" width="720px">
 </p>
 
 #### Ethereum 测试网/主网
 
-Black IDE 中已经内置了 Ethereum 三个测试网 [Ropsten](https://github.com/ethereum/ropsten)，[Rinkeby](https://www.rinkeby.io/) 和 [Kovan](https://kovan-testnet.github.io/)，以及 Ethereum 主网的连接信息。点击 _Network_ 标签旁的三角箭头，可以直接一键切换希望使用的 Ethereum 网络。
+Black IDE 中已经内置了 Ethereum 四个测试网 [Ropsten](https://github.com/ethereum/ropsten)，[Rinkeby](https://www.rinkeby.io/), [Kovan](https://kovan-testnet.github.io/) 和 [Gorli](https://goerli.net/)以及 Ethereum 主网的连接信息。点击 _Network_ 标签旁的三角箭头，可以直接一键切换希望使用的 Ethereum 网络。
 
 <p align="center">
-  <img src="./screenshots/network_selector.png" width="720px">
+  <img src="./screenshots/NetworkSelect.png" width="720px">
 </p>
+
+同时还为内置的区块链分别设置了带有此区块链专属标志的主网与测试网，主网图标为彩色，测试网图标为灰色。
 
 #### 自定义网络
 
@@ -105,13 +111,13 @@ Black IDE 支持连接自定义远程网络节点。点击 _Network_ 标签旁�
 点击 _Explorer_ 标签右侧的三角箭头，在下拉菜单中选择希望访问的密钥地址，即可查看对应地址的账户信息了。另外，也可以在区块浏览器的地址栏中输入待查看的密钥地址来查看信息。目前 Black IDE 暂不支持查看本地开发节点的历史交易记录。将网络切换到测试网或主网，区块浏览器中便可以查看历史交易记录了。
 
 <p align="center">
-  <img src="./screenshots/explorer.png" width="720px">
+  <img src="./screenshots/explorer01.png" width="720px">
 </p>
 
 当连接主网查询信息时，区块浏览器可以显示地址下已被 [Trust Wallet](https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/tokenlist.json) 收录的的 ERC-20 代币信息。
 
 <p align="center">
-  <img src="./screenshots/erc_20.png" width="720px">
+  <img src="./screenshots/transfer01.png" width="720px">
 </p>
 
 Black IDE 区块浏览器在地址栏右侧集成了常用工具以方便用户使用，可以单击按钮调用相应工具：
@@ -119,7 +125,7 @@ Black IDE 区块浏览器在地址栏右侧集成了常用工具以方便用户�
 - 点击 _Transfer_ 按钮以进行快速转账，该转账功能支持使用 ETH 或当前地址拥有的 ERC-20 代币进行交易。在转账弹窗中选择需要转账代币，填写参数后点击 _Sign and Push_ 以执行交易。每笔转账交易都会被存储在[历史交易记录](#历史交易记录)中，以便之后再次查看。这里，我们使用转账功能向 `keypair01` 转账 10,000 ETH 代币。
 
 <p align="center">
-  <img src="./screenshots/transfer.png" width="720px">
+  <img src="./screenshots/transfer01.png" width="720px">
 </p>
 
 - 当连接测试网时，点击 _Faucet_ 按钮，Black IDE 会打开申请测试代币的网站，以供开发测试使用。测试网上所申请的代币均为测试代币，是没有实际价值的。
@@ -148,19 +154,19 @@ Black IDE 支持使用 [Truffle](https://www.trufflesuite.com/truffle), [Hardhat
 项目创建完成后，主页面将切换至项目编辑器。项目编辑器由几个部分组成，包括了左侧的文件浏览器，文件浏览器上方的工具栏，右侧上半部分的代码编辑器以及右侧下半部分的日志查看器等多个开发常用模块。
 
 <p align="center">
-  <img src="./screenshots/editor.png" width="720px">
+  <img src="./screenshots/editor01.png" width="720px">
 </p>
 
 点击工具栏中右侧的 _Project Settings_（齿轮形状）图标，打开项目设置页。在这里可以查看和修改项目的基本配置，编译器配置以及 Linter 配置等信息。
 
 <p align="center">
-  <img src="./screenshots/project_setting.png" width="720px">
+  <img src="./screenshots/project_setting01.png" width="720px">
 </p>
 
 Black IDE 的项目编辑器内置了 Linter，可以在代码编辑过程中自动检查代码并提示项目代码中的警告和错误。项目编辑器会在有警告的代码行前标注黄色的惊叹号，在错误的代码行前标注红色的叉作为提示。
 
 <p align="center">
-  <img src="./screenshots/linter.png" width="720px">
+  <img src="./screenshots/linter01.png" width="720px">
 </p>
 
 #### 编译智能合约
@@ -168,7 +174,7 @@ Black IDE 的项目编辑器内置了 Linter，可以在代码编辑过程中自
 点击工具栏的 _Build_ 按钮（锤子形状），Black IDE 将进行项目的编译，你可以通过下方的日志查看器来查看编译结果。编译后将在项目目录下的 `build/contracts` 文件夹中查看到编译完成的 `*.json` 文件，这些编译输出文件的数据格式可参阅 [Solc 文档](https://docs.soliditylang.org/en/latest/using-the-compiler.html#output-description)。
 
 <p align="center">
-  <img src="./screenshots/compile.png" width="720px">
+  <img src="./screenshots/compile01.png" width="720px">
 </p>
 
 另外也可以通过右键点击一个 `*.sol` 文件，在菜单中选择 _Compile_，单独编译选中的合约文件。
@@ -207,7 +213,7 @@ Black IDE 的项目编辑器内置了 Linter，可以在代码编辑过程中自
 - 右边栏用于进行合约的事件查询，点击蓝紫色下拉框，选择希望查询该合约的事件。
 
 <p align="center">
-  <img src="./screenshots/contract.png" width="720px">
+  <img src="./screenshots/contract01.png" width="720px">
 </p>
 
 Black IDE 在部署合约后将自动保存合约 ABI，并在读取合约时候通过 ABI 中的数据，生成上面的写入方法、数据读取、事件查询，和它们各自的参数表单。更多 ABI 的使用方法可以参考 [ABI Storage](#abi-storage)。
@@ -223,19 +229,19 @@ Black IDE 在部署合约后将自动保存合约 ABI，并在读取合约时候
 完成后，点击上方的方法名称旁的 _Execute_ 按钮（三角形状）执行交易。稍后弹窗会提示交易成功及交易费用信息。
 
 <p align="center">
-  <img src="./screenshots/transfer_call.png" width="720px">
+  <img src="./screenshots/transfer_call01.png" width="720px">
 </p>
 
 接下来，我们来验证一下上笔交易的结果。在合约读取窗口中选择 _balanceOf_ 数据栏，在 Parameters 下 account 下拉菜单中选择 `keypair02` 地址，最后点击上方的数据名称旁的 _Execute_ 按钮（三角形状）。结果会显示在下方 Result 栏目中，可以看到查询到的值为 100。这个结果与我们上笔交易中向 `keypair02` 转账的 amount 数量一致，这验证了我们之前交易的结果。
 
 <p align="center">
-  <img src="./screenshots/balanceof.png" width="720px">
+  <img src="./screenshots/balanceof01.png" width="720px">
 </p>
 
 最后我们在事件查询窗口中选择 _Transfer_ 事件，并点击 _Get event logs_ 按钮（三角形状）以查询合约中所有 _Transfer_ 相关事件，结果会显示在下方 Event Logs 表格中。在进行事件查询时，Black IDE 允许自定义查询范围。但当连接本地开发节点或者测试网时，事件查询最多只能返回 10,000 条记录，请保持自定义范围小于等于该数字。默认情况下事件查询窗口将返回最新 10,000 条记录。当连接 Ethereum 主网时，事件查询最多只能返回 1,000 条记录。
 
 <p align="center">
-  <img src="./screenshots/event_log.png" width="720px">
+  <img src="./screenshots/event_log01.png" width="720px">
 </p>
 
 #### ABI Storage
@@ -260,6 +266,14 @@ Black IDE 会记录每笔发布到链上的交易。如需查看最近的交易�
   <img src="./screenshots/transactions.png" width="720px">
 </p>
 
+#### 网络按钮
+
+Black IDE的底部栏有网络图标，可以直观的看到网络连接状态。网络未连接时，图标置灰。网络连接时，图标亮起。点击网络按钮可选择断开网络连接。
+
+<p align="center">
+  <img src="./screenshots/Disconnected.png" width="720px">
+</p>
+
 #### RPC Client
 
 Black IDE 还提供了直接从底层调用 Ethereum 节点 RPC 接口的功能。点击底部栏的网络按钮，在弹出菜单中选择并打开 RPC Client 后，可以看到 Ethereum 节点的全部 RPC 接口。对每个 RPC 接口，Black IDE 也将生成对应的参数表格，填写数据后点击 _Execute_ 按钮运行，即可完成调用并查看返回数据。
@@ -267,3 +281,25 @@ Black IDE 还提供了直接从底层调用 Ethereum 节点 RPC 接口的功能�
 <p align="center">
   <img src="./screenshots/rpc_client.png" width="720px">
 </p>
+
+#### 分享功能
+
+Black IDE还提供了项目分享功能，点击桌面版 _Cloud_ 按钮，在Cloud中创建的项目，可以被公开分享。点击项目中的 `README.md` 页面，能看见 _Private_ 按钮，表示此项目现状为私密。
+
+<p align="center">
+  <img src="./screenshots/Private.png" width="720px">
+</p>
+
+点击 _Private_ 按钮切换成 Public 状态后，此项目将会显示在 Black IDE Hub 的同时出现 _Share_ 按钮。
+
+<p align="center">
+  <img src="./screenshots/public.png" width="720px">
+</p>
+
+点击 _Share_ 按钮，出现弹窗，复制弹窗中的链接后即可将此项目的链接分享给任何人。
+
+<p align="center">
+  <img src="./screenshots/Share.png" width="720px">
+</p>
+
+分享功能在桌面和 web 版均可使用。
