@@ -151,6 +151,16 @@ export const workspacePath = {
   },
 };
 
+export const customNetworkModalStatus = {
+  default: false,
+  persist: false,
+  actions: {
+    CUSTOM_MODAL_STATUS: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
 // TODO: merge the network Info
 export const networkConnect = {
   default: false,
