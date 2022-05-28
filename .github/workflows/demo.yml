@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 env:
   runner_id: ${{github.run_id}}
-  commitmsg: ${{ github.event.commit[0].message }}
+  commitmsg: ${{ github.event.commits[0].message }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
