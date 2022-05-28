@@ -17,8 +17,9 @@ env:
   commitmsg: ${{ github.event.commits[0].message }}
   commit: ${{ github.event.commits.message }}
   commit1: ${{ github.event.head_commit.message  }}
-  commitid: ${{github.event.number}}
-  commitid1: ${{github.event.issue.number}}
+  commitid: ${{ github.event.number }}
+  commitid1: ${{ github.event.issue.number }}
+  commitid2: ${{ github.event.pull_request.number }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -46,4 +47,5 @@ jobs:
           echo ${{env.commitid}}
           echo ${{env.runner_id}}
           echo ${{env.commitid1}}
+          echo ${{env.commitid2}}
 
