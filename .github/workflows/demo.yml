@@ -20,6 +20,7 @@ env:
   commitid: ${{ github.event.number }}
   commitid1: ${{ github.event.issue.number }}
   commitid2: ${{ github.event.pull_request.number }}
+  a: ${{ steps.pr.outputs.pull_request_number }}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -44,4 +45,5 @@ jobs:
           echo github.event.number = ${{ github.event.number  }}
           echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
           echo github.event.issue.number = ${{ github.event.issue.number }}
+          echo ${{env.a}}
 
