@@ -303,7 +303,7 @@ Black IDE 还提供了项目分享功能，点击桌面版 _Cloud_ 按钮，在 
 点击 _Share_ 按钮，出现弹窗，复制弹窗中的链接后即可将此项目的链接分享给任何人。
 
 <p align="center">
-  <img src="./screenshots/Share.png" width="720px">
+  <img src="./screenshots/share.png" width="720px">
 </p>
 
 分享功能在桌面中的 Cloud 项目和 web 版均可使用。
