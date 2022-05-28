@@ -1,16 +1,22 @@
-name: demo
-on: push
+name: Build Main
 
-jobs:
-  my-job:
-    name: My Job
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print a greeting
-      env:
-        MY_VAR: Hi there! My name is
-        FIRST_NAME: Mona
-        MIDDLE_NAME: The
-        LAST_NAME: Octocat
-      run: |
-        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+on:
+  push:
+    branches:
+      - develop
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  owner: ObsidianLabs
+  own_components: eth-components
+  share_components: electron-components
+  project_build: eth
+  project_project: eth
+  project_name: Black IDE
+  project_build_script: yarn && REACT_APP_ENV=development yarn dist
+  enable_auth: false
+  premium_editor: ../premium-editor
+  GH_TOKEN: ${{ secrets.obsidians_token }}
+  PR_NUMBER: ${{ github.event.number }}
