@@ -1,27 +1,16 @@
-name: 111
+name: Check rules
 on:
-  push: 
-    branches: 
+  pull_request:
+    branches:
+      - develop
       - master
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest    
-    steps:
-    - uses: actions/checkout@master
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-    - name: npm install and build
-      run: |
-        npm install
-        npm run build
-
-    - name: Deploy
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: git@github.com:owner/repo.git
-        BRANCH: gh-pages
-        FOLDER: build
-        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+    your_npm_job_name:
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-node@v2
+             with:
+              node-version: '12'
+              check-latest: true
+          - run: npm install
+          - run: npm check-rules
