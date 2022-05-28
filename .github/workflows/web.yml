@@ -15,7 +15,7 @@ env:
   premium_editor: ../premium-editor
   cos_bucket: ethereum-ide-1303090311
   cos_region: ap-singapore
-  dns_path: https://eth.ide.black/
+  dns_path: https://ide.black/
 
 jobs:
   build-info:
