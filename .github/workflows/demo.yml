@@ -1,4 +1,4 @@
-name: Greeting from Mona
+name: demo
 on: push
 
 jobs:
