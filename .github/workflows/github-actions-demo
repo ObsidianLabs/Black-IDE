@@ -1,17 +1,39 @@
-name: GitHub Actions Demo
-on: [push]
+# main.yml
+name: deploy to aliyun
+on:
+  push:
+    branches:
+      - master
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "  The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "  This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "  The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "  The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo " ️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      # 切换分支
+      - name: Checkout
+        uses: actions/checkout@master
+      # 下载 git submodule
+      - uses: srt32/git-actions@v0.0.3
+        with:
+          args: git submodule update --init --recursive
+      # 使用 node:10
+      - name: use Node.js 10
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      # npm install
+      - name: npm install and build
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "  This job's status is ${{ job.status }}."
+          npm install
+          npm run build
+        env:
+          CI: true
+      # Deploy
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
+          ARGS: "-avz --delete"
+          SOURCE: "[Current File Dir]"
+          REMOTE_HOST: "[Domain]"
+          REMOTE_USER: "[UserName]"
+          TARGET: "[Server Dir]"
