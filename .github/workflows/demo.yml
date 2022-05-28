@@ -9,41 +9,61 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-env:
-  runner_id: ${{github.run_id}}
-  commitmsg: ${{ github.event.commits[0].message }}
-  commit: ${{ github.event.commits.message }}
-  commit1: ${{ github.event.head_commit.message  }}
-  commitid: ${{ github.event.number }}
-  commitid1: ${{ github.event.issue.number }}
-  commitid2: ${{ github.event.pull_request.number }}
-  a: ${{ steps.pr.outputs.pull_request_number }}
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  pr_commented:
+    # This job only runs for pull request comments
+    name: PR comment
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-        
-      # Runs a single command using the runners shell
-      # - name: Run a one-line script
-      #  run: echo Hello, world!
+      - run: |
+          echo A comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          echo github.event.number = ${{ github.event.number  }}
-          echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
-          echo github.event.issue.number = ${{ github.event.issue.number }}
-          echo ${{env.a}}
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on issue $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+  # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
+# env:
+#   runner_id: ${{github.run_id}}
+#   commitmsg: ${{ github.event.commits[0].message }}
+#   commit: ${{ github.event.commits.message }}
+#   commit1: ${{ github.event.head_commit.message  }}
+#   commitid: ${{ github.event.number }}
+#   commitid1: ${{ github.event.issue.number }}
+#   commitid2: ${{ github.event.pull_request.number }}
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # This workflow contains a single job called "build"
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
+
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
+        
+#       # Runs a single command using the runners shell
+#       # - name: Run a one-line script
+#       #  run: echo Hello, world!
+
+#       # Runs a set of commands using the runners shell
+#       - name: Run a multi-line script
+#         run: |
+#           echo Add other actions to build,
+#           echo test, and deploy your project.
+#           echo github.event.number = ${{ github.event.number  }}
+#           echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
+#           echo github.event.issue.number = ${{ github.event.issue.number }}
+#           echo ${{env.a}}
 
