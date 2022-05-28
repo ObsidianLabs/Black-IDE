@@ -41,11 +41,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          echo ${{env.commitmsg}}
-          echo ${{env.commit}}
-          echo ${{env.commit1}}
-          echo ${{env.commitid}}
-          echo ${{env.runner_id}}
-          echo ${{env.commitid1}}
-          echo ${{env.commitid2}}
+          echo github.event.number = ${{ github.event.number  }}
+          echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
+          echo github.event.issue.number = ${{ github.event.issue.number }}
 
