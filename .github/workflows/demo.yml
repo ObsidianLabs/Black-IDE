@@ -9,7 +9,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+  workflow_dispatch:
+  
 jobs:
   pr_commented:
     # This job only runs for pull request comments
