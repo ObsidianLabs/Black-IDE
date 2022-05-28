@@ -1,39 +1,27 @@
-# main.yml
-name: deploy to aliyun
+name: Deploy to GitHub Pages
 on:
-  push:
-    branches:
+  push: 
+    branches: 
       - master
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest    
     steps:
-      # 切换分支
-      - name: Checkout
-        uses: actions/checkout@master
-      # 下载 git submodule
-      - uses: srt32/git-actions@v0.0.3
-        with:
-          args: git submodule update --init --recursive
-      # 使用 node:10
-      - name: use Node.js 10
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10
-      # npm install
-      - name: npm install and build
-        run: |
-          npm install
-          npm run build
-        env:
-          CI: true
-      # Deploy
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.0.7
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
-          ARGS: "-avz --delete"
-          SOURCE: "[Current File Dir]"
-          REMOTE_HOST: "[Domain]"
-          REMOTE_USER: "[UserName]"
-          TARGET: "[Server Dir]"
+    - uses: actions/checkout@master
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: npm install and build
+      run: |
+        npm install
+        npm run build
+
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: git@github.com:owner/repo.git
+        BRANCH: gh-pages
+        FOLDER: build
+        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
