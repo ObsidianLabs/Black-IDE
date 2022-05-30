@@ -29,10 +29,8 @@ function networkCustomGroupData(networkMap) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-const customeNetworkGroup = networkCustomGroupData(
-  redux.getState()?.customNetworks.toJS()
-);
-networkManager.addSdk(EthSdk, customeNetworkGroup);
+const customeNetworkGroup = networkCustomGroupData(redux.getState()?.customNetworks.toJS())
+if (customeNetworkGroup.length > 0) networkManager.addSdk(EthSdk, customeNetworkGroup)
 
 class HeaderWithRedux extends PureComponent {
   state = {
@@ -54,14 +52,8 @@ class HeaderWithRedux extends PureComponent {
       const interval = setInterval(() => this.getNetworks(), 30 * 1000);
       this.setState({ interval });
     } else {
-      const customeRefreshNetworkGroup = networkCustomGroupData(
-        this.props.customNetworks.toJS()
-      );
-      if (
-        JSON.stringify(customeRefreshNetworkGroup) !==
-        JSON.stringify(customeNetworkGroup)
-      )
-        networkManager.addSdk(EthSdk, customeRefreshNetworkGroup);
+      const customeRefreshNetworkGroup = networkCustomGroupData(this.props.customNetworks.toJS())
+      if (JSON.stringify(customeRefreshNetworkGroup) !== JSON.stringify(customeNetworkGroup)) networkManager.addSdk(EthSdk, customeRefreshNetworkGroup)
     }
   }
 
