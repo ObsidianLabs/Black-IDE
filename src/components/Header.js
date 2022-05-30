@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import headerActions, { AuthModal, Header, NavGuard } from '@obsidians/header';
+import redux, { connect } from '@obsidians/redux';
 
 import { BaseProjectManager } from '@obsidians/workspace';
 import EthSdk from '@obsidians/eth-sdk';
 import { IpcChannel } from '@obsidians/ipc';
 import { List } from 'immutable';
 import { actions } from '@obsidians/workspace';
-import { connect } from '@obsidians/redux';
 import { createProject } from '../lib/bsn';
 import keypairManager from '@obsidians/keypair';
 import { networkManager } from '@obsidians/network';
@@ -14,6 +14,25 @@ import { networkManager } from '@obsidians/network';
 keypairManager.kp = EthSdk.kp;
 networkManager.addSdk(EthSdk, EthSdk.networks);
 networkManager.addSdk(EthSdk, EthSdk.customNetworks);
+
+function networkCustomGroupData(networkMap) {
+  return Object.keys(networkMap)
+    .map((name) => ({
+      group: 'others',
+      icon: 'fas fa-vial',
+      id: name,
+      name: name,
+      fullName: name,
+      notification: `Switched to <b>${name}</b>.`,
+      url: networkMap[name].url,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+const customeNetworkGroup = networkCustomGroupData(
+  redux.getState()?.customNetworks.toJS()
+);
+networkManager.addSdk(EthSdk, customeNetworkGroup);
 
 class HeaderWithRedux extends PureComponent {
   state = {
@@ -35,20 +54,14 @@ class HeaderWithRedux extends PureComponent {
       const interval = setInterval(() => this.getNetworks(), 30 * 1000);
       this.setState({ interval });
     } else {
-      const customeNetworkMap = this.props.customNetworks.toJS();
-      const customeNetworkGroup = Object.keys(customeNetworkMap)
-        .map((name) => ({
-          group: 'others',
-          icon: 'fas fa-vial',
-          id: name,
-          name: name,
-          fullName: name,
-          notification: `Switched to <b>${name}</b>.`,
-          url: customeNetworkMap[name].url,
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
-
-      networkManager.addSdk(EthSdk, customeNetworkGroup);
+      const customeRefreshNetworkGroup = networkCustomGroupData(
+        this.props.customNetworks.toJS()
+      );
+      if (
+        JSON.stringify(customeRefreshNetworkGroup) !==
+        JSON.stringify(customeNetworkGroup)
+      )
+        networkManager.addSdk(EthSdk, customeRefreshNetworkGroup);
     }
   }
 
@@ -64,7 +77,6 @@ class HeaderWithRedux extends PureComponent {
           id: `bsn_${project.id}`,
           group: 'BSN',
           name: `${project.network.name}/${project.name}`,
-          // name: `${project.network.name}`,
           fullName: `${project.network.name} - ${project.name}`,
           icon: 'fas fa-globe',
           notification: `Switched to <b>${project.network.name}</b>.`,
