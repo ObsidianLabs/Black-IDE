@@ -10,14 +10,7 @@ jobs:
     name: "LOG Everything on GitHub Event"
     runs-on: ubuntu-latest
     steps:
-#       - name: Logging
-#         run: |
-#           echo "${{toJSON(github.event.commits[0].message)}}"
+      - name: Logging
+        run: |
+          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].author"
 
-    - uses: actions/github-script@v6
-      with:
-        script: |
-          const commits = ${{ toJSON(github.event.commits) }}
-          for (const commit of commits) {
-            console.log(commit);
-          }
