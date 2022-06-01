@@ -6,7 +6,7 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
-   
+
 jobs:
   log-github-event-goodies:
     name: "LOG Everything on GitHub Event"
@@ -14,5 +14,5 @@ jobs:
     steps:
       - name: Logging
         run: |
-          echo "${{toJSON(github.event)}}"
+          echo "${{toJSON(github.event.head_commit.message)}}"
 
