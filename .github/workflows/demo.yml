@@ -36,7 +36,7 @@ jobs:
     outputs:
       branch: ${{ steps.build-info.outputs.BRANCH }}
       new_release: ${{ steps.build-info.outputs.NEW_RELEASE}}
-      
+
   # Generate matrix for the following steps
   generate-matrix:
     runs-on: ubuntu-18.04
@@ -81,6 +81,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16
+      - name: Checks out flutter
+        uses: actions/checkout@v2
+        with:
+          repository: flutter/flutter
+          token: ${{ github.token }}
+          ref: refs/heads/master
+          path: flutter
 
       - name: Checkout ${{ env.share_components }}
         uses: actions/checkout@v2
