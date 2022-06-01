@@ -1,28 +1,24 @@
-name: Demo
-on:
-  push:
-    branches:
-      - develop
-    tags:
-      - 'v*'
-  workflow_dispatch:
+# This is a basic workflow to help you get started with Actions
 
-env:
-  owner: ObsidianLabs
-  own_components: eth-components
-  share_components: electron-components
-  project_build: eth
-  project_project: eth
-  project_name: Black IDE
-  project_build_script: yarn && REACT_APP_ENV=development yarn dist
-  os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
-  enable_auth: false
-  premium_editor: ../premium-editor
-  GH_TOKEN: ${{ secrets.obsidians_token }}
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  
 jobs:
-  build-info:
-    runs-on: ubuntu-18.04
+  pr_commented:
+    # This job only runs for pull request comments
+    name: PR comment
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - name: Get ${{ env.project_name }}'s build info
         id: build-info
         shell: bash
@@ -40,19 +36,60 @@ jobs:
   # Generate matrix for the following steps
   generate-matrix:
     runs-on: ubuntu-18.04
+=======
+      - run: |
+          echo A comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+>>>>>>> bd3453577dd6db667adbb76938ffbe443d0de29a
 
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Generate os matrix
-        id: set-os-matrix
-        run: echo ::set-output name=os::${{ env.os_matrix }}
+      - run: |
+          echo A comment on issue $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+  # Allows you to run this workflow manually from the Actions tab
+#   
+# env:
+#   runner_id: ${{github.run_id}}
+#   commitmsg: ${{ github.event.commits[0].message }}
+#   commit: ${{ github.event.commits.message }}
+#   commit1: ${{ github.event.head_commit.message  }}
+#   commitid: ${{ github.event.number }}
+#   commitid1: ${{ github.event.issue.number }}
+#   commitid2: ${{ github.event.pull_request.number }}
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # This workflow contains a single job called "build"
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
 
-      - name: Generate component matrix
-        id: set-component-matrix
-        run: echo ::set-output name=component::[\"${{ env.own_components }}\", \"${{ env.share_components }}\"]
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v3
+        
+#       # Runs a single command using the runners shell
+#       # - name: Run a one-line script
+#       #  run: echo Hello, world!
 
-    outputs:
-      os: ${{ steps.set-os-matrix.outputs.os }}
+#       # Runs a set of commands using the runners shell
+#       - name: Run a multi-line script
+#         run: |
+#           echo Add other actions to build,
+#           echo test, and deploy your project.
+#           echo github.event.number = ${{ github.event.number  }}
+#           echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
+#           echo github.event.issue.number = ${{ github.event.issue.number }}
+#           echo ${{env.a}}
 
+<<<<<<< HEAD
   # Build and release
   build:
     needs: [generate-matrix, build-info]
@@ -202,3 +239,5 @@ jobs:
           runner_id: ${{ github.run_id }}
           test_server_api_url: ${{ secrets.TEST_SERVER_API_URL }}
           request_id: ${{ github.event.issue.number }}
+=======
+>>>>>>> bd3453577dd6db667adbb76938ffbe443d0de29a

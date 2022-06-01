@@ -1,0 +1,16 @@
+name: Check rules
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+jobs:
+    your_npm_job_name:
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-node@v2
+             with:
+              node-version: '12'
+              check-latest: true
+          - run: npm install
+          - run: npm check-rules
