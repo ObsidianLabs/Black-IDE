@@ -1,16 +1,23 @@
 name: Event Loggger
+name: Notify on Pull Request
+
 on:
   pull_request:
-    branches:
-      - develop
-  workflow_dispatch:
+    branches: [dev]
 
 jobs:
-  log-github-event-goodies:
-    name: "LOG Everything on GitHub Event"
+  send_notification:
     runs-on: ubuntu-latest
-    steps:
-      - name: Logging
-        run: |
-          echo github.event.head_commit.message
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{github.event.after}}
+      - name: Get Commit Message
+        run: |
+          MSG=$(git log --format=%B -n 1 ${{github.event.after}})
+          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
+      - name: Echo commit message
+        run: echo "Commit SHA: ${{github.event.after}}, commit message: ${{env.COMMIT_MESSAGE}} (or ${COMMIT_MESSAGE})"
