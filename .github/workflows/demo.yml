@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Logging
         run: |
-          echo '${{ toJSON(github.event.commits) }}' | jq ".[0].author"
+          echo github.event.head_commit.message
 
