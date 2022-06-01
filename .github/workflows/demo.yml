@@ -1,6 +1,6 @@
 name: Event Loggger
 on:
-  push:
+  pull_request:
     branches:
       - develop
   workflow_dispatch:
