@@ -24,9 +24,13 @@ Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/B
 
 在浏览器中打开 https://eth.ide.black 以访问 Black IDE Web 版。
 
+### Black IDE Hub
+
+在浏览器中打开 https://hub-ide-black.vercel.app/ 以访问 Black IDE Hub。
+
 ## 功能预览
 
-以下示例以 Black IDE v0.8.0 macOS 桌面版为例，Black IDE 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
+以下示例以 Black IDE v0.18.0 macOS 桌面版为例，Black IDE 各版本操作界面和功能均保持一致，实际操作以界面显示为准。
 
 ### 准备工作
 
@@ -86,13 +90,19 @@ Black IDE 安装包可以在 [Github Releases](https://github.com/ObsidianLabs/B
   <img src="./screenshots/node_log.png" width="720px">
 </p>
 
-#### Ethereum 测试网/主网
+#### 网络节点
 
-Black IDE 中已经内置了 Ethereum 三个测试网 [Ropsten](https://github.com/ethereum/ropsten)，[Rinkeby](https://www.rinkeby.io/) 和 [Kovan](https://kovan-testnet.github.io/)，以及 Ethereum 主网的连接信息。点击 _Network_ 标签旁的三角箭头，可以直接一键切换希望使用的 Ethereum 网络。
+Black IDE 现已支持多个区块链的主网以及测试网，包含： ETHEREUM， BNB CHAIN， AVALANCHE C-CHAIN， POLYGON， FANTOM， HARMONY， CONFLUX ESPACE， GNOSIS(XDAI)， AURORA(NEAR)， 和 EVMOS。下面以 EVM 为例。
+
+#### EVM 测试网/主网
+
+Black IDE 中已经内置了 Ethereum 四个测试网 [Ropsten](https://github.com/ethereum/ropsten)，[Rinkeby](https://www.rinkeby.io/), [Kovan](https://kovan-testnet.github.io/) 和 [Gorli](https://goerli.net/)以及 Ethereum 主网的连接信息。点击 _Network_ 标签旁的三角箭头，可以直接一键切换希望使用的 Ethereum 网络。
 
 <p align="center">
-  <img src="./screenshots/network_selector.png" width="720px">
+  <img src="./screenshots/NetworkSelect.png" width="720px">
 </p>
+
+同时还为内置的区块链分别设置了带有此区块链专属标志的主网与测试网，主网图标为彩色，测试网图标为灰色。
 
 #### 自定义网络
 
@@ -260,6 +270,14 @@ Black IDE 会记录每笔发布到链上的交易。如需查看最近的交易�
   <img src="./screenshots/transactions.png" width="720px">
 </p>
 
+#### 网络按钮
+
+Black IDE 的底部栏有网络图标，可以直观的看到网络连接状态。网络未连接时，图标置灰。网络连接时，图标亮起。点击网络按钮可选择断开或者重练网络连接。
+
+<p align="center">
+  <img src="./screenshots/network_tools.png" width="720px">
+</p>
+
 #### RPC Client
 
 Black IDE 还提供了直接从底层调用 Ethereum 节点 RPC 接口的功能。点击底部栏的网络按钮，在弹出菜单中选择并打开 RPC Client 后，可以看到 Ethereum 节点的全部 RPC 接口。对每个 RPC 接口，Black IDE 也将生成对应的参数表格，填写数据后点击 _Execute_ 按钮运行，即可完成调用并查看返回数据。
@@ -267,3 +285,25 @@ Black IDE 还提供了直接从底层调用 Ethereum 节点 RPC 接口的功能�
 <p align="center">
   <img src="./screenshots/rpc_client.png" width="720px">
 </p>
+
+#### 分享功能
+
+Black IDE 还提供了项目分享功能，点击桌面版 _Cloud_ 按钮，在 Cloud 中创建的项目，可以被公开分享。点击项目中的 `README.md` 页面，能看见 _Private_ 按钮，表示此项目现状为私密。
+
+<p align="center">
+  <img src="./screenshots/private.png" width="720px">
+</p>
+
+点击 _Private_ 按钮切换成 Public 状态后，此项目将会显示在 Black IDE Hub 的同时出现 _Share_ 按钮。
+
+<p align="center">
+  <img src="./screenshots/public.png" width="720px">
+</p>
+
+点击 _Share_ 按钮，出现弹窗，复制弹窗中的链接后即可将此项目的链接分享给任何人。
+
+<p align="center">
+  <img src="./screenshots/share.png" width="720px">
+</p>
+
+分享功能在桌面中的 Cloud 项目和 web 版均可使用。
