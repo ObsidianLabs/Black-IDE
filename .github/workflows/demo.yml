@@ -10,7 +10,7 @@ on:
 jobs:
   job1:
     env:
-      commitmsg: ${{ github.event.head_commit.message }}
+      commitmsg: ${{ github.event.commits_url }}
       GITHUB_CONTEXT: ${{ toJson(github) }}
     runs-on: ubuntu-latest
     steps:
