@@ -8,15 +8,18 @@ on:
       - 'v*'
   workflow_dispatch:
 jobs:
-  job1:
-    env:
-      commitmsg: ${{ github.event.commits_url }}
-      GITHUB_CONTEXT: ${{ toJson(github) }}
+  send_notification:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: get commit message
+        with:
+          fetch-depth: 0
+          ref: ${{github.event.after}}
+      - name: Get Commit Message
         run: |
-            echo Commit MSG = ${{ env.commitmsg }}
-            echo "$GITHUB_CONTEXT"
+          MSG=$(git log --format=%B -n 1 ${{github.event.after}})
+          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
+      - name: Echo commit message
+        run: echo "${{github.event.after}}, ${{env.COMMIT_MESSAGE}} (or ${COMMIT_MESSAGE})"
