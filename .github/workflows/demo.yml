@@ -22,4 +22,4 @@ jobs:
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
           #echo "::set-env name=COMMIT_MESSAGE::${MSG}"
           echo "${MSG}"
-          echo ${{github.event.pull_request.number}}
+          echo ${{ github.event.pull_request.head.sha }}
