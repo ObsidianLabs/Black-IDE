@@ -24,6 +24,4 @@ jobs:
           echo "${MSG}"
           PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
           echo "${PR_NUMBER}"
-          echo github.event.number = ${{ github.event.number  }}
-          echo github.event.pull_request.number = ${{ github.event.pull_request.number }}
-          echo github.event.issue.number = ${{ github.event.issue.number }}
+          echo "PR number = ${{ github.event.pull_request.number }}"
