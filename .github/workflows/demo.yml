@@ -11,6 +11,7 @@ jobs:
   job1:
     env:
       commitmsg: ${{ github.event.head_commit.message }}
+      GITHUB_CONTEXT: ${{ toJson(github) }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -18,3 +19,4 @@ jobs:
       - name: get commit message
         run: |
             echo Commit MSG = ${{ env.commitmsg }}
+            echo "$GITHUB_CONTEXT"
