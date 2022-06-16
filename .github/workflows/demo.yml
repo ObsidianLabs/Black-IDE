@@ -1,4 +1,4 @@
-name: Event Loggger
+name: demo
 
 on:
   pull_request:
