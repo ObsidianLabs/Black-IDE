@@ -22,7 +22,4 @@ jobs:
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
           #echo "::set-env name=COMMIT_MESSAGE::${MSG}"
           echo "${MSG}"
-          echo PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }') >> $GITHUB_ENV
-          echo PR_TITLE=$(jq --raw-output .pull_request.title "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-          echo PR_URL=$(jq --raw-output .pull_request.html_url "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
-          echo PR_USER=$(jq --raw-output .pull_request.user.login "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+          echo ${{github.event.pull_request.number}}
