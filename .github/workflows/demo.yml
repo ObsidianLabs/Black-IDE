@@ -17,11 +17,11 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{github.event.after}}
-#       - name: Get Commit Message
-#         run: |
-#           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
-#           echo "::set-env name=COMMIT_MESSAGE::${MSG}"
-      - name: Echo commit message
-        run: echo "${{github.event.after}}"
-             echo "${{env.COMMIT_MESSAGE}}"
-             echo "${COMMIT_MESSAGE}"
+      - name: Get Commit Message
+        run: |
+          MSG=$(git log --format=%B -n 1 ${{github.event.after}})
+          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
+#       - name: Echo commit message
+#         run: echo "${{github.event.after}}"
+#              echo "${{env.COMMIT_MESSAGE}}"
+#              echo "${COMMIT_MESSAGE}"
