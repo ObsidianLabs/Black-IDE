@@ -142,7 +142,8 @@ const overrides = [
   }),
   turnOffMangle(),
   addWasmLoader(),
-  customSplitting(),
+  // TODO: fix the code spliting
+  // customSplitting(),
 ];
 
 if (process.env.CDN) {
