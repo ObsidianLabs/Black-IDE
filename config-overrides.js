@@ -63,14 +63,32 @@ function customSplitting() {
         chunks: 'all',
         cacheGroups: {
           vendor: {
+            minChunks: 2,
+            test: /[\\/]node_modules[\\/]/,
             name(module) {
               const packageName = module.context.match(
                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/
               )[1];
-              return `vendor.${packageName.replace('@', '')}`;
+              return `npm.${packageName.replace('@', '')}`;
             },
-            test: /[\\/]node_modules[\\/]/,
+          },
+          aws: {
+            name: 'aws',
             chunks: 'all',
+            test: /[\\/]node_modules[\\/]aws-sdk/,
+            enforce: true,
+          },
+          highlight: {
+            name: 'highlight',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/]highlight.js/,
+            enforce: true,
+          },
+          conflux: {
+            name: 'conflux-sdk',
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/]js-conflux-sdk/,
+            enforce: true,
           },
           common: {
             test: /[\\/]src[\\/]components[\\/]/,
@@ -143,7 +161,7 @@ const overrides = [
   turnOffMangle(),
   addWasmLoader(),
   // TODO: fix the code spliting
-  // customSplitting(),
+  customSplitting(),
 ];
 
 if (process.env.CDN) {
