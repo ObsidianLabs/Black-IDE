@@ -167,7 +167,20 @@ jobs:
           commands: 'cdn PurgePathCache --cli-unfold-argument --Paths ${{ env.dns_path }} --FlushType flush'
           # Data format of command output. Available values are `json`, `table`, `text`. Default is `json`
           output_format: 'json'
-
+          
+       # AWS Authentication credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+       # Refresh the CDN 
+      - name: Invalidate Cloudfront CDN
+        run: aws cloudfront create-invalidation --distribution-id=$CLOUDFRONT_DISTRIBUTION_ID --paths '/*'
+        env:
+            CLOUDFRONT_DISTRIBUTION_ID: E28UBPK9Z0N99E
+            
   send-notification:
     needs: [build, build-info]
     runs-on: ubuntu-18.04
