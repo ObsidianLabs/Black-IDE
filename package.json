@@ -18,7 +18,7 @@
     "install": "electron-rebuild",
     "dev:local": "REACT_APP_IPC_SERVER_URL=http://localhost:7001 react-app-rewired start",
     "dev:react": "react-app-rewired start",
-    "build:react": "react-app-rewired build",
+    "build:react": "react-app-rewired build --stats",
     "build:web": "dotenv -e .env.production -v PUBLIC_URL=/ -v CDN=true yarn build:react",
     "build:web-staging": "dotenv -e .env -v PUBLIC_URL=/ -v CDN=true yarn build:react",
     "dev:main": "webpack --config webpack.main.config.js && electron ./dev/index.js",
@@ -43,8 +43,8 @@
     "keytar": "7.7.0",
     "monaco-ace-tokenizer": "^0.2.1",
     "node-pty": "0.10.0",
-    "prettier": "^2.5.0",
-    "prettier-plugin-solidity": "1.0.0-beta.10",
+    "prettier": "^2.7.1",
+    "prettier-plugin-solidity": "1.0.0-beta.19",
     "socket.io-client": "^2.4.0",
     "solhint": "ObsidianLabs/solhint#obsidians",
     "solium": "ObsidianLabs/Ethlint",
@@ -100,8 +100,8 @@
     "loadjs": "^4.2.0",
     "lodash": "^4.17.14",
     "moment": "^2.29.1",
-    "monaco-editor": "^0.20.0",
-    "monaco-editor-webpack-plugin": "^1.9.0",
+    "monaco-editor": "^0.21.0",
+    "monaco-editor-webpack-plugin": "^2.0.0",
     "native-ext-loader": "^2.3.0",
     "node-fetch": "^2.6.1",
     "node-sass": "npm:sass",
@@ -131,7 +131,7 @@
     "node-sass": "npm:sass",
     "sass-loader": "10.2.0",
     "react-highlight": "^0.13.0",
-    "prettier": "2.5.0",
+    "prettier": "^2.7.1",
     "react-error-overlay": "6.0.9"
   },
   "workspaces": [
@@ -169,7 +169,7 @@
       "target": {
         "target": "default",
         "arch": [
-          "x64"
+          "arm64"
         ]
       }
     },
