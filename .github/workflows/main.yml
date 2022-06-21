@@ -196,3 +196,4 @@ jobs:
           commit_id: ${{ github.sha }}
           runner_id: ${{ github.run_id }}
           test_server_api_url: ${{ secrets.TEST_SERVER_API_URL }}
+          request_id: ${{ github.event.number }}

@@ -1,7 +1,7 @@
 {
   "name": "black-ide",
   "description": "Graphic IDE for Ethereum smart contract development",
-  "version": "0.15.4",
+  "version": "0.21.1",
   "author": {
     "name": "Phil Li",
     "email": "phil.li@obsidians.io",
@@ -111,6 +111,7 @@
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.8",
     "react-dom": "^17.0.1",
+    "react-ga4": "^1.4.1",
     "react-router": "^5.2.0",
     "react-router-cache-route": "^1.11.0",
     "react-router-dom": "^5.2.0",
@@ -141,19 +142,11 @@
     "../eth-components/packages/*",
     "../bsc-components/packages/*"
   ],
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not ie <= 11",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "build": {
     "productName": "Black IDE",
     "artifactName": "Black-IDE-${version}.${ext}",

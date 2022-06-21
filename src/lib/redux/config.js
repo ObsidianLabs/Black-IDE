@@ -131,11 +131,31 @@ export const network = {
   },
 };
 
+export const loadNetworkResources = {
+  default: false,
+  persist: false,
+  actions: {
+    LOAD_NETWORK_RESOURCES: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
 export const workspacePath = {
   default: '',
   persist: true,
   actions: {
     SETTING_WORKSPACE_PATH: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
+export const customNetworkModalStatus = {
+  default: false,
+  persist: false,
+  actions: {
+    CUSTOM_MODAL_STATUS: {
       reducer: (_, { payload }) => payload,
     },
   },

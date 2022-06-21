@@ -138,10 +138,12 @@ const overrides = [
     BUILD_ID: process.env.BUILD_ID,
     COMMIT_ID: JSON.stringify(process.env.COMMIT_ID),
     BUILD_TIME: JSON.stringify(process.env.BUILD_TIME),
+    GA_MEASUREMENT_ID: JSON.stringify(process.env.GA_MEASUREMENT_ID),
   }),
   turnOffMangle(),
   addWasmLoader(),
-  customSplitting(),
+  // TODO: fix the code spliting
+  // customSplitting(),
 ];
 
 if (process.env.CDN) {
