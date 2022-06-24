@@ -16,6 +16,7 @@ env:
   cos_bucket: ethereum-ide-1303090311
   cos_region: ap-singapore
   dns_path: https://ide.black/
+  CLOUDFRONT_DISTRIBUTION_ID: E28UBPK9Z0N99E
 
 jobs:
   build-info:
@@ -48,6 +49,7 @@ jobs:
           echo "Deploying ${{ github.ref }} branch"
           echo "cos_bucket=ethereum-ide-test-1303090311" >> $GITHUB_ENV
           echo "dns_path=https://eth-test.ide.black/" >> $GITHUB_ENV
+          echo "CLOUDFRONT_DISTRIBUTION_ID=E19AK26SFJYOK4" >> $GITHUB_ENV
           echo "project_build_script=yarn && REACT_APP_ENV=development yarn build:web-staging" >> $GITHUB_ENV
 
       - name: Install Node.js, NPM and Yarn
@@ -167,7 +169,17 @@ jobs:
           commands: 'cdn PurgePathCache --cli-unfold-argument --Paths ${{ env.dns_path }} --FlushType flush'
           # Data format of command output. Available values are `json`, `table`, `text`. Default is `json`
           output_format: 'json'
-
+            
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
+      - name: Invalidate Cloudfront CDN
+        run: aws cloudfront create-invalidation --distribution-id=${{ env.CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
+        
   send-notification:
     needs: [build, build-info]
     runs-on: ubuntu-18.04
