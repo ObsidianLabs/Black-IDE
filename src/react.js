@@ -1,5 +1,5 @@
 import './scss/index.scss';
-import './tailwind.pcss';
+import './scss/tailwindcss.scss';
 import './i18n';
 
 import * as serviceWorker from './serviceWorker';
