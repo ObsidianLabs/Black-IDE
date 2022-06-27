@@ -30,3 +30,5 @@ yarn-error.log*
 
 dev
 dist
+yarn.lock
+src/Test.js
