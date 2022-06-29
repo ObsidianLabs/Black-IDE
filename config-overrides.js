@@ -6,7 +6,6 @@ const {
   addWebpackExternals,
   addWebpackAlias,
   addWebpackPlugin,
-  addPostcssPlugins,
 } = require('customize-cra');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const BundleAnalyzerPlugin =
@@ -52,17 +51,6 @@ function addWasmLoader(options) {
           oneOf.exclude.push(/\.wasm$/);
         }
       });
-    });
-    return config;
-  };
-}
-
-function addPostCssLoader(_options) {
-  return (config) => {
-    console.log('Adding post css loader');
-    config.module.rules.push({
-      test: /\.pcss$/i,
-      use: ['style-loader', 'css-loader', 'postcss-loader'],
     });
     return config;
   };
@@ -154,11 +142,6 @@ const overrides = [
   }),
   turnOffMangle(),
   addWasmLoader(),
-  addPostCssLoader(),
-  addPostcssPlugins([
-    require('tailwindcss')('./tailwind.config.js'),
-    require('autoprefixer'),
-  ]),
   // TODO: fix the code spliting
   // customSplitting(),
 ];

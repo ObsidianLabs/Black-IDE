@@ -48,10 +48,6 @@ module.exports = merge.smart(baseConfig, {
         test: /\.node$/,
         use: 'native-ext-loader',
       },
-      {
-        test: /\.pcss$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
     ],
   },
   plugins: [
