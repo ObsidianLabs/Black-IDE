@@ -4,7 +4,10 @@ import React, { PureComponent } from 'react';
 
 import Auth from '@obsidians/auth';
 import BLACK_IDE_ICON from '../icon.png';
+import COIN_PIC from '../coin.webp';
 import DISCORD_ICON from '../discord.png';
+import ERC20_PIC from '../erc20.webp';
+import ERC721_PIC from '../erc721.webp';
 import GITHUB_ICON from '../github.png';
 import { actions } from '@obsidians/workspace';
 import { connect } from '@obsidians/redux';
@@ -116,19 +119,19 @@ class WelcomePageWithProps extends PureComponent {
             className="option"
             onClick={() => this.route('/BlackIDE-ObsidianLab/ERC-721')}
           >
-            <div className="option-title">Sample ERC - 721</div>
+            <img src={ERC721_PIC}></img>
           </div>
           <div
             className="option"
             onClick={() => this.route('/BlackIDE-ObsidianLab/ERC-20')}
           >
-            <div className="option-title">Sample ERC - 20</div>
+            <img src={ERC20_PIC}></img>
           </div>
           <div
             className="option"
             onClick={() => this.route('/BlackIDE-ObsidianLab/COIN')}
           >
-            <div className="option-title">Sample Coin</div>
+            <img src={COIN_PIC}></img>
           </div>
         </div>
         <div className="subtitle">Learn More About Black IDE</div>
