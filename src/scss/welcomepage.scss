@@ -1,0 +1,64 @@
+@import './theme.scss';
+.welcome-page{
+    overflow-y: auto;
+}
+
+.title{
+    font-size: 1.5rem;
+    line-height: 3rem;
+    padding: 1rem 2rem 0;
+    width: 100%;
+    color: $light;
+    *{
+        vertical-align: middle;
+    }
+    img {
+        height: 2.5rem;
+        margin: .25rem 1rem .25rem 0;
+        &.align-right{
+            float: right;
+        }
+    }
+}
+
+.subtitle{
+    font-size: 1.2rem;
+    color: $gray-200;
+    padding: 1rem 2rem 0;
+}
+
+.desc{
+    padding: .25rem 2rem;
+    color: $gray-500;
+    line-height: 1.5rem;
+}
+
+.options {
+    overflow: hidden;
+    padding-left: 1rem;
+    .option {
+        cursor: pointer;
+        background: $dark2;
+        float: left;
+        height: 9rem;
+        width: 16rem;
+        margin: .5rem 0 1rem 1rem;
+        border: 1px solid $gray-400;
+        .option-title{
+            font-size: 1.2rem;
+            padding: .5rem 1rem 0;
+            line-height: 2rem;
+            color: $gray-400;
+        }
+        .option-desc{
+            color: $gray-500;
+            font-size: 1rem;
+            padding: 0rem 1rem;
+            line-height: 1.2rem;
+        }
+        img{
+            height: 100%;
+        }
+
+    }
+}
