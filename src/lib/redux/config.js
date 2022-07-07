@@ -161,6 +161,16 @@ export const customNetworkModalStatus = {
   },
 };
 
+export const loginRedirectPath = {
+  default: '',
+  persist: true,
+  actions: {
+    SET_LOGIN_REDIRECT_PATH: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
 // TODO: merge the network Info
 export const networkConnect = {
   default: false,
