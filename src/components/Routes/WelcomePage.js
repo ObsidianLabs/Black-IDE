@@ -46,7 +46,11 @@ class WelcomePageWithProps extends PureComponent {
         <div className="title">
           <img src={BLACK_IDE_ICON} />
           <span>Welcome to Black IDE</span>
-
+          {!Auth.isLogin && (
+            <div className="login-button" onClick={() => this.login()}>
+              Login
+            </div>
+          )}
           <img
             className={'align-right'}
             src={DISCORD_ICON}
