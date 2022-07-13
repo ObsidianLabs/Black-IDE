@@ -1,9 +1,9 @@
+import EthSdk, { customChains } from '@obsidians/eth-sdk';
 import React, { PureComponent } from 'react';
 import headerActions, { AuthModal, Header, NavGuard } from '@obsidians/header';
 import redux, { connect } from '@obsidians/redux';
 
 import { BaseProjectManager } from '@obsidians/workspace';
-import EthSdk from '@obsidians/eth-sdk';
 import { IpcChannel } from '@obsidians/ipc';
 import { List } from 'immutable';
 import { actions } from '@obsidians/workspace';
@@ -12,7 +12,10 @@ import keypairManager from '@obsidians/keypair';
 import { networkManager } from '@obsidians/network';
 
 keypairManager.kp = EthSdk.kp;
-networkManager.addSdk(EthSdk, EthSdk.networks);
+networkManager.addSdk(EthSdk, EthSdk.networks, [
+  ...EthSdk.networks,
+  ...customChains,
+]);
 networkManager.addSdk(EthSdk, EthSdk.customNetworks);
 
 function networkCustomGroupData(networkMap) {
@@ -25,6 +28,7 @@ function networkCustomGroupData(networkMap) {
       fullName: name,
       notification: `Switched to <b>${name}</b>.`,
       url: networkMap[name].url,
+      networkId: networkMap[name].networkId,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
