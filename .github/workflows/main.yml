@@ -73,7 +73,7 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ github.ref }}" != "refs/heads/master" ]]; then
-            echo "project_build_script=yarn && yarn dist:staging" >> $GITHUB_ENV
+            echo "project_build_script=yarn && REACT_APP_ENV=development NODE_ENV=development yarn dist:staging" >> $GITHUB_ENV
           fi
           if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
             echo "project_build_script=yarn && yarn dist --publish always" >> $GITHUB_ENV
