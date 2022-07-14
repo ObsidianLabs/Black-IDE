@@ -26,6 +26,7 @@ function networkCustomGroupData(networkMap) {
       notification: `Switched to <b>${name}</b>.`,
       url: networkMap[name].url,
       networkId: networkMap[name]?.networkId || name,
+      chainId: networkMap[name]?.chainId || '',
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
