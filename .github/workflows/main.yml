@@ -15,7 +15,7 @@ env:
   project_build: eth
   project_project: eth
   project_name: Black IDE
-  project_build_script: yarn && REACT_APP_ENV=development NODE_ENV=development yarn dist
+  project_build_script: yarn && yarn dist:staging
   os_matrix: '[\"macos-latest\", \"ubuntu-18.04\", \"windows-2019\"]'
   enable_auth: false
   premium_editor: ../premium-editor
