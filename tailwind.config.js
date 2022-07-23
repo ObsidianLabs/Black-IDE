@@ -8,7 +8,14 @@ module.exports = {
     '../bsc-components/packages/**/index.es.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        jumbotron: '#e9ecef',
+      },
+      borderRadius: {
+        1.2: '0.3rem',
+      },
+    },
   },
   plugins: [],
 };
