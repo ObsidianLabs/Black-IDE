@@ -123,7 +123,7 @@ export const accounts = {
 
 export const network = {
   default: '',
-  persist: false,
+  persist: true,
   actions: {
     SELECT_NETWORK: {
       reducer: (_, { payload }) => payload,
