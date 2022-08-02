@@ -103,16 +103,30 @@ class HeaderWithRedux extends PureComponent {
     }
   }
 
+  getTestNetworks = (group) => {
+    const networksArray = networkManager.networks.filter(
+      (item) =>
+        item.group === group &&
+        item.chainId &&
+        (group === 'others' ? true : item.name === 'Testnet')
+    );
+    return networksArray.length > 0 ? networksArray : [];
+  };
+
   groupedNetworks = (networksByGroup) => {
     const networkList = [];
     const groups = networksByGroup.toJS();
     const keys = Object.keys(groups);
     keys.forEach((key, index) => {
-      if (key !== 'default') {
-        networkList.push({ header: key });
-      }
-      groups[key].forEach((network) => networkList.push(network));
-      if (index !== keys.length - 1) {
+      groups[key].forEach((network) => {
+        if (network.testnet || network.fullName === 'Custom Network') {
+          if (network.id !== 'dev') {
+            network.testnet = this.getTestNetworks(network.group);
+          }
+          networkList.push(network);
+        }
+      });
+      if (index === keys.length - 2) {
         networkList.push({ divider: true });
       }
     });
