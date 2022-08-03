@@ -104,13 +104,12 @@ class HeaderWithRedux extends PureComponent {
   }
 
   getTestNetworks = (group) => {
-    const networksArray = networkManager.networks.filter(
+    return networkManager.networks.filter(
       (item) =>
         item.group === group &&
         item.chainId &&
-        (group === 'others' ? true : item.name === 'Testnet')
+        (group === 'others' ? true : item.fullName.includes('Testnet'))
     );
-    return networksArray.length > 0 ? networksArray : [];
   };
 
   groupedNetworks = (networksByGroup) => {
@@ -119,7 +118,12 @@ class HeaderWithRedux extends PureComponent {
     const keys = Object.keys(groups);
     keys.forEach((key, index) => {
       groups[key].forEach((network) => {
-        if (network.testnet || network.fullName === 'Custom Network') {
+        network.testnet = [];
+        if (
+          network.name === 'Mainnet' ||
+          network.id === 'dev' ||
+          network.fullName === 'Custom Network'
+        ) {
           if (network.id !== 'dev') {
             network.testnet = this.getTestNetworks(network.group);
           }
