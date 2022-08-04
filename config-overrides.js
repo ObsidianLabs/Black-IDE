@@ -151,7 +151,6 @@ if (process.env.CDN) {
     addWebpackExternals({
       react: 'React',
       'react-dom': 'ReactDOM',
-      'monaco-editor': 'monaco',
     })
   );
 } else {
