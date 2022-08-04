@@ -9,62 +9,141 @@
     padding: 1rem 2rem 0;
     width: 100%;
     color: $light;
-    *{
-        vertical-align: middle;
+    display: flex;
+    
+    .title-image{
+        height: 5rem;
+        flex: 5rem 0;
+        background-image: url(../components/icon.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
-    .login-button{
-        cursor: pointer;
-        float: right;
-        font-size: 1rem;
-        height: calc(3rem - 1px);
-        padding: 0 1em;
-        border-bottom: 1px solid $gray-100;
-        background-color: $dark2;
+
+    .title-text{
+        flex: 1 0;
+        height: 5rem;
+        .title-h1{
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            padding-left: 1rem;
+        }
+        .desc{
+            font-size: 1rem;
+            line-height: 1.25rem;
+            padding-left: 1rem;
+            margin-top: -.5rem;
+        }
+    }
+    
+    .title-icons{
+        flex: 0 10rem;
+        display: flex;
+        .login-button{
+            flex: 0 auto;
+            cursor: pointer;
+            font-size: .9rem;
+            height: 2rem;
+            line-height: 2rem;
+            margin: 1.5rem auto;
+            border-radius: 5px;
+            padding: 0 1rem;
+            background-color: $primary;
+        }
+        .title-icon{
+            flex: 0 auto;
+            cursor: pointer;
+            height: 3rem;
+            width: 2.5rem;
+            margin: 1rem 1rem .25rem 0;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .icon-github{
+            background-image: url(../components/pics/logo_github.png);
+        }
+        .icon-discord{
+            background-image: url(../components/pics/logo_discord.png);
+        }
     }
     img {
-        cursor: pointer;
-        height: 2.5rem;
-        margin: .25rem 1rem .25rem 0;
         &.align-right{
             float: right;
         }
     }
 }
 
+.section{
+    background: $gray-900;
+    border-radius: 5px;
+    margin: .5rem 2rem;
+}
+
 .subtitle{
     font-size: 1.2rem;
     color: $gray-200;
-    padding: 1rem 2rem 0;
+    padding: 1rem 1rem 0;
 }
 
 .desc{
-    padding: .25rem 2rem;
+    padding: .25rem 1rem;
     color: $gray-500;
     line-height: 1.5rem;
 }
 
 .options {
     overflow: hidden;
-    padding-left: 1rem;
     .option {
         cursor: pointer;
         background: $dark2;
         float: left;
-        height: 9rem;
-        width: 16rem;
+        height: auto;
+        width: auto;
+        min-height: 4rem;
         margin: .5rem 0 1rem 1rem;
-        border: 1px solid $gray-400;
+        border: 1px solid $gray-500;
+        position: relative;
+        padding-left: 3.5rem;
+        padding-right: 1rem;
+        border-radius: 5px;
+        &:hover{
+            background-color: rgba(255, 255, 255, .1);
+        }
+        &:active{
+            background-color: rgba(255, 255, 255, .2);
+        }
+
+        .icon{
+            position: absolute;
+            width: 1.5rem;
+            height: 3rem;
+            top: 0;
+            left: 0;
+            margin: .5rem 1rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .icon-create{background-image: url(../components/pics/icon_createproject.png);}
+        .icon-sample{background-image: url(../components/pics/icon_sampleproject.png);}
+        .icon-project{background-image: url(../components/pics/icon_project.png);}
+        .icon-network{background-image: url(../components/pics/icon_network.png);}
+        .icon-contract{background-image: url(../components/pics/icon_contract.png);}
+        .icon-explorer{background-image: url(../components/pics/icon_explorer.png);}
+        .icon-document{background-image: url(../components/pics/icon_document.png);}
         .option-title{
-            font-size: 1.2rem;
-            padding: .5rem 1rem 0;
-            line-height: 2rem;
+            font-size: 1.1rem;
+            line-height: 4rem;
             color: $gray-400;
         }
         .option-desc{
             color: $gray-500;
-            font-size: 1rem;
-            padding: 0rem 1rem;
-            line-height: 1.2rem;
+            font-size: .9rem;
+            margin-top: -1rem;
+            height: 5rem;
+            line-height: 1.25rem;
+            width: 12rem;
         }
         img{
             height: 100%;
