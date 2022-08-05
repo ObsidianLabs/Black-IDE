@@ -3,12 +3,6 @@ import '../../scss/welcomepage.scss';
 import React, { PureComponent } from 'react';
 
 import Auth from '@obsidians/auth';
-// import BLACK_IDE_ICON from '../icon.png';
-import COIN_PIC from '../coin.webp';
-import DISCORD_ICON from '../discord.png';
-import ERC20_PIC from '../erc20.webp';
-import ERC721_PIC from '../erc721.webp';
-import GITHUB_ICON from '../github.png';
 import { actions } from '@obsidians/workspace';
 import { connect } from '@obsidians/redux';
 import platform from '@obsidians/platform';
@@ -51,6 +45,9 @@ class WelcomePageWithProps extends PureComponent {
             <div className="desc">
               Black IDE is an integrated development environment, making
               developing Ethereum smart contracts faster and easier.
+              <br />
+              Please follow the instructions below, and start to explorer Black
+              IDE.
             </div>
           </div>
           <div className="title-icons">

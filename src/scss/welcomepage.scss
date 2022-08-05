@@ -14,7 +14,7 @@
     .title-image{
         height: 5rem;
         flex: 5rem 0;
-        background-image: url(../components/icon.png);
+        background-image: url(../components/pics/logo_blackide.png);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -24,21 +24,22 @@
         flex: 1 0;
         height: 5rem;
         .title-h1{
-            font-size: 1.5rem;
-            line-height: 2.5rem;
+            font-size: 1.3rem;
+            line-height: 2.2rem;
             padding-left: 1rem;
         }
         .desc{
-            font-size: 1rem;
-            line-height: 1.25rem;
+            font-size: .9rem;
+            line-height: 1.2rem;
             padding-left: 1rem;
-            margin-top: -.5rem;
+            margin-top: -.15rem;
         }
     }
     
     .title-icons{
         flex: 0 10rem;
         display: flex;
+        justify-content: flex-end;
         .login-button{
             flex: 0 auto;
             cursor: pointer;
@@ -54,17 +55,17 @@
             flex: 0 auto;
             cursor: pointer;
             height: 3rem;
-            width: 2.5rem;
+            width: 2rem;
             margin: 1rem 1rem .25rem 0;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
         }
         .icon-github{
-            background-image: url(../components/pics/logo_github.png);
+            background-image: url(../components/pics/logo_github_white.svg);
         }
         .icon-discord{
-            background-image: url(../components/pics/logo_discord.png);
+            background-image: url(../components/pics/icon_discord_white.svg);
         }
     }
     img {
@@ -102,10 +103,10 @@
         width: auto;
         min-height: 4rem;
         margin: .5rem 0 1rem 1rem;
-        border: 1px solid $gray-500;
+        border: 1px solid $gray-600;
         position: relative;
-        padding-left: 3.5rem;
-        padding-right: 1rem;
+        padding-left: 3.1rem;
+        padding-right: .9rem;
         border-radius: 5px;
         &:hover{
             background-color: rgba(255, 255, 255, .1);
@@ -116,26 +117,26 @@
 
         .icon{
             position: absolute;
-            width: 1.5rem;
+            width: 1.3rem;
             height: 3rem;
             top: 0;
             left: 0;
-            margin: .5rem 1rem;
+            margin: .5rem .9rem;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
         }
-        .icon-create{background-image: url(../components/pics/icon_createproject.png);}
-        .icon-sample{background-image: url(../components/pics/icon_sampleproject.png);}
-        .icon-project{background-image: url(../components/pics/icon_project.png);}
-        .icon-network{background-image: url(../components/pics/icon_network.png);}
-        .icon-contract{background-image: url(../components/pics/icon_contract.png);}
-        .icon-explorer{background-image: url(../components/pics/icon_explorer.png);}
-        .icon-document{background-image: url(../components/pics/icon_document.png);}
+        .icon-create{background-image: url(../components/pics/icon_createproject.svg);}
+        .icon-sample{background-image: url(../components/pics/icon_sampleproject.svg);}
+        .icon-project{background-image: url(../components/pics/icon_project.svg);}
+        .icon-network{background-image: url(../components/pics/icon_network.svg);}
+        .icon-contract{background-image: url(../components/pics/icon_contract.svg);}
+        .icon-explorer{background-image: url(../components/pics/icon_explorer.svg);}
+        .icon-document{background-image: url(../components/pics/icon_document.svg);}
         .option-title{
-            font-size: 1.1rem;
+            font-size: 1rem;
             line-height: 4rem;
-            color: $gray-400;
+            color: $gray-200;
         }
         .option-desc{
             color: $gray-500;
