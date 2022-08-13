@@ -3,6 +3,7 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const {
   override,
+  addWebpackModuleRule,
   addWebpackExternals,
   addWebpackAlias,
   addWebpackPlugin,
@@ -174,6 +175,13 @@ if (process.env.CDN) {
     )
   );
 }
+
+overrides.push(
+  addWebpackModuleRule({
+    test: /\.pcss$/i,
+    use: ['style-loader', 'css-loader', 'postcss-loader'],
+  })
+);
 
 module.exports = {
   webpack: override(...overrides),

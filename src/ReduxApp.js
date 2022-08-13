@@ -59,6 +59,8 @@ export default class ReduxApp extends Component {
     }
     return (
       <Provider store={redux.store}>
+        {/* The div below can test if Tailwind CSS works. */}
+        <div className="hidden"></div>
         <div
           className="body"
           style={{ paddingTop: this.state.dependencies ? '49px' : '0' }}
