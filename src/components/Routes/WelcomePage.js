@@ -7,6 +7,8 @@ import { actions } from '@obsidians/workspace';
 import { connect } from '@obsidians/redux';
 import platform from '@obsidians/platform';
 
+const TemplateNames = ['ERC-1155', 'ERC-721', 'ERC-20', 'coin'];
+
 class WelcomePageWithProps extends PureComponent {
   openLink(link) {
     if (platform.isWeb) return window.open(link);
@@ -31,6 +33,26 @@ class WelcomePageWithProps extends PureComponent {
 
   route(path) {
     this.props.history.push(path);
+  }
+
+  renderTemplatetOptions() {
+    return (
+      <div className="options">
+        {TemplateNames.map((template) => {
+          return (
+            <div
+              className="option"
+              onClick={() =>
+                this.route(`/BlackIDE-ObsidianLab/${template.toUpperCase()}`)
+              }
+            >
+              <div className="icon icon-sample" />
+              <div className="option-title">Sample {template}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   render() {
@@ -87,29 +109,7 @@ class WelcomePageWithProps extends PureComponent {
             Forking from an official project will duplicate a copy to your
             projects, and allows you to explorer freely with an easy start.
           </div>
-          <div className="options">
-            <div
-              className="option"
-              onClick={() => this.route('/BlackIDE-ObsidianLab/ERC-721')}
-            >
-              <div className="icon icon-sample"></div>
-              <div className="option-title">Sample ERC-721</div>
-            </div>
-            <div
-              className="option"
-              onClick={() => this.route('/BlackIDE-ObsidianLab/ERC-20')}
-            >
-              <div className="icon icon-sample"></div>
-              <div className="option-title">Sample ERC-20</div>
-            </div>
-            <div
-              className="option"
-              onClick={() => this.route('/BlackIDE-ObsidianLab/COIN')}
-            >
-              <div className="icon icon-sample"></div>
-              <div className="option-title">Sample Coin</div>
-            </div>
-          </div>
+          {this.renderTemplatetOptions()}
         </div>
         <div className="section">
           <div className="subtitle">What Can Black IDE Do?</div>
