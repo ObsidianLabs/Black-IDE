@@ -3,6 +3,7 @@ importScripts('./solc-wrapper.js')
 
 onmessage = function (e) {
   const { id, method, data } = e.data
+  console.log(' onmessage e.data --->', e.data);
   if (method === 'compile') {
     const result = compileProject(data)
     postMessage({ id, data: result })
@@ -14,8 +15,14 @@ function compileProject ({ solcUrl, input }) {
     importScripts(solcUrl)
     solc = wrapper(Module)
   }
-  const output = solc.compile(input, { import: importFile })
-  return JSON.parse(output)
+  try {
+    const output = solc.compile(input, { import: importFile })
+    console.log(' output ----', output);
+    return JSON.parse(output)
+  } catch (error) {
+    console.log('solc compile failed', error);
+    return error
+  }
 }
 
 function importFile (path) {
