@@ -18,6 +18,7 @@ const oldIpc = require('./ipc');
 let win;
 let terminalChannelManager;
 
+app.commandLine.appendSwitch('enable-features', 'SharedArrayBuffer');
 app.on('ready', async () => {
   if (!getTheLock) {
     app.quit();
