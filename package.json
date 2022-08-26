@@ -27,6 +27,7 @@
     "dev": "concurrently \"yarn dev:react\" \"wait-on http://localhost:3000 && yarn dev:main\"",
     "build": "yarn build:react && yarn build:main",
     "dist": "yarn build && electron-builder -c.extraMetadata.main=build/main/index.js",
+    "quickdist": "yarn build:main && electron-builder -c.extraMetadata.main=build/main/index.js",
     "dist:staging": "dotenv -e .env cross-env REACT_APP_ENV=development yarn build && electron-builder -c.extraMetadata.main=build/main/index.js",
     "lint": "tslint '{src,test,mocks}/**/*.{ts,tsx}' --project ./tsconfig.json",
     "test": "jest '(\\/test\\/(?!e2e/)).*'",
