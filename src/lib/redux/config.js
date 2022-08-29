@@ -131,6 +131,16 @@ export const network = {
   },
 };
 
+export const loadedNetworkInfo = {
+  default: Immutable.fromJS({}),
+  persist: false,
+  actions: {
+    LOAD_NETWORK_INFO: {
+      reducer: (_, { payload }) => payload,
+    },
+  },
+};
+
 export const loadNetworkResources = {
   default: false,
   persist: false,
